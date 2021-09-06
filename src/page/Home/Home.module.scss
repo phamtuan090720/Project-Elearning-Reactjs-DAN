@@ -1,0 +1,610 @@
+$them-color: #38b2ac;
+$secondary-color: #5850ec;
+$them-color-rgb: 56, 178, 172;
+$secondary-color-rgb: 88, 80, 236;
+
+$margin-desktop: 200px;
+$margin-ipad-pro: 60px;
+$margin-phone: 20px;
+
+@mixin row{
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin col{
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin  respond($breakpoint) {
+  @if $breakpoint == phone{
+    @media (max-width: 46.1875em){@content};
+  }
+  @if $breakpoint == tab-port{
+    @media (min-width: 46.25em) and (max-width: 63.9375em){@content};  
+  }
+  @if $breakpoint == tab-land{
+    @media (max-width: 63.9375em){@content}; 
+  }
+  @if $breakpoint == ipad-pro{
+    @media (max-width: 75em){@content};
+  }
+}
+
+.stick_v{
+  background-color: $secondary-color;
+  border-radius: 5px;
+  width: 10px;
+  line-height: 80%;
+  margin-right: 15px;
+}
+
+.stick_h{
+  background-color: $secondary-color;
+  border-radius: 5px;
+  width: 5px;
+  line-height: 80%;
+  height: 10px;
+  margin-left: 30px;
+  min-width: 120px;
+
+  @include respond(phone){
+    display: none;
+  }
+}
+
+
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+
+.banner{
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 80vh;
+  width: -webkit-fill-available;
+  // background-image: url(/banner.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-bottom-right-radius: 100px;
+
+  @include respond(ipad-pro){
+    min-height: auto;
+    padding-bottom: 61px;
+  }
+  @include respond(phone){
+    border-bottom-right-radius: 0;
+  }
+
+  .introduce{
+    margin-top: 150px;
+    margin-left: $margin-desktop;
+    width: 580px;
+    @include respond(ipad-pro){
+      margin-top: 150px;
+      margin-left: $margin-ipad-pro;
+    }
+
+    @include respond(phone){
+      margin-top: 70px;
+      margin-left: $margin-phone;
+      width:90%;
+    }
+
+
+    .header {
+      @include row;
+      font-weight: bold;
+
+      h1{
+        font-size: 34px;
+
+        @include respond(phone){
+          font-size: 22px;
+        }
+
+      }
+    }
+
+    .content{
+      padding: 20px;
+
+      h2{
+        font-weight: 400;
+        @include respond(phone){
+          font-weight: 300;
+          font-size: 1.3em;
+        }
+      }
+    }
+
+    .btnSignUp{
+      text-align: center;
+      width: 50%;
+      background-color: $secondary-color;
+      color: #fff;
+      height: 60px;
+      font-size: 20px;
+
+      @include respond(phone){
+        width: auto;
+      }
+    }
+
+  }
+}
+
+.body1{
+  margin-top:600px;
+  margin-left: $margin-desktop;
+  @include respond(ipad-pro){
+    margin-top: 500px;
+    margin-left: $margin-ipad-pro;
+  }
+  @include respond(phone){
+    margin-top: 430px;
+    margin-left: $margin-phone;
+  }
+
+  .header{
+    @include row;
+    align-items: baseline;
+  }
+
+  .content{
+    @include row;
+    align-items: flex-start;
+    justify-content: space-between;
+    @include respond(phone){
+      @include col;
+    }
+
+    .left{
+      text-align: center;
+      margin-top: 100px;
+      @include row;
+      @include respond(phone){
+        @include col;
+        margin: 0;
+        order: 1;
+        margin: auto;
+      }
+
+      .leftItems{
+          flex-basis: 30%;
+          background-image: linear-gradient(to right,#38b2ace0, #48bb78ad);
+          border-radius: 15px;
+          padding: 15px;
+          height: 100%;
+          width: 33.3%;
+          color: #636363;
+          @include respond(phone){
+            width: 100%;
+          }
+
+
+          p{
+            font-size: 16px;
+          }
+
+          &:nth-child(2){
+            margin-top:40px;
+            @include respond(phone){
+              margin-top:30px;
+            }
+          }
+
+          &:nth-child(3){
+            margin-top:140px;
+            @include respond(phone){
+              margin-top:30px;
+            }
+          }
+
+          h2{
+            color: #fff;
+          }
+
+          .icon{
+            font-size:35px;
+            color: #000;
+          }
+      }
+    }
+    
+    .right{
+      width: 60%;
+      padding: 0 200px 0 100px;
+      margin-top: 50px;
+
+      @include respond(ipad-pro){
+        padding: 0 20px 0 0px;
+        margin-top: 100px;
+      }
+
+      @include respond(phone){
+        margin-top:30px;
+        padding: 0;
+        width: 100%;
+      }
+      .header {
+        @include row;
+        font-weight: bold;
+        align-items: initial;
+        @include respond(phone){
+          font-size: 10px;
+        }
+      }
+
+      .content{
+        padding: 20px;
+  
+        p{
+          font-size: 20px;
+          font-weight: 200;
+          @include respond(phone){
+            font-size: 17px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.exp{
+  position: relative;
+  margin-top: 100px;
+  min-height: 600px;
+  width: 100%;
+  @include respond(phone){
+    margin-top:30px;
+  }
+
+  .bgLeft{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-bottom-right-radius: 125px;
+    border-top-left-radius: 125px;
+    background-color: rgba(56, 178, 172, 0.4);
+    width: 50%;
+    height: 60%;
+    @include respond(phone){
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+    }
+  }
+
+  .bgRight{
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-bottom-right-radius: 125px;
+    border-top-left-radius: 125px;
+    background-color: rgba(88, 80, 236, 0.4);
+    width: 50%;
+    height: 60%;
+    @include respond(phone){
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      top: 80px;
+    }
+  }
+
+  .header{
+    @include row;
+    align-items: baseline;
+    margin-left: $margin-desktop;
+
+    @include respond(ipad-pro){
+      margin-left: $margin-ipad-pro;
+    }
+    @include respond(phone){
+      margin-left:$margin-phone;
+    }
+  }
+
+  .content{
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+    @include row;
+    justify-content: center;
+    @include respond(ipad-pro){
+      width: 100%;
+      margin: auto;
+      margin-top: 50px;
+    }
+    @include respond(phone){
+      @include col;
+      margin: auto;
+    }
+
+    .items{
+        flex-basis: 30%;
+        border-radius: 15px;
+        width: 33.3%;
+        margin: 0 55px;
+        z-index: 100;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 2px 2px #ccc;
+
+        @include respond(ipad-pro){
+          margin: 0 20px;
+        }
+
+        @include respond(phone){
+          width: 80vw;
+          margin: auto;
+          margin-bottom: 20px;
+        }
+
+
+        .row{
+          @include row;
+          background-color: #000;
+          width: 100%;
+          border-top-right-radius: 15px;
+          border-top-left-radius: 15px;
+          color: #fff;
+          align-items: center;
+          justify-content: center;
+
+          h2{
+            color: #fff;
+          }
+        }
+
+        p{
+          font-size: 18px;
+          padding : 25px;
+          min-height: 250px;
+        }
+
+        .icon{
+          font-size:60px;    
+          padding-right: 15px;   
+        }
+    }
+  }
+}
+
+.ctn{
+  width: 100%;
+  height: 660px;
+  position: relative;
+  bottom: -450px;
+  margin-top: -300px;
+  left: 0;
+  border-top-left-radius: 100px;
+  @include respond(ipad-pro){
+    position: initial;
+    margin-top: 80px;
+    height: auto;
+  }
+  @include respond(phone){
+    margin-top: 40px;
+  }
+
+  .forInstructor{
+    margin: auto;
+    min-height: 400px;
+    width: 60%;
+    box-shadow: 2px 4px 4px 2px rgb(128, 128, 128);
+    border-radius: 15px;
+    background-color: #fff;
+    @include row;
+    @include respond(ipad-pro){
+      width: 90%;
+    }
+    @include respond(phone){
+      width: 98%;
+      @include col;
+    }
+  
+    .left{
+      width: 60%;
+      @include respond(phone){
+        width: 100%;
+        padding: 10px;
+      }
+      .header{
+        @include row;
+        align-items: baseline;
+        margin-left: 50px;
+        @include respond(phone){
+          margin-left: $margin-phone;
+          font-size:11px;
+        }
+      }
+      .content{
+        width: 60%;
+        margin-left: 50px;
+        @include respond(phone){
+          width: 90%;
+          margin: auto;
+          text-align: center;
+        }
+  
+        h2{
+          font-weight: 200;
+        }
+      }
+  
+      .btnSignUp{
+        text-align: center;
+        margin-left: 50px;
+        margin-top: 30px;
+        background-color: $secondary-color;
+        color: #fff;
+        height: 50px;
+        font-size: 16px;
+
+        @include respond(ipad-pro){
+          margin: 10px 50px;
+          margin-left: 40px;
+        }
+
+        @include respond(phone){
+          margin: 10px 0;
+          margin-left: 40px;
+        }
+      }
+    }
+
+    .gif{
+      margin-right: 15px;
+      width: 40%;
+      @include respond(phone){
+        display: none;
+      }
+      
+      img{
+        width: 100%;
+      }
+    }
+  }
+}
+
+.bgFooter{
+  width: 100%;
+  height: 500px;
+  position: relative;
+  bottom: -400px;
+  z-index: -100;
+  margin-top: -300px;
+  left: 0;
+  border-top-left-radius: 100px;
+  background-color: #dcdcdc;
+    
+  @include respond(ipad-pro){
+    height: 350px;
+  }
+  @include respond(phone){
+    display: none;
+  }
+}
+
+// .main {
+//   padding: 5rem 0;
+//   flex: 1;
+//   @include col;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .footer {
+//   width: 100%;
+//   height: 100px;
+//   border-top: 1px solid #eaeaea;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .footer a {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-grow: 1;
+// }
+
+// .title a {
+//   color: #0070f3;
+//   text-decoration: none;
+// }
+
+// .title a:hover,
+// .title a:focus,
+// .title a:active {
+//   text-decoration: underline;
+// }
+
+// .title {
+//   margin: 0;
+//   line-height: 1.15;
+//   font-size: 4rem;
+// }
+
+// .title,
+// .description {
+//   text-align: center;
+// }
+
+// .description {
+//   line-height: 1.5;
+//   font-size: 1.5rem;
+// }
+
+// .code {
+//   background: #fafafa;
+//   border-radius: 5px;
+//   padding: 0.75rem;
+//   font-size: 1.1rem;
+//   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+//     Bitstream Vera Sans Mono, Courier New, monospace;
+// }
+
+// .grid {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   flex-wrap: wrap;
+//   max-width: 800px;
+//   margin-top: 3rem;
+// }
+
+// .card {
+//   margin: 1rem;
+//   padding: 1.5rem;
+//   text-align: left;
+//   color: inherit;
+//   text-decoration: none;
+//   border: 1px solid #eaeaea;
+//   border-radius: 10px;
+//   transition: color 0.15s ease, border-color 0.15s ease;
+//   width: 45%;
+// }
+
+// .card:hover,
+// .card:focus,
+// .card:active {
+//   color: #0070f3;
+//   border-color: #0070f3;
+// }
+
+// .card h2 {
+//   margin: 0 0 1rem 0;
+//   font-size: 1.5rem;
+// }
+
+// .card p {
+//   margin: 0;
+//   font-size: 1.25rem;
+//   line-height: 1.5;
+// }
+
+// .logo {
+//   height: 1em;
+//   margin-left: 0.5rem;
+// }
+
+// @media (max-width: 600px) {
+//   .grid {
+//     width: 100%;
+//     flex-direction: column;
+//   }
+// }

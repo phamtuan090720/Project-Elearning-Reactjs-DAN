@@ -1,0 +1,163 @@
+$them-color: #38b2ac;
+$secondary-color: #5850ec;
+@mixin  respond($breakpoint) {
+    @if $breakpoint == phone{
+        @media (max-width: 46.1875em){@content};
+    }
+    @if $breakpoint == tab-port{
+        @media (min-width: 46.25em) and (max-width: 63.9375em){@content};  
+    }
+    @if $breakpoint == tab-land{
+        @media (max-width: 63.9375em){@content}; 
+    }
+}
+
+
+.myRow{
+    display: none;
+    @include respond(phone){
+        display: flex;
+        margin-top: 5px;
+        position: relative;
+    }
+}
+.sdCol{
+    display: none;
+    @include respond(phone){
+        display: block;
+        margin-top: 5px;
+        z-index: 1;
+        position: fixed;
+        top: -5px;
+        left: 0;
+        width: 80vh;
+        // background: rgb(0 0 0 / 78%);
+        height: 100vh;
+    }
+}
+
+.myCol{
+    transform: translate3d(-100%,0,0);
+    display: block;
+    margin-top: 5px;
+    z-index: 10;
+    position: fixed;
+    top: -5px;
+    left: -100px;
+    width: 80%;
+    background: linear-gradient(to right, #1e0025, #1b1b1b);
+    height: 100vh;
+    @include respond(phone){
+        transform :translateX(100px);
+        transition: transform 1s ease;
+
+        & > * {
+            min-height: 40px;
+            font-size: 16px;
+
+            &:active{
+                background-color: #340352;;
+            }
+        }
+        & > * > a{
+            color: white; 
+            width: -webkit-fill-available;
+            padding: 1.2em;
+            padding-left: 10%;
+        }
+    }
+}
+
+.none{
+    @extend .myCol;
+    transform: translate3d(-100%,0,0);
+    transition: transform 2s ease;
+}
+.btnForPhone{
+    z-index: 1;
+    background-color: initial;
+    border-color: transparent;
+    
+    &:hover, &:focus, &:active{
+        color: #000;
+        background-color: initial;
+        border-color: transparent;
+    }
+
+    .btnMenu{
+        display: none;
+        @include respond(phone){
+            display: block;
+            font-size: 30px;
+            line-height:100%;
+            align-self: center;
+        }
+    }
+}
+
+.navbarContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 1000;
+    position: relative;
+    @include respond(phone){
+        display: none;
+    }
+
+    .homeMenu{
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        @include respond(tab-land){
+            width: 40%;
+            justify-content: space-between;
+        }
+
+        // @include respond(phone){
+        //     display: none;
+        // }
+    
+        .homeMenuItem{
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            transition: all 0.5;
+    
+            &:hover{
+                color: $them-color;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .rightNavbar{
+        width: 25%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 16px;
+        @include respond(tab-land){
+            width: 35%;
+        }
+        // @include respond(phone){
+        //     display: none;
+        // }
+
+        .instructor{
+            color: $them-color;
+        }
+
+        .buttonLogin{
+            border-color: $them-color;
+        }
+
+        .btnSignIn{
+            background-color: $secondary-color;
+            color: #fff;
+        }
+    }
+}

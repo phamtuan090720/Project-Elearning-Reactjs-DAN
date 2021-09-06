@@ -1,0 +1,142 @@
+$them-color: #38b2ac;
+$secondary-color: #5850ec;
+@mixin  respond($breakpoint) {
+    @if $breakpoint == phone{
+      @media (max-width: 46.1875em){@content};
+    }
+    @if $breakpoint == tab-port{
+      @media (min-width: 46.25em) and (max-width: 63.9375em){@content};  
+    }
+    @if $breakpoint == tab-land{
+      @media (max-width: 63.9375em){@content}; 
+    }
+    @if $breakpoint == ipad-pro{
+      @media (max-width: 75em){@content};
+    }
+  }
+
+.footerContainer {
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+    @include respond(ipad-pro){
+        width: 100%;
+        margin-top: 30px;
+        padding-top: 10px;
+        background-color: #dcdcdc;
+    }
+    @include respond(phone){
+        background-color: #dcdcdc;
+        padding-top: 30px;
+        text-align: center;
+    }
+
+    .main{
+        justify-content: space-between;
+       
+        .ulItems{
+            list-style: none;
+            text-align: left;
+            padding-left: 30%;
+            @include respond(ipad-pro){
+                padding: 0;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            // @include respond(phone){
+            //     padding: 0;
+            //     text-align: center;
+            //     margin-bottom: 30px;
+            // }
+    
+            h2{
+                margin: auto;
+            }
+    
+            a{
+                text-decoration: none;
+                color: inherit;
+                font-size: 16px;
+                line-height: 1.7rem;
+            }
+        }
+    
+        .borderRadius{
+            border-radius: 40px;
+            border-color: $them-color;
+    
+            &:hover{
+                border-color: $them-color;
+            }
+        }
+        .btnSubmit{
+            width: 80%;
+            margin-top: 15px;
+            @include respond(ipad-pro){
+                margin: auto;
+            }
+            // @include respond(phone){
+            //     margin: auto;
+            // }
+        }
+    
+        .customButton{
+            background-color: $secondary-color;
+            color: #fff;
+            @include respond(ipad-pro){
+                margin-top: 15px;
+            }
+        }
+    
+        .w60{
+            width: 60%;
+            @include respond(ipad-pro){
+                width: 80%;
+                margin: auto;
+            }
+            // @include respond(phone){
+            //     width: 80%;
+            //     margin: auto;
+            // }
+        }
+    }
+
+    .sub{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 30px;
+        align-items: baseline;
+        @include respond(ipad-pro){
+            width: 90%;
+            margin: auto;
+        }
+
+        .right{
+            font-size: 26px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 15%;
+            @include respond(phone){
+                width: 90%;
+                margin: auto;
+            }
+
+            a{
+                color: inherit;
+
+                &:hover{
+                    color: $secondary-color;
+                }
+            }
+        }
+
+        .left{
+            @include respond(phone){
+                display: none;
+            }
+        }
+    }
+}
+
