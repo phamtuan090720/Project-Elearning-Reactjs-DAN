@@ -1,3 +1,4 @@
+import CoursesPage from "../page/CoursesPage/CoursesPage";
 import HomePage from "../page/Home/Home";
 const routesHome = [
     {
@@ -9,6 +10,11 @@ const routesHome = [
         exact: false,
         path: "/home",
         component: HomePage,
+    },
+    {
+        exact: false,
+        path: "/courses",
+        component: CoursesPage,
     },
 ];
 export { routesHome }
