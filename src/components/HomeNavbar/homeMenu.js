@@ -7,10 +7,10 @@ export default function homeMenu() {
     //   }
     return (
         <div className={styles.homeMenu}>
-            <NavLink to="/home" className={styles.homeMenuItem}>Home</NavLink>
-            <NavLink to="/course" className={styles.homeMenuItem}>Course</NavLink>
-            <NavLink to="/about" className={styles.homeMenuItem}>About Us</NavLink>
-            <NavLink to="/contact" className={styles.homeMenuItem}>Contact</NavLink>
+            <NavLink to="/home" exact activeClassName={styles.activeClass} className={styles.homeMenuItem}>Home</NavLink>
+            <NavLink to="/courses" exact activeClassName={styles.activeClass}  className={styles.homeMenuItem}>Course</NavLink>
+            <NavLink to="/about" exact activeClassName={styles.activeClass}  className={styles.homeMenuItem}>About Us</NavLink>
+            <NavLink to="/contact" exact activeClassName={styles.activeClass}  className={styles.homeMenuItem}>Contact</NavLink>
         </div>
     );
 }

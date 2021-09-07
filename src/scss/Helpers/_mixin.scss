@@ -1,0 +1,40 @@
+
+@mixin respond-to($breakpoint) {
+    @if map-has-key($map: $breakpoints, $key: $breakpoint) {
+        $value: map-get($map: $breakpoints, $key: $breakpoint);
+        @media screen and (max-width: $value) {
+            @content;
+        }
+    }
+    @else {
+        @warn"$breakpoint không tồn tại";
+    }
+}
+
+@mixin text($color, $font-size) {
+    color: $color;
+    font-size: $font-size;
+}
+@mixin breakpointMoblie($point) {
+    @if $point==iphone {
+        @media (max-width: 480px) and (min-width: 320px) {
+            @content ;
+        }
+    }
+}
+@mixin breakpoint($max,$min) {
+    @media (max-width: $max) and (min-width: $min) {
+        @content ;
+    }
+}
+@mixin breakpointMax($max) {
+    @media (max-width: $max) {
+        @content ;
+    }
+}
+@mixin breakpointMin($min) {
+    @media (max-width: $min) {
+        @content ;
+    }
+}
+$breakpoints:( 'extra-large': 1200px, 'large': 992px, 'medium': 768px, 'small': 576px)

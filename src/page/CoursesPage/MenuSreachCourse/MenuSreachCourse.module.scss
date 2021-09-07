@@ -1,0 +1,9 @@
+@import '../../../scss/Helpers/variables';
+.wrap{
+    .menuItem{
+        margin-bottom: $mg-1;
+        .select{
+            width: 80%;
+        }
+    }
+}

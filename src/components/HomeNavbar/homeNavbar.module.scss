@@ -119,18 +119,26 @@ $secondary-color: #5850ec;
         // @include respond(phone){
         //     display: none;
         // }
-    
+        
         .homeMenuItem{
             text-decoration: none;
             font-size: 18px;
             color: black;
             transition: all 0.5;
-    
+            font-weight: 400;
             &:hover{
                 color: $them-color;
                 cursor: pointer;
             }
         }
+        .activeClass{
+            color: $them-color;
+            &:hover{
+                color: $them-color;
+                cursor: pointer;
+            }
+        }
+
     }
 
     .rightNavbar{
