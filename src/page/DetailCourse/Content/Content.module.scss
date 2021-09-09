@@ -1,0 +1,15 @@
+@import './../../../scss/Helpers/mixin';
+@import './../../../scss/Helpers/variables';
+.wrap{
+    padding-left: $pd-2;
+    padding-right: $pd-2;
+    margin-top: $mg-3;
+    margin-bottom: $mg-3;
+    .description{
+        font-size: $font-size-2;
+        margin-bottom: $mg-2;
+    }
+    .curriculum{
+        font-size: $font-size-2;
+    }
+}

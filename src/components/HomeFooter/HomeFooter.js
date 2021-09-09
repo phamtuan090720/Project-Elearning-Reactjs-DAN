@@ -27,7 +27,7 @@ export default function HomeFooter() {
                     </ul>
                 </Col>
                 <Col xl={{ span: 10}} order={3} xs={{ span: 24}}>
-                    <h2 style={{textAlign: 'center'}} >Get notifications about new couses</h2>
+                    <h2>Get notifications about new couses</h2>
                     <Form
                         name="basic"
                         layout="inline"
