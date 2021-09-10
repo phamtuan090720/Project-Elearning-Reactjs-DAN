@@ -2,7 +2,7 @@ import { Col, Collapse, Row } from 'antd';
 import React from 'react'
 import styles from './Content.module.scss';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import Review from '../../../components/Review/Review';
+import Review from '../../../../components/Review/Review';
 const { Panel } = Collapse;
 
 export default function Content() {

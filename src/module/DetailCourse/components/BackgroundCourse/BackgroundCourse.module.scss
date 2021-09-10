@@ -1,0 +1,81 @@
+@import "./../../../../scss/Helpers/variables";
+@import "./../../../../scss/Helpers/mixin";
+.wrap {
+    height: 400px;
+    background-blend-mode: color-burn;
+    background-color: rgba(23, 23, 23, 0.25);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    .container {
+        max-width: 80%;
+        @include breakpointMax(1200px){
+            max-width: 100%;
+        }
+        margin: 0 auto;
+        .content {
+            @include breakpointMin(1200px) {
+                width: 66.666667%;
+            }
+            .category {
+                text-transform: uppercase;
+                font-size: $font-size-2;
+            }
+            .name_course {
+                font-size: $font-size-big;
+                font-weight: 500;
+                margin-bottom: $mg-1;
+            }
+            .sub_course {
+                font-size: $font-size-3;
+                font-weight: $f-w-normal;
+                margin-bottom: $mg-1;
+            }
+
+            .rating {
+                display: flex;
+                align-items: center;
+                margin-bottom: $mg-1;
+                .point {
+                    padding-left: 0.5rem;
+                    padding-right: 0.5rem;
+                    border-radius: 0.25rem;
+                    background-color: $color-orange-0;
+                    font-weight: bold;
+                    font-size: $font-size-3;
+                    color: rgba(255, 255, 255, 1);
+                    margin-right: 10px;
+                }
+                display: flex;
+                align-items: center;
+            }
+            .author{
+                margin-bottom: $mg-1;
+                span{
+                    font-weight: 500;
+                    font-size: $font-size-2;
+                }
+            }
+            .author > span > span {
+                margin-right: 10px;
+            }
+            .created_updated{
+                display: flex;
+                .created{
+                    margin-right: $mg-1;
+                }
+            }
+        }
+
+        @include breakpointMin(960px) {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        @include breakpointMin(640px) {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+}

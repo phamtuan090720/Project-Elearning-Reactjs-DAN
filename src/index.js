@@ -4,12 +4,15 @@ import "antd/dist/antd.css";
 import './index.scss';
 import './scss/main.scss'
 import App from './App';
+import store from "./redux/configStore";
+import { Provider } from "react-redux";
 import reportWebVitals from './reportWebVitals';
 
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
