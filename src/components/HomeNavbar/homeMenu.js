@@ -5,7 +5,10 @@ export default function HomeMenu() {
     const router = useLocation();
     const param = useParams();
     React.useEffect(()=>{
-        console.log(router.pathname==='/course/'+param.id);
+        console.log(router)
+        // console.log(router.pathname+router.search== `/course/${router.search}`);
+        // console.log(router.search)
+        // console.log(router.pathname+router.search)
     })
     // function handleChange(value) {
     //     console.log(`selected ${value}`);
@@ -19,7 +22,7 @@ export default function HomeMenu() {
                 else return false
             }} activeClassName={styles.activeClass}  className={styles.homeMenuItem}>Home</NavLink>
             <NavLink to="/courses" isActive={()=>{
-                if(router.pathname==='/courses'||router.pathname==='/course/'+param.id){
+                if(router.pathname==='/courses'||router.pathname==='/course/'+param.id || (router.pathname+router.search)==='/courses/'+router.search){
                     return true;
                 }
                 else return false

@@ -2,25 +2,37 @@ import React from 'react'
 import styles from './MenuSreachCourse.module.scss';
 import { Radio, Rate, Select } from 'antd';
 import RadioCustom from '../../../../components/Radio/Radio';
+import { useDispatch, useSelector } from 'react-redux';
 const { Option } = Select;
-function onBlur() {
-    console.log('blur');
-}
-
-function onFocus() {
-    console.log('focus');
-}
-
-function onSearch(val) {
-    console.log('search:', val);
-}
 export default function MenuSreachCourse() {
+    const {arrCategory} = useSelector(state => state.CoursesReducer)
+    const dispatch = useDispatch()
+    console.log(arrCategory);  
+    const renderCategory = React.useCallback(() => {
+        return arrCategory.map((item,index)=>{
+            return   <Option key={index} value={item.name}>{item.name}</Option>
+        })
+    }, [arrCategory]);
     const pointRate = [5, 4.5, 3.5, 2.5, 1.5]
     const renderRadio = () => {
         return pointRate.map((item, index) => <Radio key={index} value={item}><Rate allowHalf defaultValue={item} disabled /></Radio>)
     }
     const onChange = (value) => {
-        console.log(`selected ${value}`);
+        dispatch((dispatch)=>{
+            dispatch({
+                type:"Category_filter",
+                data:value
+            })
+        })
+    }
+    const onFocus = ()=>{
+        console.log('focus');
+    }
+    const onBlur = ()=>{
+        console.log('blur');
+    }
+    const onSearch = ()=>{
+        console.log('blur');
     }
     return (
         <div className={styles.wrap}>
@@ -39,17 +51,15 @@ export default function MenuSreachCourse() {
                     filterOption={(input, option) =>
                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }
-                    defaultValue={'IT'}
+                    defaultValue={""}
                 >
-                    <Option value="IT">IT</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="tom">Tom</Option>
+                    {renderCategory()}
                 </Select>
             </div>
             <div className={styles.menuItem}>
                 <h3 className={styles.title}>Course rating</h3>
                 <div className={styles.ctn_radio}>
-                    <RadioCustom defaultValue={5} id='rate'>
+                    <RadioCustom id='rate'>
                         {renderRadio()}
                     </RadioCustom>
                 </div>
@@ -57,7 +67,7 @@ export default function MenuSreachCourse() {
             <div className={styles.menuItem}>
                 <h3 className={styles.title}>Course type</h3>
                 <div className={styles.ctn_radio}>
-                    <RadioCustom defaultValue={1} id='type'>
+                    <RadioCustom id='type'>
                         <Radio value={1}>Free</Radio>
                         <Radio value={2}>Paid</Radio>
                     </RadioCustom>
@@ -66,7 +76,7 @@ export default function MenuSreachCourse() {
             <div className={styles.menuItem}>
                 <h3 className={styles.title}>Course status</h3>
                 <div className={styles.ctn_radio}>
-                    <RadioCustom defaultValue={1} id='status'>
+                    <RadioCustom id='status'>
                         <Radio value={1}>Public</Radio>
                         <Radio value={2}>Private</Radio>
                     </RadioCustom>

@@ -17,7 +17,8 @@ $secondary-color: #5850ec;
     min-height: 380px;
     max-height: 400px;
     overflow: hidden;
-    .footer{
+    .author{
+        color: $color-gray-1;
     }
     .price{
         text-align: right;
