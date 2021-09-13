@@ -5,7 +5,7 @@ import RightNavbar from './rightNavbar';
 import styles from './homeNavbar.module.scss';
 import { MenuOutlined } from '@ant-design/icons';
 import { Button, Row, Col } from 'antd';
-import {Link}  from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function HomeNavbar() {
     const [collapsed, setCollapsed] = useState(false);
@@ -13,9 +13,21 @@ export default function HomeNavbar() {
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
     };
+    const [isSticky,setIsSticky] = React.useState(false);
+    React.useEffect(() => {
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                setIsSticky(true);
+            } else {
+                setIsSticky(false)
+            }
+        }
+    })
 
     return (
-        <div>
+        <div className={isSticky===true ? "sticky_navbar" : ''} style={{zIndex:10000}}>
             <Row className={styles.myRow}>
                 <Col span={4}>
                     <Button onClick={toggleCollapsed} className={styles.btnForPhone}>
@@ -24,8 +36,8 @@ export default function HomeNavbar() {
                 </Col>
                 <Col style={{ zIndex: '1' }} span={12} offset={2}><Logo direction='row' /></Col>
             </Row>
-            <div className={collapsed ? styles.sdCol: styles.none} onClick={toggleCollapsed}/>
-            <Col className={collapsed ? styles.myCol: styles.none}>
+            <div className={collapsed ? styles.sdCol : styles.none} onClick={toggleCollapsed} />
+            <Col className={collapsed ? styles.myCol : styles.none}>
                 <Row><Link to="/" onClick={toggleCollapsed}>Home</Link></Row>
                 <Row><Link to="/course" onClick={toggleCollapsed}>Course</Link></Row>
                 <Row><Link to="/" onClick={toggleCollapsed}>About Us</Link></Row>

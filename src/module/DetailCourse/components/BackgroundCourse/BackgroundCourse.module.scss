@@ -3,15 +3,17 @@
 .wrap {
     height: 400px;
     background-blend-mode: color-burn;
-    background-color: rgba(23, 23, 23, 0.25);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     padding-top: 4rem;
     padding-bottom: 4rem;
+    color: $color-white-0;
+
     .container {
+        color: $color-white-0;
         max-width: 80%;
-        @include breakpointMax(1200px){
+        @include breakpointMax(1200px) {
             max-width: 100%;
         }
         margin: 0 auto;
@@ -19,7 +21,14 @@
             @include breakpointMin(1200px) {
                 width: 66.666667%;
             }
+            .action{
+                display: none;
+                @include breakpointMax(1200px){
+                    display: block;
+                }
+            }
             .category {
+                color: $color-white-0;
                 text-transform: uppercase;
                 font-size: $font-size-2;
             }
@@ -38,6 +47,16 @@
                 display: flex;
                 align-items: center;
                 margin-bottom: $mg-1;
+                .mess {
+                    padding-left: 0.5rem;
+                    padding-right: 0.5rem;
+                    border-radius: 0.25rem;
+                    background-color: $color-orange-0;
+                    font-weight: bold;
+                    font-size: $font-size-3;
+                    color: rgba(255, 255, 255, 1);
+                    // margin-right: 10px;
+                }
                 .point {
                     padding-left: 0.5rem;
                     padding-right: 0.5rem;
@@ -51,9 +70,9 @@
                 display: flex;
                 align-items: center;
             }
-            .author{
+            .author {
                 margin-bottom: $mg-1;
-                span{
+                span {
                     font-weight: 500;
                     font-size: $font-size-2;
                 }
@@ -61,10 +80,14 @@
             .author > span > span {
                 margin-right: 10px;
             }
-            .created_updated{
+            .created_updated {
                 display: flex;
-                .created{
+                font-size: $font-size-2;
+                span{
                     margin-right: $mg-1;
+                    margin-left: $mg-1;
+                }
+                .created {
                 }
             }
         }
