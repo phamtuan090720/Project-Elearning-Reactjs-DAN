@@ -1,0 +1,15 @@
+@import '../../../../scss/Helpers/variables';
+.wrap{
+    background-color: white;
+    padding: $mg-1 $mg-2;
+    border-radius: 10px;
+    margin-bottom: $mg-3;
+    .menuItem{
+        margin-bottom: $mg-1;
+        .select{
+            width: 80%;
+        }
+        .ctn_radio{
+        }
+    }
+}
