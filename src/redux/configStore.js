@@ -1,12 +1,14 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import test from './reducers/testReducer';
 import CoursesReducer from '../module/Coursers/reducers/CoursesReducer';
 import DetailCourseReducer from "../module/DetailCourse/reducers/DetailCourseReducer";
+import RegisterCourseReducer from "../module/DetailCourse/reducers/RegisterCourseReducer";
+import LoginReducer from "../module/Login/redux/LoginReducer";
 const rootReducer = combineReducers({
-    test,
     CoursesReducer,
-    DetailCourseReducer
+    DetailCourseReducer,
+    LoginReducer,
+    RegisterCourseReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

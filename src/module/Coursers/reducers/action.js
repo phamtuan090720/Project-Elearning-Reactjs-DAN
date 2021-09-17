@@ -21,7 +21,7 @@ export const getCategory = () => {
 export const getCourse = (page='?page=1') =>{
     return (dispatch)=>{
         dispatch(actGetCoursesRequest());
-        let promise = http.get(`coures/${page}`);
+        let promise = http.get(`courses/${page}`);
         promise.then((result) => {
             console.log(result)
             dispatch(actGetCoursesSuccess(result.data.results))

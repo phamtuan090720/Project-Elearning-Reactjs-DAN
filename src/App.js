@@ -2,7 +2,7 @@ import { BrowserRouter, Switch,Route } from 'react-router-dom';
 import HomeTemplate from './template/HomeTemplate';
 import { routesHome } from './routers';
 import PageNotFound from './page/PageNotFound/PageNotFound';
-
+import Login from './module/Login/page/Login';
 function App() {
   const showLayoutHome = (routes) => {
     if (routes && routes.length > 0) {
@@ -15,6 +15,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         {showLayoutHome(routesHome)}
+        <Route path='/login' component = {Login}/>
         <Route path='' component = {PageNotFound}/>
       </Switch>
     </BrowserRouter>
