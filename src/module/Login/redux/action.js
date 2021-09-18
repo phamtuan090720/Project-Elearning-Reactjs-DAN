@@ -40,7 +40,7 @@ export const actLogin = (user, history) => {
         })
         await http.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
-            history.push('/home');
+            history.goBack();
         }).catch((err) => {
             dispatch(actionLoginFailed("Incorrect account and password"));
         });

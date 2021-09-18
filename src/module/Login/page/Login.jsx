@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 export default function Login() {
     let history = useHistory();
-    const { userLogin } = useSelector(state => state.LoginReducer);
+    // const { userLogin } = useSelector(state => state.LoginReducer);
     const dispatch = useDispatch();
-    React.useEffect(() => {
-        if (userLogin) {
-            history.push('/home');
-        }
-    }, [userLogin,history]);
+    // React.useEffect(() => {
+    //     if (userLogin) {
+    //         history.goBack();
+    //     }
+    // }, [userLogin,history]);
     const { err } = useSelector(state => state.LoginReducer);
     const openNotification = (mess, description) => {
         notification.open({

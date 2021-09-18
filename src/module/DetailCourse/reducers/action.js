@@ -7,6 +7,7 @@ export const actRegisterCourse = (id)=>{
             dispatch(actRegisterCourseSuccess(rs.data));
             dispatch(actGetDetailCourse(id));
         }).catch((err)=>{
+            console.log(err);
             dispatch(actRegisterCourseFailed(err));
         })
     }

@@ -6,7 +6,7 @@ export const getCategory = () => {
         promise.then((result) => {
             dispatch({
                 type:Type.GET_CATEGORIES,
-                data:result.data.results
+                data:result.data
             })
         })
         promise.catch((error) => {

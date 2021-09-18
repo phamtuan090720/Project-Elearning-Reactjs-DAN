@@ -2,12 +2,13 @@ import { Avatar, Button, Card } from 'antd'
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './CardCourse.module.scss';
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory } from 'react-router-dom';
 import { actRegisterCourse } from '../../reducers/action';
 export default function CardCouse({ subject, img, countStudent }) {
     const { detailCourse } = useSelector(state => state.DetailCourseReducer);
     const { userLogin } = useSelector(state => state.LoginReducer);
     let router = useParams();
+    let history = useHistory();
     const dispatch = useDispatch();
 
     const renderReview = useCallback(() => {
@@ -17,7 +18,7 @@ export default function CardCouse({ subject, img, countStudent }) {
             })
         }
     }, [detailCourse?.student_join]);
-    
+
     const renderButton = React.useCallback(() => {
         let userLoginInCourse = detailCourse?.student_join.find((item) => {
             return item.student.id === userLogin?.id;
@@ -45,14 +46,18 @@ export default function CardCouse({ subject, img, countStudent }) {
                     Add your wish list
                 </Button>
                 <Button shape='round' type="primary" danger size="large" block onClick={() => {
-                    dispatch(actRegisterCourse(router.id));
+                    if(userLogin===null){
+                        history.push('/login')
+                    }
+                    else{
+                        dispatch(actRegisterCourse(router.id));
+                    }
                 }}>
                     Register the course
                 </Button>
             </>
         }
-
-    }, [detailCourse, userLogin, dispatch,router])
+    }, [detailCourse, userLogin, dispatch,router,history])
     return (
         <Card className={styles.card}
             bordered={true}

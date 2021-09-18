@@ -85,7 +85,7 @@ $secondary-color: #5850ec;
         z-index: 10000;
         background-color: #fff;
         border: 0px solid #f8f9fb;
-        width: 250px;
+        width: 200px;
         border-radius: 10px;
         transition: all 0.3s ease-out;
         height: 0;
@@ -103,7 +103,7 @@ $secondary-color: #5850ec;
         }
     }
     .menuActive {
-        height: 220px;
+        height: 130px;
         border: 1px solid #f8f9fb;
     }
 }

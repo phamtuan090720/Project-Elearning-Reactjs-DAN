@@ -1,4 +1,4 @@
-import { Col, Collapse, Row } from 'antd';
+import { Col, Collapse, Empty, Row } from 'antd';
 import React, { useCallback } from 'react'
 import styles from './Content.module.scss';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
@@ -28,17 +28,20 @@ export default function Content() {
                 return <div style={{ fontWeight: '400', fontSize: 16 }} key={index}><BsFillCameraVideoFill style={{ marginRight: 10 }} />{item}</div>
             })
         }
-        else return <div> No video for the lesson yet  </div>
+        else return <div>No video for the lesson yet</div>
     }
     const renderLesson = () => {
         if (detailCourse?.lessons) {
-            return detailCourse.lessons.map((item, index) => {
-                return <Panel style={{ fontSize: 16, fontWeight: 'bold' }} header={item.subject} key={index}>
-                    {renderListVideo(item.list_video)}
-                </Panel>
-            })
+            if(detailCourse?.lessons.length > 0){
+                return detailCourse.lessons.map((item, index) => {
+                    return <Panel style={{ fontSize: 16, fontWeight: 'bold' }} header={item.subject} key={index}>
+                        {renderListVideo(item.list_video)}
+                    </Panel>
+                })
+            }
+            else return <div style={{padding:20}}> <Empty /></div> 
         }
-
+        
     }
     return (
         <div className='container'>
