@@ -49,6 +49,7 @@ const reducer = (state = initialState, action) => {
             state.categoryfilter = action.data;
             return {...state}
         }
+
         default:
             return { ...state };
     }

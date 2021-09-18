@@ -6,7 +6,7 @@ export const getCategory = () => {
         promise.then((result) => {
             dispatch({
                 type:Type.GET_CATEGORIES,
-                data:result.data.results
+                data:result.data
             })
         })
         promise.catch((error) => {
@@ -21,7 +21,7 @@ export const getCategory = () => {
 export const getCourse = (page='?page=1') =>{
     return (dispatch)=>{
         dispatch(actGetCoursesRequest());
-        let promise = http.get(`coures/${page}`);
+        let promise = http.get(`courses/${page}`);
         promise.then((result) => {
             console.log(result)
             dispatch(actGetCoursesSuccess(result.data.results))

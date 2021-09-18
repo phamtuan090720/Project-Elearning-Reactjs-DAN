@@ -1,7 +1,7 @@
 @import "./../../../../scss/Helpers/variables";
 @import "./../../../../scss/Helpers/mixin";
 .wrap {
-    height: 400px;
+    height: 500px;
     background-blend-mode: color-burn;
     background-repeat: no-repeat;
     background-position: center;
@@ -86,8 +86,6 @@
                 span{
                     margin-right: $mg-1;
                     margin-left: $mg-1;
-                }
-                .created {
                 }
             }
         }

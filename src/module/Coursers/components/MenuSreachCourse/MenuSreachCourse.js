@@ -5,33 +5,34 @@ import RadioCustom from '../../../../components/Radio/Radio';
 import { useDispatch, useSelector } from 'react-redux';
 const { Option } = Select;
 export default function MenuSreachCourse() {
-    const {arrCategory} = useSelector(state => state.CoursesReducer)
-    const dispatch = useDispatch()
-    console.log(arrCategory);  
+    const { arrCategory } = useSelector(state => state.CoursesReducer)
+    const dispatch = useDispatch();
     const renderCategory = React.useCallback(() => {
-        return arrCategory.map((item,index)=>{
-            return   <Option key={index} value={item.name}>{item.name}</Option>
-        })
+        if (arrCategory.length > 0) {
+            return arrCategory.map((item, index) => {
+                return <Option key={index} value={item.name}>{item.name}</Option>
+            })
+        }
     }, [arrCategory]);
     const pointRate = [5, 4.5, 3.5, 2.5, 1.5]
     const renderRadio = () => {
         return pointRate.map((item, index) => <Radio key={index} value={item}><Rate allowHalf defaultValue={item} disabled /></Radio>)
     }
     const onChange = (value) => {
-        dispatch((dispatch)=>{
+        dispatch((dispatch) => {
             dispatch({
-                type:"Category_filter",
-                data:value
+                type: "Category_filter",
+                data: value
             })
         })
     }
-    const onFocus = ()=>{
+    const onFocus = () => {
         console.log('focus');
     }
-    const onBlur = ()=>{
+    const onBlur = () => {
         console.log('blur');
     }
-    const onSearch = ()=>{
+    const onSearch = () => {
         console.log('blur');
     }
     return (

@@ -1,0 +1,18 @@
+$them-color: #38b2ac;
+$secondary-color: #5850ec;
+
+
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    .items{
+        width: 48%;
+    }
+}
+
+.radioGroup{
+    text-align: left;
+}

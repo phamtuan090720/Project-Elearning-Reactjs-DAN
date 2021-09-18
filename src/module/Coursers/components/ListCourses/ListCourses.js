@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd';
+import { Col, Empty, Row } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -33,6 +33,7 @@ export default function ListCourses() {
         })
     }, [arrCourses]);
     if(loading) return <Loading/>
+    if(!arrCourses) return <Empty/>
     return (
         <>
             <Row className={styles.wrap}>

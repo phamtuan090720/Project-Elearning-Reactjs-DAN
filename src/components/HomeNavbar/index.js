@@ -13,21 +13,8 @@ export default function HomeNavbar() {
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
     };
-    const [isSticky,setIsSticky] = React.useState(false);
-    React.useEffect(() => {
-        window.onscroll = function () { scrollFunction() };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                setIsSticky(true);
-            } else {
-                setIsSticky(false)
-            }
-        }
-    })
-
     return (
-        <div className={isSticky===true ? "sticky_navbar" : ''} style={{zIndex:10000}}>
+        <div style={{zIndex:10000}}>
             <Row className={styles.myRow}>
                 <Col span={4}>
                     <Button onClick={toggleCollapsed} className={styles.btnForPhone}>
