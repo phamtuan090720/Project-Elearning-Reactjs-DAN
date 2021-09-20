@@ -7,8 +7,8 @@ export const actRegisterCourse = (id)=>{
             dispatch(actRegisterCourseSuccess(rs.data));
             dispatch(actGetDetailCourse(id));
         }).catch((err)=>{
-            console.log(err);
-            dispatch(actRegisterCourseFailed(err));
+            // console.log(err.response.data);
+            dispatch(actRegisterCourseFailed(err.response.data));
         })
     }
 }
@@ -23,9 +23,10 @@ const actRegisterCourseSuccess = (data)=>{
         data:data
     }
 }
-const actRegisterCourseFailed = ()=>{
+const actRegisterCourseFailed = (err)=>{
     return {
-        type:Type.REGISTER_COURSE_FAILED
+        type:Type.REGISTER_COURSE_FAILED,
+        err:err
     }
 }
 export const actGetDetailCourse=(id)=>{
