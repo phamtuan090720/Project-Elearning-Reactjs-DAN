@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import CoursesReducer from '../module/Coursers/reducers/CoursesReducer';
 import DetailCourseReducer from "../module/DetailCourse/reducers/DetailCourseReducer";
 import RegisterCourseReducer from "../module/DetailCourse/reducers/RegisterCourseReducer";
-import LoginReducer from "../module/Login/redux/LoginReducer";
+import LoginReducer from "../module/Login/reducers/LoginReducer";
 const rootReducer = combineReducers({
     CoursesReducer,
     DetailCourseReducer,

@@ -3,18 +3,12 @@ import { Form, Button, Input, Divider, Layout, notification } from 'antd';
 import { FcGoogle } from 'react-icons/fc';
 import styles from './Login.module.scss';
 import { Link } from 'react-router-dom';
-import { actLogin } from '../redux/action';
+import { actLogin } from '../reducers/action';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 export default function Login() {
     let history = useHistory();
-    // const { userLogin } = useSelector(state => state.LoginReducer);
     const dispatch = useDispatch();
-    // React.useEffect(() => {
-    //     if (userLogin) {
-    //         history.goBack();
-    //     }
-    // }, [userLogin,history]);
     const { err } = useSelector(state => state.LoginReducer);
     const openNotification = (mess, description) => {
         notification.open({
