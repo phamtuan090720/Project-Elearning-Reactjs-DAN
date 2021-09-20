@@ -1,13 +1,10 @@
-// import CoursesPage from "../page/CoursesPage/CoursesPage";
-// import DetailCourse from "../page/DetailCourse/DetailCourse";
-// import HomePage from "../page/Home/Home";
 import HomePage from '../module/HomePage/page/Home';
 import CoursesPage from "../module/Coursers/page/CoursesPage";
 import DetailCourse from '../module/DetailCourse/page/DetailCourse';
 import TestCallAPI from '../redux/TestCallAPI';
 // import Login from '../module/Login/page/Login';
 // import Register from '../module/Register/page/Register';
-import UserDashboard from '../module/UserDashboard/page/UserDashboard';
+import UserIndex from '../module/User/UserIndex';
 
 const routesHome = [
     {
@@ -48,9 +45,14 @@ const routesHome = [
 ];
 const routesUser = [
     {
-        exact: false,
+        exact: true,
         path: "/user",
-        component: UserDashboard,
+        component: UserIndex,
+    },
+    {
+        exact: true,
+        path: "/user/:page",
+        component: UserIndex,
     }
 ]
 export { routesHome,routesUser }
