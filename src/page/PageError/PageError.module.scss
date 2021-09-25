@@ -1,0 +1,23 @@
+.wrap{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    .container{
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .content{
+        font-size: 16px;
+        margin-top: 20px;
+        text-align: center;
+    }
+    .ButtonHome{
+      padding: 20px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+}

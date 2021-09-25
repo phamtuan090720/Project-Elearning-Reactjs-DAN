@@ -14,8 +14,6 @@ export default function LayoutUser({ children }) {
                     <Footer style={{ textAlign: 'center' }}>Tuan ©2020 Created by Antd</Footer>
                 </Layout>
             </Layout>
-
-
         </>
     )
 }

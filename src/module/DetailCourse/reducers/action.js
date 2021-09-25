@@ -5,6 +5,7 @@ export const actRegisterCourse = (id)=>{
         dispatch(actRegisterCourseRequest());
         http.get(`courses/${id}/access-course/`).then((rs)=>{
             dispatch(actRegisterCourseSuccess(rs.data));
+            // khi đăng kí hoàn tất sẽ gọi lại api để get lại thông tin khóa học.
             dispatch(actGetDetailCourse(id));
         }).catch((err)=>{
             // console.log(err.response.data);
@@ -34,11 +35,11 @@ export const actGetDetailCourse=(id)=>{
         dispatch(actGetDetailCourseRequest())
         let promise = http.get(`courses/${id}/`);
         promise.then((rs)=>{
-            console.log('data Course',rs);
+            // console.log('data Course',rs);
             dispatch(actGetDetailCourseSuccess(rs.data))
         })
         promise.catch(err=>{
-            console.log(err);
+            // console.log(err);
             actGetDetailCourseFailed(err);
         })
     }

@@ -30,9 +30,7 @@ export default function Login() {
     const renderNoti = React.useCallback(
         () => {
             return <> {err === null ? '' : openNotification('Login failed', err)} </>
-        },
-        [err],
-    )
+        },[err])
     return (
         <Layout>
 
