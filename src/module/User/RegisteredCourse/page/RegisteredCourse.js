@@ -1,13 +1,24 @@
 import { DesktopOutlined } from '@ant-design/icons';
-import { Avatar, Space, Table } from 'antd';
+import { Avatar, Progress, Space, Table } from 'antd';
 import React from 'react'
 import { Link } from 'react-router-dom';
 import TagCustom from '../../../../components/Tag/TagCustom';
+import { useDispatch, useSelector } from 'react-redux';
+import { actGetListRegisteredCourse } from '../reducers/action';
+
 export default function RegisteredCourse() {
+    const { pagination, loading, data } = useSelector(state => state.RegisteredCourseReducer);
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(actGetListRegisteredCourse());
+    }, [dispatch])
+    const handleTableChange = (pagination) => {
+        dispatch(actGetListRegisteredCourse(`page=${pagination.current}`));
+    };
     const columns = [{
         title: 'Name Course',
         dataIndex: 'name_course',
-        render: (text, record) => <Link to={`/user/list-course/${record.id}`}>{text}</Link>
+        render: (text, record) => <Link to={`/user/course/${record.id}`}>{text}</Link>
     },
     {
         title: 'Category',
@@ -17,7 +28,7 @@ export default function RegisteredCourse() {
     {
         title: 'Tags',
         dataIndex: 'tags',
-        render: tags => tags.map((item,index) => {
+        render: tags => tags.map((item, index) => {
             return <TagCustom key={index} content={item.name} />
         }),
     },
@@ -29,48 +40,28 @@ export default function RegisteredCourse() {
             <span>{teacher.user.username}</span>
         </Space>
     },
-
-    ]
-    const data = [
-        {
-            "key":'1',
-            "id": 1,
-            "name_course": "English for beginer",
-            "category": "English",
-            "subject": null,
-            "description": "Chưa có mô tả Khóa Học",
-            "image": "http://127.0.0.1:8000/courses/2021/09/download.jfif",
-            "created_date": "2021-09-07T09:19:57.080951Z",
-            "active": true,
-            "fee": "0",
-            "is_public": true,
-            "teacher": {
-                "user": {
-                    "id": 2,
-                    "username": "ThuThuy",
-                    "avatar": "http://127.0.0.1:8000/static/uploads/2021/09/60618778_2320937534611138_7508554572390989824_n.jpg"
-                }
-            },
-            "rate": 3.3333,
-            "tags": [
-                {
-                    "id": 2,
-                    "name": "tag2"
-                },
-                {
-                    "id": 3,
-                    "name": "tag3"
-                }
-            ]
-
-
-        }
+    {
+        title: 'Complete',
+        dataIndex: 'complete_course',
+        width: '10%',
+        align: 'center',
+        render: complete_course => <Progress strokeColor={{
+            '0%': '#108ee9',
+            '100%': '#87d068',
+        }} width='55px' type="circle" percent={complete_course}  />
+    },
     ]
     return (
         <>
-            <Table columns={columns} dataSource={data}
-             title={() => <h1><DesktopOutlined style={{marginRight:10}} /> Registered Course</h1>}
-             />
+            <Table
+                columns={columns}
+                dataSource={data}
+                pagination={pagination}
+                loading={loading}
+                onChange={handleTableChange}
+                bordered
+                title={() => <h1><DesktopOutlined style={{ marginRight: 10 }} /> Registered Course</h1>}
+            />
         </>
     )
 }

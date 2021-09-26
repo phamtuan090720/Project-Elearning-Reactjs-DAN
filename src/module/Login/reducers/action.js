@@ -9,12 +9,13 @@ export const getUserLogin = (history) => {
         dispatch(actionLoginRequest());
         http.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
-            if (history) {
-                history.push('/home');
-            }
+            // if (history) {
+            //     history.push('/home');
+            // }
         }).catch((err) => {
             if (history) {
                 dispatch(actionLoginFailed("The login session has expired, please login again"));
+                history.push('/login')
             }
             else {
                 dispatch(actionLoginFailed(null));
@@ -31,12 +32,12 @@ export const actLogin = (user, history) => {
             client_id: client_id,
             client_secret: client_secret
         }
-        console.log(data);
+        // console.log(data);
         await http.post('o/token/', data).then((rs) => {
-            console.log(rs.data.access_token);
-            cookies.save('access_token', rs.data.access_token);
+            // console.log(rs.data.access_token);
+            cookies.save('access_token', rs.data.access_token,{path:'/'});
         }).catch((err) => {
-            console.log(err)
+            // console.log(err)
         })
         await http.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));

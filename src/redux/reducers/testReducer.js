@@ -2,7 +2,7 @@ let initialState = {
     data: null
 }
 const reducer = (state = initialState, action) => {
-    console.log(action);
+    // console.log(action);
     // switch (action.type) {
     //     case "Test_mess": {
     //         state.data = {

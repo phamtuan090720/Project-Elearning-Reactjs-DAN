@@ -1,0 +1,14 @@
+.wrap{
+    min-height: 500px;
+    margin: 20px;
+    .list_item{
+        list-style-type: none;
+        padding: 0;
+    }
+    .item{
+        color: #1A89EE;
+        padding: 10px;
+        cursor: pointer;
+        display: inline-block;
+    }
+}
