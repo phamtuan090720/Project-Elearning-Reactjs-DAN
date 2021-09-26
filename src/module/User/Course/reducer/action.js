@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { http } from '../../../../api/setting';
 import * as Type from '../reducer/type';
 // export const getInfoCourse = (page = 1, kw = '') => {
@@ -26,9 +27,19 @@ export const getInfoCourse = (id, page = 1, kw = '') => {
         }).catch((error) => {
             console.log(error)
             console.log(error?.response.data)
-            dispatch(getInfoCourseFailed(error?.response.data.mess));
+            if (error?.response.data?.mess) {
+                return dispatch(getInfoCourseFailed(error?.response.data?.mess));
+            }
+            else if(error?.response.data?.detail &&  error?.response.status === 401){
+                return dispatch(getInfoCourseFailed(Err401(error?.response.data?.detail)));
+            }
         })
     }
+}
+const Err401 = (err) => {
+    return <>
+        {err} &nbsp; <Link to='/login'>Go to Login</Link>
+    </>
 }
 const setPagination = (pagination) => {
     return {

@@ -1,5 +1,5 @@
 import { DesktopOutlined } from '@ant-design/icons';
-import { Avatar, Space, Table } from 'antd';
+import { Avatar, Progress, Space, Table } from 'antd';
 import React from 'react'
 import { Link } from 'react-router-dom';
 import TagCustom from '../../../../components/Tag/TagCustom';
@@ -39,6 +39,16 @@ export default function RegisteredCourse() {
             <Avatar size='large' src={teacher.user.avatar}>{teacher.user.username}</Avatar>
             <span>{teacher.user.username}</span>
         </Space>
+    },
+    {
+        title: 'Complete',
+        dataIndex: 'complete_course',
+        width: '10%',
+        align: 'center',
+        render: complete_course => <Progress strokeColor={{
+            '0%': '#108ee9',
+            '100%': '#87d068',
+        }} width='55px' type="circle" percent={complete_course}  />
     },
     ]
     return (

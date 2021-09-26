@@ -6,11 +6,14 @@ export const actGetLesson = (id) => {
         dispatch(actGetLessonRequest());
         setTimeout(() => {
             http.get(`lesson/${id}/`).then((rs) => {
-                // console.log(rs.data)
+                console.log(rs.data)
                 dispatch(actGetLessonSuccess(rs.data));
+                if (rs.data.list_video.length > 0) {
+                    dispatch(actChangeVideo(rs.data.list_video[0]))
+                }
             }).catch((err) => {
                 // console.log(err?.response.data?.mess)
-                if (err?.response.data?.mess) {
+                if (err?.response?.data?.mess) {
                     return dispatch(actGetLessonFailed(err?.response.data?.mess))
                 }
                 else if (err?.response.data?.detail && err?.response.status === 401) {
@@ -45,5 +48,11 @@ const actGetLessonFailed = (err) => {
     return {
         type: Type.GET_LESSON_FAILED,
         err: err
+    }
+}
+export const actChangeVideo = (link) => {
+    return {
+        type: Type.CHANGE_VIDEO,
+        link: link
     }
 }

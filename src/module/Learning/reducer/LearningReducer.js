@@ -3,6 +3,7 @@ let initialState = {
     loading: true,
     lesson: null,
     err: null,
+    video: null,
 }
 const learningReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -10,6 +11,7 @@ const learningReducer = (state = initialState, action) => {
             state.loading = true;
             state.lesson = null;
             state.err = null;
+            state.video = null;
             return { ...state }
         }
         case Type.GET_LESSON_SUCCESS: {
@@ -20,6 +22,10 @@ const learningReducer = (state = initialState, action) => {
         case Type.GET_LESSON_FAILED: {
             state.err = action.err;
             state.loading = false;
+            return { ...state }
+        }
+        case Type.CHANGE_VIDEO: {
+            state.video = action.link;
             return { ...state }
         }
         default:

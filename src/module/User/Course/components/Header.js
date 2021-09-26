@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageHeader, Button, Tag, Rate, Input } from 'antd';
+import { PageHeader, Button, Tag, Rate, Input, Progress, Row, Col } from 'antd';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Type from '../reducer/type.js';
@@ -12,6 +12,8 @@ export default function Header() {
     const { course } = useSelector(state => state.userCouserReducerData)
     const query = useQuery();
     const param = useParams();
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [sreach, changeSreach] = React.useState('');
     React.useEffect(() => {
         changeSreach(query.get('kw'))
@@ -20,8 +22,6 @@ export default function Header() {
         history.push(`/user/course/${param.id}/?kw=${value}`)
         dispatch(getInfoCourse(param.id, 1, value));
     };
-    const dispatch = useDispatch();
-    const history = useHistory();
     const Content = () => {
         return <div style={{ display: 'flex', justifyContent: 'space-between', justifyItems: "center" }}>
             <Rate allowHalf defaultValue={course?.rate} disabled />
@@ -42,6 +42,20 @@ export default function Header() {
             onBack={() => history.push('/user/list-course')}
         >
             <Content />
+            <Row style={{ margin: 10 }}>
+                <Col xs={24} xl={3}>
+                    <h4>
+                        Complete Course :
+                    </h4>
+                </Col>
+                <Col xs={24} xl={21}>
+                    <Progress percent={course?.complete_course} strokeColor={{
+                        '0%': '#108ee9',
+                        '100%': '#87d068',
+                    }} status="active" showInfo />
+                </Col>
+            </Row>
+
         </PageHeader>
     )
 }
