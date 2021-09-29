@@ -18,11 +18,11 @@ export default function CustomMenuUser() {
     setCollapsed(collapsed);
   };
   return (
-    <Sider style={{ background: 'white' }} collapsed={collapsed}>
+    <Sider theme='dark' collapsed={collapsed}>
       <div style={{ height: 32, display: 'flex', alignItems: 'center', justifyContent: "center", margin: '10px 0' }} onClick={() => {
         onCollapse(collapsed === true ? false : true);
       }}> <img src={LogoCourse} alt="me" width="40" height="40" /></div>
-      <Menu theme="light" defaultSelectedKeys={[`${Object.keys(router).length === 0 ? '1' : router.page}`]} mode="inline">
+      <Menu theme="dark" defaultSelectedKeys={[`${Object.keys(router).length === 0 ? '1' : router.page}`]} mode="inline">
         <Menu.Item key="1" icon={<DashboardOutlined />}>
           <Link to='/user'>
             Dashboard

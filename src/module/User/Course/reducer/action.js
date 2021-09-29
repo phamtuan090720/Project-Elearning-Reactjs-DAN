@@ -1,3 +1,4 @@
+import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import { http } from '../../../../api/setting';
 import * as Type from '../reducer/type';
@@ -12,6 +13,36 @@ import * as Type from '../reducer/type';
 //         })
 //     }
 // }
+const notification = (getInfoCourse,dispatch,mess) => {
+    return Modal.success({
+        title: 'This is a notification message',
+        content: `${mess}`,
+        width:400,
+        okText:"confirm",
+        onOk(){
+           return dispatch(getInfoCourse);
+        }
+    });
+}
+const notificationErr = (mess) => {
+    return Modal.error({
+        title: 'This is a notification message',
+        content: `${mess}`,
+        width:400,
+        okText:"confirm",
+    });
+}
+export const rating = (id,data)=>{
+    return (dispatch)=>{
+        http.post(`courses/${id}/rating/`,data).then((rs)=>{
+            console.log(rs)
+            notification(getInfoCourse(id),dispatch,rs.data);
+        }).catch((err)=>{
+            console.log(err)
+            notificationErr(err?.response.data?.mess)
+        })
+    }
+}
 export const getInfoCourse = (id, page = 1, kw = '') => {
     return (dispatch) => {
         dispatch(getInfoCourseRequest());

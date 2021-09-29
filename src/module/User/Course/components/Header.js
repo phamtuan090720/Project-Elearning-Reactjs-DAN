@@ -25,7 +25,7 @@ export default function Header() {
     const Content = () => {
         return <div style={{ display: 'flex', justifyContent: 'space-between', justifyItems: "center" }}>
             <Rate allowHalf defaultValue={course?.rate} disabled />
-            <Search placeholder="sreach lesson" defaultValue={sreach} onSearch={onSearch} style={{ width: 200 }} />
+            <Search placeholder="search lesson" defaultValue={sreach} onSearch={onSearch} style={{ width: 200 }} />
         </div>
     }
     return (
@@ -37,7 +37,7 @@ export default function Header() {
                     dispatch({
                         type: Type.OPEN_MODAL_RATING
                     })
-                }}>Comment</Button>,
+                }}>Rating</Button>,
             ]}
             onBack={() => history.push('/user/list-course')}
         >

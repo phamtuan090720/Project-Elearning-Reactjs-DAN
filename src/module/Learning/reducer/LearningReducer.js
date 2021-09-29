@@ -4,6 +4,7 @@ let initialState = {
     lesson: null,
     err: null,
     video: null,
+    isOpenModal:false
 }
 const learningReducer = (state = initialState, action) => {
     switch (action.type) {

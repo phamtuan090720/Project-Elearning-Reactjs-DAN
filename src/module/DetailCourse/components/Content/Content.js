@@ -13,7 +13,7 @@ export default function Content() {
         console.log(key)
     }
     const renderReview = useCallback(() => {
-        if (detailCourse?.student_join) {
+        if (detailCourse?.student_join.length > 0) {
             return detailCourse.student_join.map((item, index) => {
                 if (item.review !== null && item.rate !== null) {
                     return <Review key={index} student={item.student} review={item.review} point={item.rate} />
@@ -21,6 +21,7 @@ export default function Content() {
                 return <React.Fragment key={index}></React.Fragment>
             })
         }
+        else return <Empty description="There are no reviews for this course yet"/>
     }, [detailCourse?.student_join]);
     const renderListVideo = (list_video) => {
         if (list_video.length > 0) {
@@ -32,16 +33,16 @@ export default function Content() {
     }
     const renderLesson = () => {
         if (detailCourse?.lessons) {
-            if(detailCourse?.lessons.length > 0){
+            if (detailCourse?.lessons.length > 0) {
                 return detailCourse.lessons.map((item, index) => {
                     return <Panel style={{ fontSize: 16, fontWeight: 'bold' }} header={item.subject} key={index}>
                         {renderListVideo(item.list_video)}
                     </Panel>
                 })
             }
-            else return <div style={{padding:20}}> <Empty /></div> 
+            else return <div style={{ padding: 20 }}> <Empty /></div>
         }
-        
+
     }
     return (
         <div className='container'>

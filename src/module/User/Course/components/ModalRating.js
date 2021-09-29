@@ -1,7 +1,9 @@
 import { Modal, Form, Rate, Input } from 'antd';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { rating } from '../reducer/action.js';
 import * as Type from '../reducer/type.js';
+import {useParams} from 'react-router-dom';
 const CollectionCreateForm = ({ visible, onCreate, onCancel, user_review }) => {
     const [form] = Form.useForm();
     // console.log('user_review', user_review)
@@ -16,7 +18,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, user_review }) => {
                 form
                     .validateFields()
                     .then((values) => {
-                        onCreate(values);
+                        onCreate(values,form.resetFields);
                     })
                     .catch((info) => {
                         console.log('Validate Failed:', info);
@@ -50,12 +52,30 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, user_review }) => {
         </Modal>
     );
 };
+const ModalError = (resetFields,dispatch) => {
+    return Modal.error({
+        content: "You have not completed 50% of the course so you cannot rate the course",
+        title: "This is a notification message",
+        onOk(){
+            resetFields();
+            dispatch({
+                type: Type.CLOSE_MODAL_RATING
+            })
+        }
+    })
+}
 export default function ModalRating() {
     const { course } = useSelector(state => state.userCouserReducerData)
     const { isOpenModal } = useSelector(state => state.userCourseReducer)
+    const param = useParams();
     const dispatch = useDispatch()
-    const onCreate = (values) => {
-        console.log('Received values of form: ', values);
+    const onCreate = (values,resetFields) => {
+        if (course.complete_course < 50) {
+            return ModalError(resetFields,dispatch);
+        }
+        dispatch(rating(param.id,values));
+        // console.log(param.id);
+        // console.log('Received values of form: ', values);
         dispatch({
             type: Type.CLOSE_MODAL_RATING
         })

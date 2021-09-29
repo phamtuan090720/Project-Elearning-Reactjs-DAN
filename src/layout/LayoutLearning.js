@@ -5,8 +5,10 @@ import MyLoading from '../components/Loading/Loading.js';
 import PageError from '../page/PageError/PageError.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { actGetLesson, actChangeVideo } from '../module/Learning/reducer/action.js';
+import { actGetLesson, actChangeVideo, actCompleteLesson } from '../module/Learning/reducer/action.js';
 import { PlayCircleOutlined } from '@ant-design/icons';
+import styles from './LayoutLearning.module.scss';
+import ModalConfirm from '../components/Modal/ModalConfirm.js';
 export default function LayoutLearning({ children }) {
     const dispatch = useDispatch();
     const param = useParams();
@@ -45,7 +47,9 @@ export default function LayoutLearning({ children }) {
             {err}
         </div>
     </PageError>
-
+    const completeLesson = () => {
+        return dispatch(actCompleteLesson(param.id));
+    }
 
     return (
         <Layout>
@@ -56,9 +60,11 @@ export default function LayoutLearning({ children }) {
                     <Button key="1" type="primary" onClick={showDrawer} shape='round'>
                         List Video
                     </Button>,
-                    <Button key="2" type="primary" shape='round'>
-                        Complete
-                    </Button>,
+                    <Button key="2" type="primary" onClick={() => {
+                        ModalConfirm(completeLesson)
+                    }} className={`${lesson?.complete === true ? styles.disabledButton : ""}`} danger disabled={lesson?.complete} shape='round'>
+                        {lesson?.complete === false ? "Complete" : "Accomplished"}
+                    </Button>
                 ]}
                 style={{ marginTop: 10 }}
             />
