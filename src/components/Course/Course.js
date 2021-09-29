@@ -27,7 +27,7 @@ export default function Course(props) {
                 </div>
                 <div className={styles.footer}>
                     <Rate className={styles.rating} allowHalf disabled defaultValue={props.rate} />
-                    <span className={styles.price}>{props?.price}</span>
+                    <span className={styles.price}>{props?.price==="0.00"?"Free":props?.price}</span>
                 </div>
             </Card>
         </Link>

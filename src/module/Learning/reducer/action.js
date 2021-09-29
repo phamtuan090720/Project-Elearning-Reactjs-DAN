@@ -1,6 +1,32 @@
 import { http } from '../../../api/setting.js';
 import * as Type from './type.js';
+import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
+const countDown = (actGetLesson,dispatch,mess) => {
+    return Modal.success({
+        title: 'This is a notification message',
+        content: `${mess}`,
+        width:400,
+        okText:"confirm",
+        onOk(){
+           return dispatch(actGetLesson);
+        }
+    });
+}
+export const actCompleteLesson = (id) => {
+    return (dispatch) => {
+        http.post(`lesson/${id}/complete-lesson/`).then((rs) => {
+            countDown(actGetLesson(id),dispatch,rs.data.mess);
+        }).catch((err) => {
+            if (err?.response?.data?.mess) {
+                return alert(err?.response?.data?.mess)
+            }
+            else if (err?.response.data?.detail) {
+                return alert(err?.response.data?.detail)
+            }
+        })
+    }
+}
 export const actGetLesson = (id) => {
     return (dispatch) => {
         dispatch(actGetLessonRequest());
