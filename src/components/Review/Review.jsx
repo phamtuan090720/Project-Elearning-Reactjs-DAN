@@ -12,7 +12,7 @@ export default function Review({ point,student,review }) {
                         <p>{student?.username}</p>
                     </div>
                     <div className={styles.rate_point}>
-                        <Rate style={{ fontSize: 15 }} defaultValue={point} disabled />
+                        <Rate defaultValue={point} disabled />
                     </div>
                 </div>
                 <div className={styles.review}>

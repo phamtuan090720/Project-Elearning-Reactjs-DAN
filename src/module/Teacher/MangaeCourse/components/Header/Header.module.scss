@@ -1,0 +1,15 @@
+.header{
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.info > span:first-child{
+    font-weight: 500;
+}
+.info > span {
+    font-size: 15px;
+}
+.search{
+    display: flex;
+    justify-content: flex-end;
+}

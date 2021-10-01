@@ -1,0 +1,4 @@
+export const SET_STATUS_OPENCREATEFROM = 'manageCourseReducer/SET_STATUS_OPENCREATEFROM'
+export const GET_CATEGORIES_REQUEST = 'manageCourseReducer/GET_CATEGORIES_REQUEST';
+export const GET_CATEGORIES_SUCCESS = 'manageCourseReducer/GET_CATEGORIES_SUCCESS';
+export const GET_CATEGORIES_FAILED = 'manageCourseReducer/GET_CATEGORIES_FAILED';

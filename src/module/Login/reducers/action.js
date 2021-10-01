@@ -37,7 +37,7 @@ export const actLogin = (user, history) => {
             // console.log(rs.data.access_token);
             cookies.save('access_token', rs.data.access_token,{path:'/'});
         }).catch((err) => {
-            // console.log(err)
+            console.log(err)
         })
         await http.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));

@@ -2,10 +2,11 @@ import { BrowserRouter, Switch,Route } from 'react-router-dom';
 import HomeTemplate from './template/HomeTemplate';
 import UserTemplate from './template/UserTemplate';
 import LearningTemplate from './template/LearningTemplate';
-import { routesHome,routesLearning,routesUser } from './routers';
+import { routesHome,routesLearning,routesUser,routerTeacher } from './routers';
 import PageNotFound from './page/PageNotFound/PageNotFound';
 import Login from './module/Login/page/Login';
 import Course from './module/User/Course/page/Course.js';
+import TeacherTemplate from './template/TeacherTemplete';
 function App() {
   const showLayoutHome = (routes) => {
     if (routes && routes.length > 0) {
@@ -28,12 +29,20 @@ function App() {
       });
     }
   }
+  const showLayoutTeacher = (routes) => {
+    if (routes && routes.length > 0) {
+      return routes.map((item, index) => {
+        return <TeacherTemplate key={index} exact={item.exact} path={item.path} Component={item.component} />
+      });
+    }
+  }
   return (
     <BrowserRouter>
       <Switch>
         {showLayoutHome(routesHome)}
         {showLayoutUser(routesUser)}
         {showLayoutLearning(routesLearning)}
+        {showLayoutTeacher(routerTeacher)}
         <Route path='/user/course/:id' component={Course}/>
         <Route path='/login' component = {Login}/>
         <Route path='' component = {PageNotFound}/>

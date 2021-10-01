@@ -1,0 +1,12 @@
+.wrap {
+    padding: 15px;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 10px;
+}
+.btnGroup {
+    display: flex;
+    > .btnItem:first-child{
+       margin-right: 10px; 
+    }
+}
