@@ -39,8 +39,8 @@ export const actGetDetailCourse=(id)=>{
             dispatch(actGetDetailCourseSuccess(rs.data))
         })
         promise.catch(err=>{
-            // console.log(err);
-            actGetDetailCourseFailed(err);
+            // console.log(err?.response.data?.mess);
+            dispatch(actGetDetailCourseFailed(err?.response.data?.mess));
         })
     }
 }

@@ -5,6 +5,8 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import Review from '../../../../components/Review/Review';
 import { useSelector } from 'react-redux';
 import { BsFillCameraVideoFill } from 'react-icons/bs';
+import ReactHtmlParser from 'react-html-parser';
+
 const { Panel } = Collapse;
 
 export default function Content() {
@@ -44,6 +46,7 @@ export default function Content() {
         }
 
     }
+    // console.log(detailCourse?.description)
     return (
         <div className='container'>
             <div className={styles.wrap}>
@@ -51,7 +54,7 @@ export default function Content() {
                     <Col xs={24} xl={16}>
                         <div className={styles.description}>
                             <h2>Description</h2>
-                            {detailCourse?.description}
+                            {ReactHtmlParser(detailCourse?.description)}
                         </div>
                         <div className={styles.curriculum}>
                             <h2>Course Curriculum</h2>

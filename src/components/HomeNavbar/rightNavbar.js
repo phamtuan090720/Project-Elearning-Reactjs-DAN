@@ -33,12 +33,12 @@ export default function RightNavbar() {
                     </div>
                     <div className={`${styles.menu} ${openMenu === true ? styles.menuActive : ''}`}>
                         <div className={styles.menuItem} onClick={() => {
-                            router.push('/user');
+                            router.push('/user/home');
                         }}>
                             <p> <DashboardOutlined style={{ marginRight: 10, fontSize: 16 }} /> Student Dashboard</p>
                         </div>
                         {userLogin?.user_type === "Teacher" ? <div className={styles.menuItem} onClick={() => {
-                            router.push('/teacher');
+                            router.push('/teacher/home');
                         }}>
                             <p> <DashboardOutlined style={{ marginRight: 10, fontSize: 16 }} /> Teacher Dashboard</p>
                         </div> : ''}

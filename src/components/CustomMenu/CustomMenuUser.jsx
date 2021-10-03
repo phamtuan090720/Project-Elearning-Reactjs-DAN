@@ -22,9 +22,9 @@ export default function CustomMenuUser() {
       <div style={{ height: 32, display: 'flex', alignItems: 'center', justifyContent: "center", margin: '10px 0' }} onClick={() => {
         onCollapse(collapsed === true ? false : true);
       }}> <img src={LogoCourse} alt="me" width="40" height="40" /></div>
-      <Menu theme="dark" defaultSelectedKeys={[`${Object.keys(router).length === 0 ? '1' : router.page}`]} mode="inline">
-        <Menu.Item key="1" icon={<DashboardOutlined />}>
-          <Link to='/user'>
+      <Menu theme="dark" defaultSelectedKeys={[`${router.page}`]} mode="inline">
+        <Menu.Item key="home" icon={<DashboardOutlined />}>
+          <Link to='/user/home'>
             Dashboard
           </Link>
         </Menu.Item>

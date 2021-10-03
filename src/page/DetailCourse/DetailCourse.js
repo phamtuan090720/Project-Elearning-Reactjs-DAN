@@ -6,7 +6,7 @@ import Content from './Content/Content';
 import styles from './DetailCourse.moudle.scss';
 export default function DetailCourse() {
     let router = useParams();
-    console.log(router)
+    // console.log(router)
 
     return (
         <>

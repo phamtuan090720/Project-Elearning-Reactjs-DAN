@@ -5,8 +5,10 @@ import DetailCourseReducer from "../module/DetailCourse/reducers/DetailCourseRed
 import RegisterCourseReducer from "../module/DetailCourse/reducers/RegisterCourseReducer";
 import LoginReducer from "../module/Login/reducers/LoginReducer";
 import RegisteredCourseReducer from "../module/User/RegisteredCourse/reducers/RegisteredCourseReducer";
-import {userCourseReducer,userCouserReducerData} from '../module/User/Course/reducer/UserCourseReducer.js';
+import { userCourseReducer, userCouserReducerData } from '../module/User/Course/reducer/UserCourseReducer.js';
 import LearningReducer from "../module/Learning/reducer/LearningReducer";
+import manageCourseReducer from "../module/Teacher/MangaeCourse/redux/ManageCourseReducer";
+import editCourseReducer from '../module/Teacher/MangaeCourse/redux/EditCourseReducer';
 
 const rootReducer = combineReducers({
     CoursesReducer,
@@ -16,8 +18,10 @@ const rootReducer = combineReducers({
     RegisteredCourseReducer,
     userCourseReducer,
     userCouserReducerData,
-    LearningReducer
-    
+    LearningReducer,
+    manageCourseReducer,
+    editCourseReducer
+
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

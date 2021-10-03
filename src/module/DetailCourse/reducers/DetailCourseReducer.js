@@ -6,21 +6,21 @@ let initialState = {
 }
 const detailCourseReducer = (state = initialState, action) => {
     switch (action.type) {
-        case Type.GET_DETAILCOURSE_REQUEST:{
+        case Type.GET_DETAILCOURSE_REQUEST: {
             state.loading = true;
             state.detailCourse = null;
             state.error = null;
-            return {...state}
+            return { ...state }
         }
-        case Type.GET_DETAILCOURSE_SUCCESS:{
+        case Type.GET_DETAILCOURSE_SUCCESS: {
             state.loading = false;
             state.detailCourse = action.data;
-            return {...state}
+            return { ...state }
         }
-        case Type.GET_DETAILCOURSE_FAILED:{
-            state.error = action.err; 
+        case Type.GET_DETAILCOURSE_FAILED: {
             state.loading = false;
-            return {...state}
+            state.error = action.err;
+            return { ...state }
         }
         default:
             return { ...state };

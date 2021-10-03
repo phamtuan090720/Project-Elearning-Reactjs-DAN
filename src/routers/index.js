@@ -6,6 +6,7 @@ import PlayerExample from '../redux/TestCallAPI';
 // import Register from '../module/Register/page/Register';
 import UserIndex from '../module/User/UserIndex';
 import Learning from '../module/Learning/page/Learning';
+import TeacherIndex from '../module/Teacher/TeacherIndex';
 
 const routesHome = [
     {
@@ -44,12 +45,25 @@ const routesHome = [
     //     component: Login,
     // },
 ];
-const routesUser = [
-    {
+const routerTeacher = [
+    // {
+    //     exact: true,
+    //     path: "/teacher",
+    //     component: TeacherIndex
+    // },
+    {   
         exact: true,
-        path: "/user",
-        component: UserIndex,
+        path: "/teacher/:page",
+        component: TeacherIndex
     },
+
+]
+const routesUser = [
+    // {
+    //     exact: true,
+    //     path: "/user",
+    //     component: UserIndex,
+    // },
     {
         exact: true,
         path: "/user/:page",
@@ -68,4 +82,4 @@ const routesLearning = [
         component: Learning,
     }
 ]
-export { routesHome,routesUser,routesLearning }
+export { routesHome, routesUser, routesLearning, routerTeacher }
