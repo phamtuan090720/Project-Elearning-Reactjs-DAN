@@ -15,7 +15,7 @@ export default function CustomMenuTeacher() {
     const onCollapse = (collapsed) => {
         setCollapsed(collapsed);
     };
-    console.log(router.page)
+    // console.log(router.page)
     return (
         <Sider theme='dark' collapsed={collapsed}>
             <div style={{ height: 32, display: 'flex', alignItems: 'center', justifyContent: "center", margin: '10px 0' }} onClick={() => {

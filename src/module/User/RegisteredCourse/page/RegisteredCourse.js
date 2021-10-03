@@ -18,19 +18,19 @@ export default function RegisteredCourse() {
     const columns = [{
         title: 'Name Course',
         dataIndex: 'name_course',
-        key:'name_course',
+        key: 'name_course',
         render: (text, record) => <Link to={`/user/course/${record.id}`}>{text}</Link>
     },
     {
         title: 'Category',
         dataIndex: 'category',
-        key:'category',
+        key: 'category',
         render: category => `${category}`,
     },
     {
         title: 'Tags',
         dataIndex: 'tags',
-        key:'tags',
+        key: 'tags',
         render: tags => tags.map((item, index) => {
             return <TagCustom key={index} content={item.name} />
         }),
@@ -38,7 +38,7 @@ export default function RegisteredCourse() {
     {
         title: 'Teacher',
         dataIndex: 'teacher',
-        key:'teacher',
+        key: 'teacher',
         render: teacher => <Space>
             <Avatar size='large' src={teacher.user.avatar}>{teacher.user.username}</Avatar>
             <span>{teacher.user.username}</span>
@@ -47,10 +47,10 @@ export default function RegisteredCourse() {
     {
         title: 'Complete',
         dataIndex: 'complete_course',
-        key:'complete_course',
+        key: 'complete_course',
         width: '10%',
         align: 'center',
-        render: complete_course => <Progress strokeColor={{
+        render: complete_course => <Progress style={{ fontSize: 15 }} strokeColor={{
             '0%': '#108ee9',
             '100%': '#87d068',
         }} width='55px' type="circle" percent={complete_course} />

@@ -46,7 +46,7 @@ export default function Content() {
         }
 
     }
-    console.log(detailCourse?.description)
+    // console.log(detailCourse?.description)
     return (
         <div className='container'>
             <div className={styles.wrap}>

@@ -1,47 +1,108 @@
-import { Switch, Table, Button, Rate } from 'antd';
+import { Switch, Table, Button, Rate, Tooltip, Modal } from 'antd';
 import React from 'react'
 import styles from './TableLisCourse.module.scss';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { actDeleteCourse, actGetMyCourse } from '../../redux/action';
+import { useQuery } from '../../../../../HOC/useQuery';
+import { Link } from 'react-router-dom';
+import * as Type from '../../redux/type';
 export default function TableListCouse() {
-    const dataSource = [
-
-    ];
-
+    const { pagination, listCourse, loading } = useSelector(state => state.manageCourseReducer)
+    const query = useQuery();
+    const dispatch = useDispatch();
     function onChange(checked, id) {
         console.log(`${id} switch to ${checked}`);
+    }
+    const handleTableChange = (pagination) => {
+        if (query.has('kw') === true) {
+            return dispatch(actGetMyCourse(pagination.current, query.get('kw')))
+        }
+        else {
+            return dispatch(actGetMyCourse(pagination.current))
+        }
+    }
+    const openFormEdit = (id) => {
+        dispatch({
+            type: Type.SET_STATUS_OPENEDITFROM,
+            status: true,
+        })
+        dispatch({ type: Type.SET_COURSE_EDIT, id: id })
+    }
+    const deleteCourse = (id) => {
+        return Modal.confirm({
+            title: 'This is a notification message',
+            content: `Do you Want to delete these Course?`,
+            width: 450,
+            okText: "confirm",
+            onCancel() {
+                console.log('Cancel');
+            },
+            onOk() {
+                dispatch(actDeleteCourse(id))
+            }
+
+        });
+        // dispatch(actDeleteCourse(id))
+        // alert(id)
     }
     const columns = [
         {
             title: 'Name course',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'name_course',
+            key: 'name_course',
+            render: (name_course, record) => <Link to={`/teacher/manage-course/${record.id}`}>{name_course}</Link>
         },
         {
             title: 'Category',
-            dataIndex: 'age',
-            key: 'age',
+            dataIndex: 'category',
+            key: 'category',
         },
         {
-            title: 'Rate',
+            title: 'Average Rating',
             dataIndex: 'rate',
             key: 'rate',
             width: '15%',
-            render: rate => <Rate value={rate} allowHalf disabled />
+            render: rate => <Tooltip placement='bottom' title={`${rate === null ? "There are no rating for this course yet" : 'Average Rating ' + parseFloat(rate).toFixed(1)} `}>
+                <div>
+                    <Rate disabled value={rate} allowHalf />
+                </div>
+            </Tooltip>
         },
         {
             title: 'Action',
             width: '10%',
             align: 'center',
-            key: 'address',
+            key: 'action',
             render: (record) => <div className={styles.btnGroup}>
-                <Button className={styles.btnItem} type='primary' shape='round' icon={<EditOutlined />}>Edit</Button>
-                <Button className={styles.btnItem} type='primary' shape='round' icon={<DeleteOutlined />} danger>Delete</Button>
+                <Tooltip placement='bottom' title='Edit'>
+                    <Button className={styles.btnItem} type='primary' onClick={() => {
+                        openFormEdit(record.id)
+                    }} shape='round' icon={<EditOutlined />}></Button>
+                </Tooltip>
+                <Tooltip placement='bottom' title='Delete'>
+                    <Button className={styles.btnItem} onClick={() => { deleteCourse(record.id) }} type='primary' shape='round' icon={<DeleteOutlined />} danger></Button>
+                </Tooltip>
+            </div>
+        },
+        {
+            title: 'Type',
+            dataIndex: 'is_public',
+            key: 'is_public',
+            align: 'center',
+            width: '5%',
+            render: (active, record) => <div>
+                <Tooltip placement='bottom' title={`${active === true ? 'Public' : 'Private'}`}>
+                    <Switch defaultChecked={active} onChange={(checked) => {
+                        onChange(checked, record.id)
+                    }} />
+                </Tooltip>
             </div>
         },
         {
             title: 'Active',
             dataIndex: 'active',
-            key: 'address',
+            key: 'active',
             align: 'center',
             width: '5%',
             render: (active, record) => <Switch defaultChecked={active} onChange={(checked) => {
@@ -51,7 +112,12 @@ export default function TableListCouse() {
     ];
     return (
         <div className={styles.wrap} style={{ boxShadow: '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)', transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms" }}>
-            <Table dataSource={dataSource} bordered columns={columns} />
+            <Table dataSource={listCourse}
+                bordered columns={columns}
+                pagination={pagination}
+                onChange={handleTableChange}
+                loading={loading}
+            />
         </div>
 
     )

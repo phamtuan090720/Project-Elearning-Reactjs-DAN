@@ -1,7 +1,7 @@
 import { Tag } from 'antd';
 import React from 'react'
 
-export default function TagCustom({content}) {
+export default function TagCustom({content,closable,onClose}) {
     const renderColor=()=>{
         switch (content) {
             case "ReactJs":
@@ -16,6 +16,6 @@ export default function TagCustom({content}) {
         }
     }
     return (
-        <Tag style={{marginTop:5}} color={renderColor()}>#{content}</Tag>
+        <Tag style={{marginTop:5}} onClose={onClose} closable={closable} color={renderColor()}>#{content}</Tag>
     )
 }

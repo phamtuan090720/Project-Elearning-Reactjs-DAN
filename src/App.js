@@ -7,6 +7,7 @@ import PageNotFound from './page/PageNotFound/PageNotFound';
 import Login from './module/Login/page/Login';
 import Course from './module/User/Course/page/Course.js';
 import TeacherTemplate from './template/TeacherTemplete';
+import ManageDetailCourse from './module/Teacher/ManageDetailCourse/page/ManageDetailCourse';
 function App() {
   const showLayoutHome = (routes) => {
     if (routes && routes.length > 0) {
@@ -44,6 +45,7 @@ function App() {
         {showLayoutLearning(routesLearning)}
         {showLayoutTeacher(routerTeacher)}
         <Route path='/user/course/:id' component={Course}/>
+        <Route path='/teacher/manage-course/:id' component={ManageDetailCourse}/>
         <Route path='/login' component = {Login}/>
         <Route path='' component = {PageNotFound}/>
       </Switch>

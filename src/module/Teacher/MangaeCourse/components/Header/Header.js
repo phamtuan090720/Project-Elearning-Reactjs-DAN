@@ -4,11 +4,16 @@ import styles from './Header.module.scss';
 import { PlusOutlined } from '@ant-design/icons';
 import * as Type from '../../redux/type.js';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { actGetMyCourse } from '../../redux/action';
 const { Search } = Input;
 const ContentHeader = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const onSearch = value => {
-        console.log(value)
-    };
+        history.push(`/teacher/manage-course/?kw=${value}`)
+        dispatch(actGetMyCourse(1, value));
+    }
     return <>
         <Row align='middle'>
             <Col span={10}>

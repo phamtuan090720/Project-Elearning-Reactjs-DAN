@@ -1,20 +1,45 @@
 import { UploadOutlined } from '@ant-design/icons';
-import style from './FormCreateCourse.module.scss';
+import style from './FormEditCourse.module.scss';
 import { Drawer, Form, Button, Space, Input, Select, InputNumber, Row, Col, Switch, Upload } from 'antd';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import RichTextEdit from './RichTextEdit';
 import * as Type from '../../redux/type';
-import { actCreateCourse } from '../../redux/action';
-// import AddTag from '../AddTag/AddTag';
+import AddTag from '../AddTag/AddTag';
+import { actEditCourse } from '../../redux/action';
 const { Option } = Select;
 
-export default function FormCreateCourse() {
-    const { isOpenFormCreate, listCategory } = useSelector(state => state.manageCourseReducer)
+export default function FormEditCourse() {
+    const { isOpenFormEdit, listCategory, courseEdit } = useSelector(state => state.manageCourseReducer)
     const [form] = Form.useForm();
     const [imgSrc, setImgSrc] = useState('/default-image.jpg')
     const dispatch = useDispatch()
+    React.useEffect(() => {
+        if (listCategory && courseEdit) {
+            // console.log(listCategory.find((item) => item.name === courseEdit.category))
+            let category = listCategory.find((item) => item.name === courseEdit.category)
+            // console.log(courseEdit.tags)
+            const tags = []
+            courseEdit.tags.forEach((item) => {
+                tags.push(item.name)
+            })
+            // console.log(tags)
+            // console.log(tags)
+            form.setFieldsValue({
+                name_course: courseEdit.name_course,
+                subject: courseEdit.subject,
+                fee: parseInt(courseEdit.fee),
+                is_public: courseEdit.is_public,
+                category: category.id,
+                description: courseEdit.description,
+            });
+            setImgSrc(courseEdit.image)
+            // console.log(form.getFieldValue('description'))
+        }
+
+    }, [form, courseEdit, listCategory])
+
     const renderCategory = React.useCallback(() => {
         if (listCategory?.length > 0) {
             return listCategory.map((item, index) => {
@@ -23,44 +48,34 @@ export default function FormCreateCourse() {
         }
     }, [listCategory]);
     const onClose = () => {
-        dispatch({ type: Type.SET_STATUS_OPENCREATEFROM, status: false })
+        dispatch({ type: Type.SET_STATUS_OPENEDITFROM, status: false })
     }
     const onFinish = (values) => {
         let formData = new FormData();
-        console.log(values)
-        for (let key in values) {
-            if (key === 'image') {
-                formData.append(key, values[key][0].originFileObj)
-            }
-            else if (key !== 'tags') {
-                formData.append(key, values[key])
-            }
+        // console.log(values)
+        if (values.image) {
+            for (let key in values) {
+                if (key === 'image') {
+                    formData.append(key, values[key][0].originFileObj)
+                }
+                else if (key !== 'tags') {
+                    formData.append(key, values[key])
+                }
 
-            // console.log(values[key])
-            // formData.append(key, values[key])
-            // console.log(values[key])
+            }
+            dispatch(actEditCourse(courseEdit.id, formData,values.tags))
         }
-
-        dispatch(actCreateCourse(formData, form, () => {
-            setImgSrc('/default-image.jpg')
-            onClose()
-        }));
-        // console.log(form.getFieldValue('fee'))
-
+        else {
+            delete values.image;
+            console.log(values)
+            for (let key in values) {
+                if (key !== 'tags') {
+                    formData.append(key, values[key])
+                }
+            }
+            dispatch(actEditCourse(courseEdit.id, formData ,values.tags))
+        }
     }
-    // const fill = () => {
-    //     form.setFieldsValue({
-    //         name_course: 'https://taobao.com/',
-    //         description: "gaga"
-    //     });
-    // }
-    // const handleChangeRichTextBox = async (event, editor) => {
-    //     const data = editor.getData();
-    //     form.setFieldsValue({
-    //         description: data
-    //     })
-    //     console.log(data)
-    // }
     const handleChangeFile = async (info) => {
         // console.log(info.file)
         //Lấy dữ liệu từ file từ người dùng nhập
@@ -74,21 +89,11 @@ export default function FormCreateCourse() {
         form.setFieldsValue({
             image: info.fileList,
         });
-        // console.log('file', file);
-        // if (file) {
-        //     let reader = new FileReader();
-        //     reader.readAsDataURL(file);
-        //     reader.onload = async (e) => {
-        //         // console.log(e.target.result);
-        //         setImgSrc(e.target.result);
-        //     }
-        // }
-        // form.setFieldsValue('image', info.fileList)
-
-
     }
     const handleChangeCategory = (value) => {
         console.log(value)
+
+
     }
     /* eslint-disable no-template-curly-in-string */
 
@@ -106,11 +111,12 @@ export default function FormCreateCourse() {
     return (
 
         <Drawer
-            title="Create a new course"
+            title="Edit course"
             width={'40%'}
             onClose={onClose}
-            visible={isOpenFormCreate}
+            visible={isOpenFormEdit}
         >
+
             <Form form={form} name="myForm" layout={'vertical'}
                 onFinish={onFinish}
                 validateMessages={validateMessages}
@@ -193,7 +199,6 @@ export default function FormCreateCourse() {
                         label="Image Course"
                         name='image'
                         valuePropName="file"
-                        rules={[{ required: true }]}
                         noStyle>
                         <Upload.Dragger maxCount={1} onChange={handleChangeFile} beforeUpload={() => false} accept='image/png, image/jpg, image.jpeg,image/gif' >
                             <p className="ant-upload-drag-icon">
@@ -208,26 +213,25 @@ export default function FormCreateCourse() {
                     </Form.Item>
                     <p style={{ marginTop: 10 }}>Preview Image :</p>
                     {/* <input type="file" name="image" onChange={handleChangeFile} accept="image/png, image/jpg, image.jpeg,image/gif " /> */}
-                    <img style={{ width: 300 }} className="mt-2" src={imgSrc} alt="..." />
+                    <img style={{ width: 300 }} className="mt-2" src={imgSrc} alt="..."
+                        onError={(e) => { e.target.onerror = null; e.target.src = "/default-image.jpg" }} />
                 </Form.Item>
                 <Form.Item label="Description" name='description' rules={[{ required: true }]}>
                     <RichTextEdit form={form} />
                 </Form.Item>
-                {/* <Form.Item label="Tags" name="tags">
+                <Form.Item label="Tags" name="tags">
                     <AddTag form={form} />
-                </Form.Item> */}
+                </Form.Item>
                 <Form.Item style={{ paddingTop: 30 }}>
                     <Space>
                         <Button shape='round' htmlType='submit' type="primary">
-                            Submit
+                            Edit
                         </Button>
-                        {/* <Button shape='round' onClick={fill} type="primary">
-                            Fill
-                        </Button> */}
                         <Button shape='round' onClick={onClose}>Cancel</Button>
                     </Space>
                 </Form.Item>
             </Form>
+
         </Drawer>
     )
 }

@@ -8,6 +8,7 @@ import RegisteredCourseReducer from "../module/User/RegisteredCourse/reducers/Re
 import { userCourseReducer, userCouserReducerData } from '../module/User/Course/reducer/UserCourseReducer.js';
 import LearningReducer from "../module/Learning/reducer/LearningReducer";
 import manageCourseReducer from "../module/Teacher/MangaeCourse/redux/ManageCourseReducer";
+import editCourseReducer from '../module/Teacher/MangaeCourse/redux/EditCourseReducer';
 
 const rootReducer = combineReducers({
     CoursesReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     userCourseReducer,
     userCouserReducerData,
     LearningReducer,
-    manageCourseReducer
+    manageCourseReducer,
+    editCourseReducer
 
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
