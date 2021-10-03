@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './TableLisCourse.module.scss';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { actDeleteCourse, actGetMyCourse } from '../../redux/action';
+import { actDeleteCourse, actGetMyCourse ,actChangeType,actChangeActive } from '../../redux/action';
 import { useQuery } from '../../../../../HOC/useQuery';
 import { Link } from 'react-router-dom';
 import * as Type from '../../redux/type';
@@ -11,8 +11,41 @@ export default function TableListCouse() {
     const { pagination, listCourse, loading } = useSelector(state => state.manageCourseReducer)
     const query = useQuery();
     const dispatch = useDispatch();
-    function onChange(checked, id) {
-        console.log(`${id} switch to ${checked}`);
+    const onChangeType = (checked, id) => {
+        return Modal.confirm({
+            title: 'This is a notification message',
+            content: `Do you Want ${checked === true ? "Public" : "Private"} these Course?`,
+            width: 450,
+            okText: "confirm",
+            onCancel() {
+                dispatch(actGetMyCourse())
+            },
+            onOk() {
+                let data = {
+                    is_public: checked
+                }
+                dispatch(actChangeType(id,data))
+            }
+
+        });
+    }
+    const onChangeActive = (checked, id) => {
+        return Modal.confirm({
+            title: 'This is a notification message',
+            content: `Do you Want ${checked === true ? "active" : "unactive"} these Course?`,
+            width: 450,
+            okText: "confirm",
+            onCancel() {
+                dispatch(actGetMyCourse())
+            },
+            onOk() {
+                let data = {
+                    active: checked
+                }
+                dispatch(actChangeActive(id,data))
+            }
+
+        });
     }
     const handleTableChange = (pagination) => {
         if (query.has('kw') === true) {
@@ -94,7 +127,7 @@ export default function TableListCouse() {
             render: (active, record) => <div>
                 <Tooltip placement='bottom' title={`${active === true ? 'Public' : 'Private'}`}>
                     <Switch defaultChecked={active} onChange={(checked) => {
-                        onChange(checked, record.id)
+                        onChangeType(checked, record.id)
                     }} />
                 </Tooltip>
             </div>
@@ -106,7 +139,7 @@ export default function TableListCouse() {
             align: 'center',
             width: '5%',
             render: (active, record) => <Switch defaultChecked={active} onChange={(checked) => {
-                onChange(checked, record.id)
+                onChangeActive(checked, record.id)
             }} />
         },
     ];

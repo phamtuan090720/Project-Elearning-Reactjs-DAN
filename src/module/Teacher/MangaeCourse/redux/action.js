@@ -21,7 +21,24 @@ const notificationErr = (mess) => {
         okText: "confirm",
     });
 }
-
+export const actChangeType = (id, data) => {
+    return (dispatch) => {
+        http.patch(`courses/${id}/`, data).then((rs) => {
+            notification("Successfully", actGetMyCourse(), dispatch)
+        }).catch((err) => {
+            notificationErr("Failed")
+        })
+    }
+}
+export const actChangeActive = (id, data) => {
+    return (dispatch) => {
+        http.patch(`courses/${id}/`, data).then((rs) => {
+            notification("Successfully", actGetMyCourse(), dispatch)
+        }).catch((err) => {
+            notificationErr("Failed")
+        })
+    }
+}
 export const actEditCourse = (id, data, tags) => {
     return async (dispatch) => {
         await http.patch(`courses/${id}/`, data).then((rs) => {
@@ -33,7 +50,7 @@ export const actEditCourse = (id, data, tags) => {
         if (tags) {
             data = { "tags": tags }
             await http.post(`courses/${id}/add-tag/`, data).then((rs) => {
-                console.log(rs)
+
             }).catch((err) => {
                 console.log(err)
                 notificationErr("Add Tags To Failed")
