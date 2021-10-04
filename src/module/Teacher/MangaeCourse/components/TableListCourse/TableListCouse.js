@@ -84,7 +84,7 @@ export default function TableListCouse() {
             title: 'Name course',
             dataIndex: 'name_course',
             key: 'name_course',
-            render: (name_course, record) => <Link to={`/teacher/manage-course/${record.id}`}>{name_course}</Link>
+            render: (name_course, record) => <Link to={`/teacher/manage-course/${record.id}/home`}>{name_course}</Link>
         },
         {
             title: 'Category',

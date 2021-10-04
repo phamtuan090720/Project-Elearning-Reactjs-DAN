@@ -45,7 +45,7 @@ function App() {
         {showLayoutLearning(routesLearning)}
         {showLayoutTeacher(routerTeacher)}
         <Route path='/user/course/:id' component={Course}/>
-        <Route path='/teacher/manage-course/:id' component={ManageDetailCourse}/>
+        <Route path='/teacher/manage-course/:id/:page' component={ManageDetailCourse}/>
         <Route path='/login' component = {Login}/>
         <Route path='' component = {PageNotFound}/>
       </Switch>
