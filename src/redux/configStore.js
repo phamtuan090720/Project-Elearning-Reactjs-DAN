@@ -9,6 +9,7 @@ import { userCourseReducer, userCouserReducerData } from '../module/User/Course/
 import LearningReducer from "../module/Learning/reducer/LearningReducer";
 import manageCourseReducer from "../module/Teacher/MangaeCourse/redux/ManageCourseReducer";
 import editCourseReducer from '../module/Teacher/MangaeCourse/redux/EditCourseReducer';
+import lessonManageReducer from "../module/Teacher/ManageDetailCourse/reducers/LessonManageReducer";
 
 const rootReducer = combineReducers({
     CoursesReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     userCouserReducerData,
     LearningReducer,
     manageCourseReducer,
-    editCourseReducer
+    editCourseReducer,
+    lessonManageReducer
 
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
