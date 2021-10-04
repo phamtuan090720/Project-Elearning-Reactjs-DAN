@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Button, Modal, Space, Switch, Table, Tooltip } from 'antd'
 import Paper from '../../../../../../components/Paper/Paper';
@@ -6,7 +5,9 @@ import styles from './TableLesson.module.scss';
 import { BookOutlined, DeleteOutlined, EditOutlined, FileOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { actDeleteLesson } from '../../../reducers/action';
+import { actDeleteLesson, actChangeActive, getListLesson} from '../../../reducers/action';
+import * as Type from '../../../reducers/type';
+
 export default function TableLesson() {
     const { loading, listLesson } = useSelector(state => state.lessonManageReducer)
     const param = useParams();
@@ -22,6 +23,31 @@ export default function TableLesson() {
             },
             onOk() {
                 dispatch(actDeleteLesson(id, param.id));
+            }
+
+        });
+    }
+    const openFormEdit = (id) => {
+        dispatch({
+            type: Type.SET_STATUS_OPENEDITFORM,
+            status: true,
+        })
+        dispatch({ type: Type.SET_DETAIL_LESSON, id: id })
+    }
+    const onChangeActive = (checked, id) => {
+        return Modal.confirm({
+            title: 'This is a notification message',
+            content: `Do you Want ${checked === true ? "active" : "unactive"} these Lesson?`,
+            width: 450,
+            okText: "confirm",
+            onCancel() {
+                dispatch(getListLesson( param.id))
+            },
+            onOk() {
+                let data = {
+                    active: checked
+                }
+                dispatch(actChangeActive(id, param.id, data))
             }
 
         });
@@ -56,7 +82,9 @@ export default function TableLesson() {
             key: 'action',
             render: (record) => <Space>
                 <Tooltip placement='bottom' title='Edit'>
-                    <Button className={styles.btnItem} type='primary' shape='round' icon={<EditOutlined />}></Button>
+                    <Button className={styles.btnItem} type='primary' shape='round' icon={<EditOutlined />} onClick={() => {
+                        openFormEdit(record.id)
+                    }}></Button>
                 </Tooltip>
                 <Tooltip placement='bottom' title='Delete'>
                     <Button className={styles.btnItem} type='primary' onClick={() => deleteLesson(record.id)} shape='round' icon={<DeleteOutlined />} danger></Button>
@@ -68,7 +96,9 @@ export default function TableLesson() {
             dataIndex: 'active',
             key: 'active',
             width: '5%',
-            render: (acvitve) => <Switch defaultChecked={acvitve} />
+            render: (acvitve, record) => <Switch defaultChecked={acvitve} onChange={(checked) => {
+                onChangeActive(checked, record.id)
+            }}/>
         }
     ];
     // const data =

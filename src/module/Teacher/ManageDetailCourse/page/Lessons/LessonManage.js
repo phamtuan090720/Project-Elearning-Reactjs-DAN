@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { getListLesson } from '../../reducers/action';
 import FormAddLesson from './FormAddLesson/FormAddLesson';
+import FormEditLesson from './FormEditLesson/FormEditLesson';
 import Header from './Header/Header';
 import styles from './LessonManage.module.scss';
 import TableLesson from './TableLesson/TableLesson';
@@ -18,6 +19,7 @@ export default function LessonManage() {
             <Header />
             <TableLesson />
             <FormAddLesson/>
+            <FormEditLesson/>
         </div>
     )
 }

@@ -31,6 +31,25 @@ export const actDeleteLesson = (id,idCourse)=>{
     }
     
 }
+export const actChangeActive = (id, idCourse, data) => {
+    return (dispatch) => {
+        http.patch(`lesson/${id}/`, data).then((rs) => {
+            notification("Successfully", getListLesson(idCourse), dispatch)
+        }).catch((err) => {
+            notificationErr("Failed")
+        })
+    }
+}
+export const actEditLesson = (id, idCourse, data) => {
+    return async (dispatch) => {
+        await http.patch(`lesson/${id}/`, data).then((rs) => {
+            notification("Successfully",  getListLesson(idCourse), dispatch)
+            dispatch({ type: Type.SET_STATUS_OPENEDITFORM, status: false })
+        }).catch((err) => {
+            notificationErr("Failed")
+        })
+    }
+}
 export const addLesson = (id,data,form)=>{
     return (dispatch)=>{
         http.post(`courses/${id}/add-lesson/`,data).then((rs)=>{

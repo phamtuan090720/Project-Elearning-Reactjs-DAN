@@ -1,9 +1,11 @@
 import * as Type from './type';
 const initialState = {
     listLesson: null,
+    lesson: null,
     err: null,
     loading: false,
     isOpenCreateForm: false,
+    isOpenEditForm: false,
 
 }
 const addKey = (data) => {
@@ -18,6 +20,17 @@ const lessonManageReducer = (state = initialState, action) => {
     switch (action.type) {
         case Type.SET_STATUS_OPENCEATEFORM: {
             state.isOpenCreateForm = action.status;
+            return { ...state };
+        }
+        case Type.SET_STATUS_OPENEDITFORM: {
+            state.isOpenEditForm = action.status;
+            return { ...state };
+        }
+        case Type.SET_DETAIL_LESSON: {
+            let lesson = state.listLesson.find((item) => item.id === action.id)
+            if(lesson){
+                state.lesson = lesson;
+            }
             return { ...state };
         }
         case Type.GET_LIST_LESSON_REQUEST: {

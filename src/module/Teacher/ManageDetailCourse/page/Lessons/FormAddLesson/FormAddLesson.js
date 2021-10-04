@@ -32,7 +32,7 @@ export default function FormAddLesson() {
     const [form] = Form.useForm();
     return (
         <Drawer
-            title="Create a new account"
+            title="Create a new lesson"
             width={"40%"}
             onClose={onClose}
             visible={isOpenCreateForm}
