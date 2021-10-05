@@ -23,6 +23,9 @@ export default function FormEditCourse() {
             if(lesson.image !==null){
                 setImgSrc(lesson.image)
             }
+            else{
+                setImgSrc('/default-image.jpg')
+            }
         }
 
     }, [form, lesson])
@@ -42,7 +45,7 @@ export default function FormEditCourse() {
                 }
 
             }
-            dispatch(actEditLesson(lesson.id, lesson.course, formData))
+            dispatch(actEditLesson(lesson.id, lesson.course, formData,form))
         }
         else {
             delete values.image;
@@ -50,7 +53,7 @@ export default function FormEditCourse() {
                 formData.append(key, values[key])
             }
 
-            dispatch(actEditLesson(lesson.id, lesson.course, formData))
+            dispatch(actEditLesson(lesson.id, lesson.course, formData,form))
         }
     }
     const handleChangeFile = async (info) => {

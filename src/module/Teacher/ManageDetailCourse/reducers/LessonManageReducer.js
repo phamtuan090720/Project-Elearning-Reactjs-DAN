@@ -6,6 +6,10 @@ const initialState = {
     loading: false,
     isOpenCreateForm: false,
     isOpenEditForm: false,
+    pagination: {
+        current: 1,
+        pageSize: 10,
+    }
 
 }
 const addKey = (data) => {
@@ -28,7 +32,7 @@ const lessonManageReducer = (state = initialState, action) => {
         }
         case Type.SET_DETAIL_LESSON: {
             let lesson = state.listLesson.find((item) => item.id === action.id)
-            if(lesson){
+            if (lesson) {
                 state.lesson = lesson;
             }
             return { ...state };
@@ -37,6 +41,10 @@ const lessonManageReducer = (state = initialState, action) => {
             state.loading = true;
             state.listLesson = null;
             state.err = null;
+            state.pagination = {
+                current: 1,
+                pageSize: 10,
+            }
             return { ...state };
         }
         case Type.GET_LIST_LESSON_SUCCESS: {
@@ -49,6 +57,10 @@ const lessonManageReducer = (state = initialState, action) => {
         case Type.GET_LIST_LESSON_FAILED: {
             state.loading = false;
             state.err = action.err;
+            return { ...state };
+        }
+        case Type.SET_PAGINATION: {
+            state.pagination = { ...state.pagination, current: action.data.current, total: action.data.total }
             return { ...state };
         }
         default:

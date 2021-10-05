@@ -1,17 +1,24 @@
 import React from 'react'
-import { Button, Modal, Space, Switch, Table, Tooltip } from 'antd'
+import { Button, Input, Modal, Space, Switch, Table, Tooltip } from 'antd'
 import Paper from '../../../../../../components/Paper/Paper';
 import styles from './TableLesson.module.scss';
 import { BookOutlined, DeleteOutlined, EditOutlined, FileOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import { actDeleteLesson, actChangeActive, getListLesson} from '../../../reducers/action';
+import { useHistory, useParams } from 'react-router';
+import { actDeleteLesson, actChangeActive, getListLesson } from '../../../reducers/action';
 import * as Type from '../../../reducers/type';
-
+import { useQuery } from '../../../../../../HOC/useQuery';
+const { Search } = Input;
 export default function TableLesson() {
-    const { loading, listLesson } = useSelector(state => state.lessonManageReducer)
+    const { loading, listLesson, pagination } = useSelector(state => state.lessonManageReducer)
     const param = useParams();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const query = useQuery();
+    const [sreach, changeSreach] = React.useState('');
+    const history = useHistory();
+    React.useEffect(() => {
+        changeSreach(query.get('kw'))
+    }, [query])
     const deleteLesson = (id) => {
         return Modal.confirm({
             title: 'This is a notification message',
@@ -27,6 +34,10 @@ export default function TableLesson() {
 
         });
     }
+    const onSearch = value => {
+        history.push(`/teacher/manage-course/${param.id}/lessons/?kw=${value}`)
+        dispatch(getListLesson(param.id, 1, value));
+    };
     const openFormEdit = (id) => {
         dispatch({
             type: Type.SET_STATUS_OPENEDITFORM,
@@ -41,7 +52,7 @@ export default function TableLesson() {
             width: 450,
             okText: "confirm",
             onCancel() {
-                dispatch(getListLesson( param.id))
+                dispatch(getListLesson(param.id))
             },
             onOk() {
                 let data = {
@@ -52,6 +63,14 @@ export default function TableLesson() {
 
         });
     }
+    const handleTableChange = (pagination) => {
+        if (query.has('kw') === true) {
+            return dispatch(getListLesson(param.id, pagination.current, query.get('kw')))
+        }
+        else {
+            return dispatch(getListLesson(param.id, pagination.current))
+        }
+    };
     const columns = [
         {
             title: 'Lesson',
@@ -98,7 +117,7 @@ export default function TableLesson() {
             width: '5%',
             render: (acvitve, record) => <Switch defaultChecked={acvitve} onChange={(checked) => {
                 onChangeActive(checked, record.id)
-            }}/>
+            }} />
         }
     ];
     // const data =
@@ -129,10 +148,13 @@ export default function TableLesson() {
     return (
         <Paper className={styles.wrap}>
             <Table
+                onChange={handleTableChange}
                 dataSource={listLesson}
                 loading={loading}
                 bordered
                 columns={columns}
+                pagination={pagination}
+                title={() => <Search placeholder="search lesson" defaultValue={sreach} onSearch={onSearch} style={{ width: 200 }} />}
             />
         </Paper>
     )

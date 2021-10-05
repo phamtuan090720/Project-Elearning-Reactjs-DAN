@@ -40,22 +40,23 @@ export const actChangeActive = (id, idCourse, data) => {
         })
     }
 }
-export const actEditLesson = (id, idCourse, data) => {
+export const actEditLesson = (id, idCourse, data,form) => {
     return async (dispatch) => {
         await http.patch(`lesson/${id}/`, data).then((rs) => {
             notification("Successfully",  getListLesson(idCourse), dispatch)
             dispatch({ type: Type.SET_STATUS_OPENEDITFORM, status: false })
+            form.resetFields()
         }).catch((err) => {
             notificationErr("Failed")
         })
     }
 }
-export const addLesson = (id,data,form)=>{
+export const addLesson = (id,data,resetFrom)=>{
     return (dispatch)=>{
         http.post(`courses/${id}/add-lesson/`,data).then((rs)=>{
             console.log(rs)
             notification(rs.data.mess,getListLesson(id),dispatch);
-            form.resetFields()
+            resetFrom();
             dispatch({type:Type.SET_STATUS_OPENCEATEFORM,status:false});
         }).catch((err)=>{
             console.log(err);
@@ -65,11 +66,16 @@ export const addLesson = (id,data,form)=>{
         });
     }
 }
-export const getListLesson = (id) => {
+export const getListLesson = (id,page=1,kw='') => {
     return (dispatch) => {
         dispatch(getListLessonRequest());
-        http.get(`courses/${id}/lesson/`).then((rs) => {
+        http.get(`courses/${id}/lesson/?page=${page}&kw=${kw}`).then((rs) => {
             dispatch(getListLessonSuccess(rs.data));
+            let pagination = {
+                current: parseInt(page),
+                total: rs.data.count
+            }
+            dispatch(setPagination(pagination));
         }).catch((error) => {
             if (error?.response.data?.mess) {
                 return dispatch(getListLessonFailed(error?.response.data?.mess));
@@ -81,6 +87,12 @@ export const getListLesson = (id) => {
                 console.log(error)
             }
         })
+    }
+}
+const setPagination = (pagination) => {
+    return {
+        type: Type.SET_PAGINATION,
+        data: pagination
     }
 }
 const getListLessonRequest = () => {
