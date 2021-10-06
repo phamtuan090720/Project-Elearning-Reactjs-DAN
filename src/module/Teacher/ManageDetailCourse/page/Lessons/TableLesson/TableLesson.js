@@ -5,7 +5,7 @@ import styles from './TableLesson.module.scss';
 import { BookOutlined, DeleteOutlined, EditOutlined, FileOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
-import { actDeleteLesson, actChangeActive, getListLesson } from '../../../reducers/action';
+import { actDeleteLesson, actChangeActive, getListLesson, getDetailLesson } from '../../../reducers/action';
 import * as Type from '../../../reducers/type';
 import { useQuery } from '../../../../../../HOC/useQuery';
 const { Search } = Input;
@@ -71,7 +71,18 @@ export default function TableLesson() {
             return dispatch(getListLesson(param.id, pagination.current))
         }
     };
+    const openContainer = (id) => {
+        // alert(id);
+        dispatch(getDetailLesson(id));
+        dispatch({ type: Type.SET_STATUS_CONTAINER, status: true });
+    }
     const columns = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            width: '5%',
+            key: 'id',
+        },
         {
             title: 'Lesson',
             dataIndex: 'subject',
@@ -84,13 +95,25 @@ export default function TableLesson() {
             key: 'action',
             render: (record) => <Space>
                 <Tooltip placement='bottom' title='Files'>
-                    <Button className={styles.btnItem} shape='circle' icon={<FileOutlined />}></Button>
+                    <Button className={styles.btnItem} onClick={() => {
+                        openContainer(record.id)
+                        dispatch({ type: Type.SET_KEY_CONTAINER, key: "Files" })
+                    }
+                    } shape='circle' icon={<FileOutlined />}></Button>
                 </Tooltip>
                 <Tooltip placement='bottom' title='HomeWork'>
-                    <Button className={styles.btnItem} shape='circle' icon={<BookOutlined />}></Button>
+                    <Button className={styles.btnItem} onClick={() => {
+                        openContainer(record.id)
+                        dispatch({ type: Type.SET_KEY_CONTAINER, key: "HomeWork" })
+                    }
+                    } shape='circle' icon={<BookOutlined />}></Button>
                 </Tooltip>
                 <Tooltip placement='bottom' title='Videos'>
-                    <Button className={styles.btnItem} shape='circle' icon={<VideoCameraOutlined />}></Button>
+                    <Button className={styles.btnItem} onClick={() => {
+                        openContainer(record.id)
+                        dispatch({ type: Type.SET_KEY_CONTAINER, key: "Videos" })
+                    }
+                    } shape='circle' icon={<VideoCameraOutlined />}></Button>
                 </Tooltip>
             </Space>
         },

@@ -26,7 +26,7 @@ export default function FormAddLesson() {
             }
 
         }
-        dispatch(addLesson(param.id, formData,()=>{
+        dispatch(addLesson(param.id, formData, () => {
             form.resetFields();
             setImgSrc('/default-image.jpg')
         }));
@@ -58,6 +58,7 @@ export default function FormAddLesson() {
 
 
     }
+    /* eslint-disable no-template-curly-in-string */
     const validateMessages = {
         required: '${label} is required!',
         types: {
@@ -109,7 +110,7 @@ export default function FormAddLesson() {
                 </Form.Item>
                 <Form.Item>
                     <Space>
-                        <Button htmlType='submit'> Submit</Button>
+                        <Button htmlType='submit' type='primary'> Submit</Button>
                         <Button onClick={onClose} type="primary">
                             Cancel
                         </Button>

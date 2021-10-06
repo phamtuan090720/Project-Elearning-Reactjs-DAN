@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { getListLesson } from '../../reducers/action';
+import Container from './Container/Container';
 import FormAddLesson from './FormAddLesson/FormAddLesson';
 import FormEditLesson from './FormEditLesson/FormEditLesson';
 import Header from './Header/Header';
@@ -20,6 +21,7 @@ export default function LessonManage() {
             <TableLesson />
             <FormAddLesson/>
             <FormEditLesson/>
+            <Container/>
         </div>
     )
 }
