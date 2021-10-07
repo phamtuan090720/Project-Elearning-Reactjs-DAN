@@ -1,0 +1,66 @@
+$them-color: #38b2ac;
+$secondary-color: #5850ec;
+@mixin  respond($breakpoint) {
+    @if $breakpoint == phone{
+      @media (max-width: 46.1875em){@content};
+    }
+    @if $breakpoint == tab-port{
+      @media (min-width: 46.25em) and (max-width: 63.9375em){@content};  
+    }
+    @if $breakpoint == tab-land{
+      @media (max-width: 63.9375em){@content}; 
+    }
+    @if $breakpoint == ipad-pro{
+      @media (max-width: 75em){@content};
+    }
+}
+
+
+.container {
+    display: flex;
+    align-content: center;
+    height: 100vh;
+    @include respond(ipad-pro){
+        margin-top: 20px;
+        height: auto;
+    }
+
+    .formContainer {
+        width: 35%;
+        margin: auto;
+        padding: 60px 50px;
+        border-radius: 15px;
+        border: 2px solid #f0f0f0;
+        @include respond(ipad-pro){
+            width: 55%;
+        }
+        @include respond(phone){
+            width: 100%;
+            border-radius: 0;
+            border: none;
+        }
+    }
+
+    h2{
+        text-align: center;
+        padding-bottom: 15px;
+        color: $them-color;
+    }
+
+    .googleBtn{
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon{
+        font-size: 24px;
+        margin-right: 15px;
+    }
+
+
+  }
+  

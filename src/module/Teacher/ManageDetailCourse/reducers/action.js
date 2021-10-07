@@ -365,3 +365,54 @@ const getDetailLessonFailed = (err) => {
         err: err
     }
 }
+export const actAllowStudentJoinCourse = (idCourse,data) => {
+    return (dispatch) => {
+        http.post(`courses/${idCourse}/accept-student/`,data).then((rs) => {
+            notification(rs.data.mess, actGetListStudentInCourse(idCourse), dispatch)
+        }).catch((err) => {
+            console.log(err)
+            notificationErr('Failed')
+        })
+    }
+}
+export const actGetListStudentInCourse = (id) => {
+    return (dispatch) => {
+        dispatch(actGetListStudentInCourseRequest())
+        http.get(`courses/${id}/get-student-course/`).then((rs) => {
+            dispatch(actGetListStudentInCourseSuccess(rs.data))
+            console.log(rs.data)
+        }).catch((error) => {
+            if (error?.response.data?.mess) {
+                return dispatch(actGetListStudentInCourseFailed(error?.response.data?.mess));
+            }
+            else if (error?.response.data?.detail && error?.response.status === 401) {
+                return dispatch(actGetListStudentInCourseFailed(error?.response.data?.detail))
+            }
+            else if (error?.response.data?.detail) {
+                return dispatch(actGetListStudentInCourseFailed(error?.response.data?.detail))
+            }
+            else {
+                console.log(error)
+            }
+        })
+
+    }
+}
+
+const actGetListStudentInCourseRequest = () => {
+    return {
+        type: Type.GET_STUDENT_REQUEST
+    }
+}
+const actGetListStudentInCourseSuccess = (data) => {
+    return {
+        type: Type.GET_STUDENT_SUCCESS,
+        data: data
+    }
+}
+const actGetListStudentInCourseFailed = (err) => {
+    return {
+        type: Type.GET_STUDENT_FAILED,
+        err: err
+    }
+}

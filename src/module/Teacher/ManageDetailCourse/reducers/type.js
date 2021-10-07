@@ -11,3 +11,6 @@ export const GET_DETAIL_LESSON_REQUEST = 'detailLessonManageReducer/GET_DETAIL_L
 export const GET_DETAIL_LESSON_SUCCESS = 'detailLessonManageReducer/GET_DETAIL_LESSON_SUCCESS';
 export const GET_DETAIL_LESSON_FAILED = 'detailLessonManageReducer/GET_DETAIL_LESSON_FAILED';
 export const SET_KEY_CONTAINER = 'detailLessonManageReducer/SET_KEY_CONTAINER';
+export const GET_STUDENT_SUCCESS = 'studentManageReducer/GET_STUDENT_SUCCESS';
+export const GET_STUDENT_FAILED = 'studentManageReducer/GET_STUDENT_FAILED';
+export const GET_STUDENT_REQUEST = 'studentManageReducer/GET_STUDENT_REQUEST';

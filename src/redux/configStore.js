@@ -11,11 +11,15 @@ import manageCourseReducer from "../module/Teacher/MangaeCourse/redux/ManageCour
 import editCourseReducer from '../module/Teacher/MangaeCourse/redux/EditCourseReducer';
 import lessonManageReducer from "../module/Teacher/ManageDetailCourse/reducers/LessonManageReducer";
 import detailLessonManageReducer from "../module/Teacher/ManageDetailCourse/reducers/DetailLessonManageReducer";
-
+import studentManageReducer from "../module/Teacher/ManageDetailCourse/reducers/StudentManageReducer";
+import RegisterReducer from "../module/Register/reducer/registerReducer";
+import teacherRegisterReducer from "../module/RegiterTeacher/reducer/TeacherRegisterReducer";
 const rootReducer = combineReducers({
     CoursesReducer,
     DetailCourseReducer,
     LoginReducer,
+    RegisterReducer,
+    teacherRegisterReducer,
     RegisterCourseReducer,
     RegisteredCourseReducer,
     userCourseReducer,
@@ -24,7 +28,8 @@ const rootReducer = combineReducers({
     manageCourseReducer,
     editCourseReducer,
     lessonManageReducer,
-    detailLessonManageReducer
+    detailLessonManageReducer,
+    studentManageReducer
 
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

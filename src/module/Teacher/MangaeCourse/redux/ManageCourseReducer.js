@@ -3,6 +3,7 @@ const initialState = {
     isOpenFormCreate: false,
     isOpenFormEdit: false,
     courseEdit: null,
+    countCourse: null,
     listCategory: null,
     listCourse: null,
     loading: false,
@@ -56,13 +57,20 @@ const manageCourseReducer = (state = initialState, action) => {
             state.loading = true;
             state.courseEdit = null;
             state.listCourse = null;
+            state.countCourse = null;
             state.err = null;
             return { ...state };
         }
         case Type.GET_MY_COURSE_SUCCESS: {
             state.loading = false;
-            state.listCourse = addKey(action.data);
+            state.listCourse = addKey(action.data.results);
+            state.countCourse = action.data.count;
             return { ...state }
+        }
+        case Type.GET_MY_COURSE_FAILED: {
+            state.loading = false;
+            state.err = action.err;
+            return { ...state };
         }
         case Type.SET_PAGINATION: {
             state.pagination = { ...state.pagination, current: action.data.current, total: action.data.total }

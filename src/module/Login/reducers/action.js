@@ -9,9 +9,6 @@ export const getUserLogin = (history) => {
         dispatch(actionLoginRequest());
         http.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
-            // if (history) {
-            //     history.push('/home');
-            // }
         }).catch((err) => {
             if (history) {
                 dispatch(actionLoginFailed("The login session has expired, please login again"));
@@ -23,7 +20,7 @@ export const getUserLogin = (history) => {
         });
     }
 }
-export const actLogin = (user, history) => {
+export const actLogin = (user, history, mess) => {
     return async (dispatch) => {
         dispatch(actionLoginRequest());
         let data = {
@@ -35,12 +32,15 @@ export const actLogin = (user, history) => {
         // console.log(data);
         await http.post('o/token/', data).then((rs) => {
             // console.log(rs.data.access_token);
-            cookies.save('access_token', rs.data.access_token,{path:'/'});
+            cookies.save('access_token', rs.data.access_token, { path: '/' });
         }).catch((err) => {
             console.log(err)
         })
         await http.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
+            if (mess === "register success") {
+                return history.push('/home')
+            }
             history.goBack();
         }).catch((err) => {
             dispatch(actionLoginFailed("Incorrect account and password"));

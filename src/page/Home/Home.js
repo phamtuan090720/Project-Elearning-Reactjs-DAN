@@ -91,7 +91,7 @@ export default function Home() {
                 We provides the tools to deliver the content, while you get to focus on your courses, and expanding your Experience.</h2>
             </div>
             <Button shape="round" size="large" className={styles.btnSignUp}>
-              <Link to="/iregister">Become An <strong>Instructor</strong></Link >
+              <Link to="/register-teacher">Become An <strong>Instructor</strong></Link >
             </Button>
           </div>
           <div className={styles.gif}><img src="/gif.gif" alt='gif-teacher' /></div>

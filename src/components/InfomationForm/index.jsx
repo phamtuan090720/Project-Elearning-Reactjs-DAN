@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Form, Input, Radio, } from 'antd';
+import { Row, Form, Input } from 'antd';
 import styles from './infoForm.module.scss'
 
 export default function InfoForm() {
@@ -22,13 +22,13 @@ export default function InfoForm() {
                     <Input style={{ height: `50px` }} size="large" placeholder="Last name " />
                 </Form.Item>
             </Row>
-            <Form.Item name="gender" label="Gender" className={styles.radioGroup}>
+            {/* <Form.Item name="gender" label="Gender" className={styles.radioGroup}>
                 <Radio.Group >
                     <Radio value="male">Male</Radio>
                     <Radio value="female">Female</Radio>
                     <Radio value="orther">Orther</Radio>
                 </Radio.Group>
-            </Form.Item>
+            </Form.Item> */}
 
             <Form.Item
                 name="phone"

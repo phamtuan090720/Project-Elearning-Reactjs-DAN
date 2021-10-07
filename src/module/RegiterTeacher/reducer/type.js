@@ -1,0 +1,4 @@
+export const TEACHERREGISTER_REQUEST = 'TeacherRegisterReducer/TEACHERREGISTER_REQUEST';
+export const TEACHERREGISTER_SUCCESS = 'TeacherRegisterReducer/TEACHERREGISTER_SUCCESS';
+export const TEACHERREGISTER_FAILED = 'TeacherRegisterReducer/TEACHERREGISTER_FAILED';
+export const TEACHER_ACTIVE = 'TeacherRegisterReducer/TEACHER_ACTIVE';

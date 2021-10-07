@@ -1,0 +1,93 @@
+$them-color: #38b2ac;
+$secondary-color: #5850ec;
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media (max-width: 46.1875em) {
+            @content;
+        }
+    }
+    @if $breakpoint == tab-port {
+        @media (min-width: 46.25em) and (max-width: 63.9375em) {
+            @content;
+        }
+    }
+    @if $breakpoint == tab-land {
+        @media (max-width: 63.9375em) {
+            @content;
+        }
+    }
+    @if $breakpoint == ipad-pro {
+        @media (max-width: 75em) {
+            @content;
+        }
+    }
+}
+.container {
+    width: 50%;
+    margin: auto;
+    height: 100vh;
+    position: initial;
+    @include respond(ipad-pro) {
+        width: 90%;
+    }
+    .content {
+        min-height: 400px;
+        margin-top: 16px;
+        padding-top: 80px;
+        text-align: center;
+        background-color: #fafafa;
+        border: 1px dashed #e9e9e9;
+        border-radius: 2px;
+    }
+    .containerForm{
+        max-width: 600px;
+        min-height: 400px;
+        margin:0 auto;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    .btnBackToHome{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .btnGroup {
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        margin-top: 20px;
+    }
+    .stepContainer {
+        margin-top: 50px;
+    }
+
+    .registerContainer {
+        margin: auto;
+        margin-top: 50px;
+        width: 80%;
+        text-align: center;
+    }
+
+    .subject {
+        position: relative;
+        width: 100%;
+    }
+
+    
+    .googleBtn {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+    }
+}

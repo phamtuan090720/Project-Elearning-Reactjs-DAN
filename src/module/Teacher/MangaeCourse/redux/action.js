@@ -109,17 +109,35 @@ export const actGetMyCourse = (page = 1, kw = '') => {
     return (dispatch) => {
         dispatch(actGetMyCourseRequest())
         http.get(`teacher/get-list-courses/?page=${page}&kw=${kw}`).then((rs) => {
-            dispatch(actGetMyCourseSuccess(rs.data.results));
+            dispatch(actGetMyCourseSuccess(rs.data));
             console.log(rs)
             let pagination = {
                 current: parseInt(page),
                 total: rs.data.count
             }
             dispatch(setPagination(pagination))
-        }).catch((err) => {
-            notificationErr(err?.response?.data?.detail)
-            console.log(err)
-            dispatch(actGetMyCourseFailed(err?.response?.data?.mess));
+        }).catch((error) => {
+            if (error?.response.data?.mess) {
+                notificationErr(error?.response.data?.mess)
+                dispatch(actGetMyCourseFailed(error?.response.data?.mess));
+                return dispatch(actGetMyCourseFailed(error?.response.data?.mess));
+            }
+            else if (error?.response.data?.detail && error?.response.status === 401) {
+                notificationErr(error?.response?.data?.detail)
+                dispatch(actGetMyCourseFailed(error?.response?.data?.detail));
+                return dispatch(actGetMyCourseFailed(error?.response?.data?.detail));
+            }
+            else if (error?.response.data?.detail) {
+                notificationErr(error?.response?.data?.detail)
+                dispatch(actGetMyCourseFailed(error?.response?.data?.detail));
+                return dispatch(actGetMyCourseFailed(error?.response?.data?.detail));
+            }
+            else {
+                notificationErr("Failed")
+                dispatch(actGetMyCourseFailed(error));
+            }
+
+
         });
     }
 }
@@ -147,8 +165,6 @@ const setPagination = (pagination) => {
         data: pagination
     }
 }
-
-
 // export const actEditCourse = (id, data) => {
 //     return async (dispatch) => {
 //         await http.patch(`courses/${id}/`, data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((rs) => {

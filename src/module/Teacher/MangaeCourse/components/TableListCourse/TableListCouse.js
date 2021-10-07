@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './TableLisCourse.module.scss';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { actDeleteCourse, actGetMyCourse ,actChangeType,actChangeActive } from '../../redux/action';
+import { actDeleteCourse, actGetMyCourse, actChangeType, actChangeActive } from '../../redux/action';
 import { useQuery } from '../../../../../HOC/useQuery';
 import { Link } from 'react-router-dom';
 import * as Type from '../../redux/type';
@@ -24,7 +24,7 @@ export default function TableListCouse() {
                 let data = {
                     is_public: checked
                 }
-                dispatch(actChangeType(id,data))
+                dispatch(actChangeType(id, data))
             }
 
         });
@@ -42,7 +42,7 @@ export default function TableListCouse() {
                 let data = {
                     active: checked
                 }
-                dispatch(actChangeActive(id,data))
+                dispatch(actChangeActive(id, data))
             }
 
         });
@@ -80,6 +80,11 @@ export default function TableListCouse() {
         // alert(id)
     }
     const columns = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            key: 'id',
+        },
         {
             title: 'Name course',
             dataIndex: 'name_course',

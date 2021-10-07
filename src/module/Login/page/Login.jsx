@@ -8,7 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 export default function Login() {
     let history = useHistory();
+    console.log(history)
     const dispatch = useDispatch();
+
     const { err } = useSelector(state => state.LoginReducer);
     const openNotification = (mess, description) => {
         notification.open({
@@ -30,7 +32,7 @@ export default function Login() {
     const renderNoti = React.useCallback(
         () => {
             return <> {err === null ? '' : openNotification('Login failed', err)} </>
-        },[err])
+        }, [err])
     return (
         <Layout>
 

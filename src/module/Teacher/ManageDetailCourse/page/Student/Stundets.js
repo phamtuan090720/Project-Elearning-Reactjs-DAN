@@ -1,12 +1,20 @@
 import { Tabs } from 'antd';
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 import Paper from '../../../../../components/Paper/Paper';
 import Header from './Header/Header'
 import ListStudent from './ListStudent/ListStudent';
 import ListStudentPenddingAccess from './ListStudentPenddingAccess/ListStudentPenddingAccess';
+import { actGetListStudentInCourse } from '../../reducers/action.js';
 import styles from './Students.module.scss';
 const { TabPane } = Tabs;
 export default function Stundets() {
+    const dispatch = useDispatch()
+    const param = useParams()
+    useEffect(() => {
+        dispatch(actGetListStudentInCourse(param.id));
+    }, [dispatch, param])
     return (
         <div className={styles.wrap}>
             <Header />

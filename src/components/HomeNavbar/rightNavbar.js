@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './homeNavbar.module.scss';
-import { Avatar, Button } from 'antd';
+import { Avatar, Button, Space } from 'antd';
 import { Link, NavLink } from 'react-router-dom';
 import { CaretDownOutlined, DashboardOutlined, LoginOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ export default function RightNavbar() {
         if (loading) return <></>
         if (userLogin) {
             return <>
+                {userLogin.user_type === "Teacher" ? '' : <NavLink to="/register-teacher" className={styles.instructor}>Become a instructor</NavLink >}
                 <div className={styles.menuUser}>
                     <div className={styles.user}>
                         <Avatar src={userLogin?.avatar} style={{ marginRight: 10 }}>{userLogin.username}</Avatar>
@@ -53,13 +54,14 @@ export default function RightNavbar() {
         }
         else {
             return <>
-                <NavLink to="/" className={styles.instructor}>Become a instructor</NavLink >
-                <Button shape="round" size="large" className={styles.buttonLogin}>
-                    <NavLink to="/login">login</NavLink >
-                </Button>
-                <Button shape="round" size="large" className={styles.btnSignIn}>
-                    <NavLink to="/">Sign Up</NavLink >
-                </Button>
+                <Space>
+                    <Button shape="round" size="large" className={styles.buttonLogin}>
+                        <NavLink to="/login">login</NavLink >
+                    </Button>
+                    <Button shape="round" size="large" className={styles.btnSignIn}>
+                        <NavLink to="/register">Sign Up</NavLink >
+                    </Button>
+                </Space>
             </>
         }
     }, [userLogin, openMenu, dispatch, loading, router]);

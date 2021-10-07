@@ -1,13 +1,15 @@
-import { BrowserRouter, Switch,Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomeTemplate from './template/HomeTemplate';
 import UserTemplate from './template/UserTemplate';
 import LearningTemplate from './template/LearningTemplate';
-import { routesHome,routesLearning,routesUser,routerTeacher } from './routers';
+import { routesHome, routesLearning, routesUser, routerTeacher } from './routers';
 import PageNotFound from './page/PageNotFound/PageNotFound';
 import Login from './module/Login/page/Login';
 import Course from './module/User/Course/page/Course.js';
 import TeacherTemplate from './template/TeacherTemplete';
 import ManageDetailCourse from './module/Teacher/ManageDetailCourse/page/ManageDetailCourse';
+import Register from './module/Register/page/Register';
+import RegiterTeacher from './module/RegiterTeacher/page/RegiterTeacher';
 function App() {
   const showLayoutHome = (routes) => {
     if (routes && routes.length > 0) {
@@ -44,10 +46,12 @@ function App() {
         {showLayoutUser(routesUser)}
         {showLayoutLearning(routesLearning)}
         {showLayoutTeacher(routerTeacher)}
-        <Route path='/user/course/:id' component={Course}/>
-        <Route path='/teacher/manage-course/:id/:page' component={ManageDetailCourse}/>
-        <Route path='/login' component = {Login}/>
-        <Route path='' component = {PageNotFound}/>
+        <Route path='/user/course/:id' component={Course} />
+        <Route path='/teacher/manage-course/:id/:page' component={ManageDetailCourse} />
+        <Route path='/register' component={Register} />
+        <Route path='/register-teacher' component={RegiterTeacher} />
+        <Route path='/login' component={Login} />
+        <Route path='' component={PageNotFound} />
       </Switch>
     </BrowserRouter>
 
