@@ -12,7 +12,7 @@ import { HiChatAlt2, HiPlay } from 'react-icons/hi';
 export default function Home() {
   return (
     < >
-      <div className={styles.banner} style={{backgroundImage:`url(/banner.png)`}}>
+      <div className={styles.banner} style={{backgroundImage:`url(/banner.png)`,width:'100%'}}>
         <div className={styles.introduce}>
 
           <div className={styles.header}>

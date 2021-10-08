@@ -1,4 +1,16 @@
-.wrap{
+.wrap {
     display: flex;
     justify-content: center;
+}
+.wrapLoadingTeacher {
+    // width: 100vh;
+    height: 100vh;
+    // background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    img {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%);
+    }
 }

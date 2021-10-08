@@ -1,0 +1,19 @@
+.tag {
+    padding: 4px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+.tag:hover {
+    opacity: 0.8;
+}
+.inactive {
+    text-align: center;
+    color: #252b2f;
+    background-color: #dbdbdb;
+}
+.active {
+    text-align: center;
+    color: #fff;
+    background-color: #fa9b1a;
+}

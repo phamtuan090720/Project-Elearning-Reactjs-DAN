@@ -14,6 +14,7 @@ import detailLessonManageReducer from "../module/Teacher/ManageDetailCourse/redu
 import studentManageReducer from "../module/Teacher/ManageDetailCourse/reducers/StudentManageReducer";
 import RegisterReducer from "../module/Register/reducer/registerReducer";
 import teacherRegisterReducer from "../module/RegiterTeacher/reducer/TeacherRegisterReducer";
+import infoTeacherReducer from "../module/Teacher/GeneralInfomation/reducer/InfoTeacherReducer"; 
 const rootReducer = combineReducers({
     CoursesReducer,
     DetailCourseReducer,
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
     editCourseReducer,
     lessonManageReducer,
     detailLessonManageReducer,
-    studentManageReducer
+    studentManageReducer,
+    infoTeacherReducer
 
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

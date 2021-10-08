@@ -3,11 +3,12 @@ import { Layout, Menu } from 'antd';
 import {
     DashboardOutlined,
     HomeOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
 import LogoCourse from '../../assets/img/logo.svg';
 import { useParams } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
-import {RiHomeGearLine} from 'react-icons/ri'
+import { RiHomeGearLine } from 'react-icons/ri'
 const { Sider } = Layout;
 export default function CustomMenuTeacher() {
     const router = useParams();
@@ -31,6 +32,11 @@ export default function CustomMenuTeacher() {
                     <NavLink to='/teacher/manage-course'>
                         Manage Course
                     </NavLink>
+                </Menu.Item>
+                <Menu.Item key="info" icon={<UserOutlined />}>
+                    <Link to='/teacher/info'>
+                        General infomation
+                    </Link>
                 </Menu.Item>
                 <Menu.Item key="/" icon={<HomeOutlined />}>
                     <Link to='/'>

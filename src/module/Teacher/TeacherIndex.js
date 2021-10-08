@@ -2,6 +2,7 @@ import { Empty } from 'antd';
 import React from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import GeneralInfomation from './GeneralInfomation/page/GeneralInfomation.js';
 import DashboardTeacher from './Dashboard/page/Dashboard';
 import ManageCourse from './MangaeCourse/page/ManageCourse';
 export default function TeacherIndex() {
@@ -12,6 +13,8 @@ export default function TeacherIndex() {
                 return <DashboardTeacher />
             case "manage-course":
                 return <ManageCourse />
+            case "info":
+                return <GeneralInfomation />
             default:
                 return <>
                     <Empty

@@ -1,0 +1,45 @@
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 10px;
+    .wrapProfile {
+        padding: 30px;
+        .job {
+            padding: 0 15px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #38a169;
+        }
+    }
+}
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    > div:first-child {
+        position: relative;
+        padding-left: 24px;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.5;
+        text-align: left;
+        color: #38b2ac;
+    }
+    > div:first-child::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        left: 0;
+        width: 5px;
+        height: 15px;
+        background-color: #38b2ac;
+        border-bottom: 1px solid #dbdbdb;
+    }
+}

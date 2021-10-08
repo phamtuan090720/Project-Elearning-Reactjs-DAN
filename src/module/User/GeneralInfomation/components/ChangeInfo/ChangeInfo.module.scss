@@ -1,0 +1,33 @@
+.wrapChangeInfo {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+.wrapContent {
+    min-height: 500px;
+}
+.avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    &:hover .updateAvatar {
+        height: 50px;
+    }
+    .updateAvatar {
+        bottom: -2px;
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        right: 0;
+        height: 0px;
+        display: flex;
+        justify-content: center;
+        // background-color: white;
+        background: rgba(0, 0, 0, 0.5);
+        transition: height ease 0.3s;
+    }
+}
