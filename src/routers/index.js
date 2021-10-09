@@ -1,4 +1,6 @@
 import HomePage from '../module/HomePage/page/Home';
+import AboutUs from '../module/AboutUs/aboutUs';
+import Contact from '../module/Contact/contact';
 import CoursesPage from "../module/Coursers/page/CoursesPage";
 import DetailCourse from '../module/DetailCourse/page/DetailCourse';
 import PlayerExample from '../redux/TestCallAPI';
@@ -23,6 +25,16 @@ const routesHome = [
         exact: false,
         path: "/courses",
         component: CoursesPage,
+    },
+    {
+        exact: false,
+        path: "/about",
+        component: AboutUs,
+    },
+    {
+        exact: false,
+        path: "/contact",
+        component: Contact,
     },
     {
         exact: false,

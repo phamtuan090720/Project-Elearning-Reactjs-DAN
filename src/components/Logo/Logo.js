@@ -8,7 +8,7 @@ export default function Logo(props) {
     return (
         <div style={{ display: 'flex',...direction}}  className={styles.logoContainer}>
             <img src={LogoCourse} alt="me" width="40" height="40" />
-            namelogo
+            TTdemy
         </div>
     )
 }
