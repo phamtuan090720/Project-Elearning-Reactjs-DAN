@@ -4,7 +4,8 @@ import { Input, Radio, Rate, Select, Form, Row, Button, Col } from 'antd';
 import RadioCustom from '../../../../components/Radio/Radio';
 import { useDispatch, useSelector } from 'react-redux';
 import { RestFilled, SearchOutlined } from '@ant-design/icons';
-import { searchCourse } from '../../reducers/action';
+import { searchCourse, getCourse } from '../../reducers/action';
+import * as Type from '../../reducers/type';
 const { Option } = Select;
 export default function MenuSreachCourse() {
     const { arrCategory } = useSelector(state => state.CoursesReducer)
@@ -21,25 +22,25 @@ export default function MenuSreachCourse() {
         return pointRate.map((item, index) => <Radio key={index} value={item}><Rate allowHalf defaultValue={item} disabled /></Radio>)
     }
     const onChange = (value) => {
-        let newValue = arrCategory.find((item) => item.id === value)
-        console.log(newValue)
+    }
+    const onFinish = (value) => {
+        let newValue = arrCategory.find((item) => item.id === value.category)
+        dispatch(searchCourse(1, value))
         dispatch({
-            type: "Category_filter",
+            type: 'Category_filter',
             data: newValue.name
         })
+        dispatch({
+            type: Type.dataSreach,
+            data: value
+        })
     }
-    // const onFocus = () => {
-    //     console.log('focus');
-    // }
-    // const onBlur = () => {
-    //     console.log('blur');
-    // }
-    // const onSearch = () => {
-    //     console.log('blur');
-    // }
-    const onFinish = (value) => {
-        console.log(value)
-        dispatch(searchCourse(1, value))
+    const onReset = () => {
+        dispatch(getCourse())
+        dispatch({
+            type: 'Category_filter',
+            data: "All"
+        })
     }
     return (
         <div className={styles.wrap}>
@@ -105,7 +106,7 @@ export default function MenuSreachCourse() {
                             <Button htmlType='submit' icon={<SearchOutlined />}>Search</Button>
                         </Col>
                         <Col span={12}>
-                            <Button htmlType='reset' icon={<RestFilled />}>Rest</Button>
+                            <Button htmlType='reset' onClick={onReset} icon={<RestFilled />}>Reset</Button>
                         </Col>
                     </Row>
                 </Form.Item>

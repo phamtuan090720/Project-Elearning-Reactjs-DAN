@@ -27,7 +27,7 @@ export default function HomeFooter() {
                     </ul>
                 </Col>
                 <Col xl={{ span: 10}} order={3} xs={{ span: 24}}>
-                    <h2>Get notifications about new couses</h2>
+                    <h2>Get notifications about new course</h2>
                     <Form
                         name="basic"
                         layout="inline"
@@ -46,7 +46,7 @@ export default function HomeFooter() {
             <Divider />
             <div className={styles.sub}>
                 <div className={styles.left}>
-                    <CopyrightOutlined /> 2018-2020 Courster. All rights reserved.
+                    <CopyrightOutlined /> 2021 Course. All rights reserved.
                 </div>
                 <div className={styles.right}>
                     <Link to="/">

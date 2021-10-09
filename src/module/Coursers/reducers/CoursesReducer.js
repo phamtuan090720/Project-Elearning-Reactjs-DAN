@@ -9,7 +9,9 @@ let initialState = {
         total: 0,
         pageSize: 6,
         current: 1
-    }
+    },
+    dataSreach: null
+
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -42,7 +44,7 @@ const reducer = (state = initialState, action) => {
             return { ...state }
         }
         case Type.INFO_PAGINATION: {
-            state.padingation=action.data;
+            state.padingation = action.data;
             // console.log('padigation',action.data)
             return { ...state }
         }
@@ -55,7 +57,10 @@ const reducer = (state = initialState, action) => {
             state.categoryfilter = action.data;
             return { ...state }
         }
-
+        case Type.dataSreach: {
+            state.dataSreach = action.dataSreach
+            return { ...state }
+        }
         default:
             return { ...state };
     }

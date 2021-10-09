@@ -37,12 +37,43 @@ export const getCourse = (page = "?page=1") => {
     }
 }
 export const searchCourse = (page = 1, dataSreach) => {
-    return (dispatch) => {
-        http.get(`courses/?page=${page}&kw=${dataSreach.kw ? dataSreach.kw : ''}&fee=${dataSreach.fee ? dataSreach.fee : ''}&public=${dataSreach.public ? dataSreach.public : ''}&category=${dataSreach.category ? dataSreach.category : ''}`).then((result) => {
-            console.log(result.data)
-        }).catch((err) => {
+    if (dataSreach) {
+        return (dispatch) => {
 
-        })
+            dispatch(actGetCoursesRequest());
+            http.get(`courses/?page=${page}&kw=${dataSreach.kw ? dataSreach.kw : ''}&rate=${dataSreach.rate ? dataSreach.rate : ''}&fee=${dataSreach.fee ? dataSreach.fee : ''}&public=${dataSreach.public ? dataSreach.public : ''}&category=${dataSreach.category ? dataSreach.category : ''}`).then((result) => {
+                console.log(result.data)
+                dispatch(actGetCoursesSuccess(result.data.results))
+                dispatch({
+                    type: Type.INFO_PAGINATION,
+                    data: {
+                        total: result.data.count,
+                        current: page,
+                        pageSize: 6
+                    }
+                })
+            }).catch((err) => {
+                dispatch(actGetCoursesFailed(err));
+            })
+        }
+    }
+    else {
+        return (dispatch) => {
+            dispatch(actGetCoursesRequest());
+            http.get(`courses/?page=${page}`).then((result) => {
+                dispatch(actGetCoursesSuccess(result.data.results))
+                dispatch({
+                    type: Type.INFO_PAGINATION,
+                    data: {
+                        total: result.data.count,
+                        current: page,
+                        pageSize: 6
+                    }
+                })
+            }).catch(err => {
+                dispatch(actGetCoursesFailed(err));
+            })
+        }
     }
 
 }

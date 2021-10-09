@@ -1,19 +1,33 @@
-@import './../../../../scss/Helpers/mixin';
-@import './../../../../scss/Helpers/variables';
-.wrap{
+@import "./../../../../scss/Helpers/mixin";
+@import "./../../../../scss/Helpers/variables";
+.wrap {
     padding-left: $pd-2;
     padding-right: $pd-2;
     margin-top: $mg-3;
     margin-bottom: $mg-3;
-    .description{
+    .description {
+        font-size: $font-size-2;
+        margin-bottom: $mg-2;
+        .content {
+            h2 {
+                font-size: $font-size-3;
+            }
+            h3 {
+                font-size: $font-size-2;
+            }
+            h4 {
+                font-size: $font-size-0;
+            }
+            p {
+                font-size: $font-size-0;
+            }
+        }
+    }
+    .curriculum {
         font-size: $font-size-2;
         margin-bottom: $mg-2;
     }
-    .curriculum{
-        font-size: $font-size-2;
-        margin-bottom: $mg-2;
-    }
-    .reviews{
+    .reviews {
         font-size: $font-size-2;
         margin-bottom: $mg-2;
     }

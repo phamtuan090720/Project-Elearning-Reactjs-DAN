@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import MenuEditCourse from '../../../../components/CustomMenu/MenuEdit';
 import Home from './Home/Home';
 import LessonManage from './Lessons/LessonManage';
+import Statistical from './Statistical/Statistical';
 import Stundets from './Student/Stundets.js';
 const { Content, Footer } = Layout;
 
@@ -19,6 +20,8 @@ export default function ManageDetailCourse() {
                 return <LessonManage />
             case "students":
                 return <Stundets />
+            case "statistics":
+                return <Statistical/>
             default:
                 return <>
                     <Empty
