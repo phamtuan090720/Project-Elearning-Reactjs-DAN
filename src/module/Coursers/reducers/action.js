@@ -36,6 +36,16 @@ export const getCourse = (page = "?page=1") => {
         })
     }
 }
+export const searchCourse = (page = 1, dataSreach) => {
+    return (dispatch) => {
+        http.get(`courses/?page=${page}&kw=${dataSreach.kw ? dataSreach.kw : ''}&fee=${dataSreach.fee ? dataSreach.fee : ''}&public=${dataSreach.public ? dataSreach.public : ''}&category=${dataSreach.category ? dataSreach.category : ''}`).then((result) => {
+            console.log(result.data)
+        }).catch((err) => {
+
+        })
+    }
+
+}
 const actGetCoursesRequest = () => {
     return {
         type: Type.GET_COURSES_REQUEST

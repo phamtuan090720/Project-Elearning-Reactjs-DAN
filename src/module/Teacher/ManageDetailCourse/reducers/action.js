@@ -382,8 +382,8 @@ export const actGetListStudentInCourse = (id) => {
             dispatch(actGetListStudentInCourseSuccess(rs.data))
             console.log(rs.data)
         }).catch((error) => {
-            if (error?.response.data?.mess) {
-                return dispatch(actGetListStudentInCourseFailed(error?.response.data?.mess));
+            if (error?.response?.data?.mess) {
+                return dispatch(actGetListStudentInCourseFailed(error?.response?.data?.mess));
             }
             else if (error?.response.data?.detail && error?.response.status === 401) {
                 return dispatch(actGetListStudentInCourseFailed(error?.response.data?.detail))
