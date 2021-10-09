@@ -1,38 +1,59 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
 
-const data = {
-    labels: ['1', '2', '3', '4', '5', '6'],
-    datasets: [
-        {
-            label: 'Student join course',
-            data: [12, 19, 3, 5, 2, 3],
-            fill: false,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgba(255, 99, 132, 0.2)',
-        },
-    ],
-};
 
-const options = {
-    scales: {
-        yAxes: [
+
+
+
+const StudentJoinCourse = () => {
+
+    const { data } = useSelector(state => state.statisticsCourseReducer)
+    // console.log(Object.keys(data?.student_join_course))
+    const getlabel = () => {
+        if (data?.student_join_course) {
+            return Object.keys(data?.student_join_course)
+        }
+        return []
+    }
+    const getValue = () => {
+        if (data?.student_join_course) {
+            return Object.values(data?.student_join_course)
+        }
+        return []
+    }
+    const dataConfig = {
+        labels: getlabel(),
+        datasets: [
             {
-                ticks: {
-                    beginAtZero: true,
-                },
+                label: 'Student join course',
+                data: getValue(),
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgba(255, 99, 132, 0.2)',
             },
         ],
-    },
-};
+    };
+    const options = {
+        scales: {
+            yAxes: [
+                {
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                },
+            ],
+        },
+    };
+    return (
 
-const StudentJoinCourse = () => (
-    <>
-        <div className='header'>
-            <h1 className='title'>Statistics of students participating in the course</h1>
-        </div>
-        <Line data={data} options={options} />
-    </>
-);
+        <>
+            <div className='header'>
+                <h1 className='title'>Statistics of students participating in the course</h1>
+            </div>
+            <Line data={dataConfig} options={options} />
+        </>
+    );
+}
 
 export default StudentJoinCourse;

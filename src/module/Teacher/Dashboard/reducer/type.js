@@ -1,0 +1,3 @@
+export const GET_STATISCS_COURSE_REQUEST = 'statisticsListCourseReducer/GET_STATISCS_COURSE_REQUEST';
+export const GET_STATISCS_COURSE_SUCCESS = 'statisticsListCourseReducer/GET_STATISCS_COURSE_SUCCESS';
+export const GET_STATISCS_COURSE_FAILED = 'statisticsListCourseReducer/GET_STATISCS_COURSE_FAILED';
