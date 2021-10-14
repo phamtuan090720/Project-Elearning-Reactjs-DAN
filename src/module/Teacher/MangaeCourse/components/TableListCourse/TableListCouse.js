@@ -93,7 +93,7 @@ export default function TableListCouse() {
         },
         {
             title: 'Category',
-            dataIndex: 'category',
+            dataIndex: 'category_name',
             key: 'category',
         },
         {

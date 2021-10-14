@@ -145,7 +145,7 @@ export default function FormCreateCourse() {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input.TextArea />
                 </Form.Item>
                 <Form.Item
                     name={'category'}
@@ -195,7 +195,7 @@ export default function FormCreateCourse() {
                         valuePropName="file"
                         rules={[{ required: true }]}
                         noStyle>
-                        <Upload.Dragger maxCount={1} onChange={handleChangeFile} beforeUpload={() => false} accept='image/png, image/jpg, image.jpeg,image/gif' >
+                        <Upload.Dragger maxCount={1} onChange={handleChangeFile} beforeUpload={() => false} accept='image/*' >
                             <p className="ant-upload-drag-icon">
                                 <UploadOutlined />
                             </p>

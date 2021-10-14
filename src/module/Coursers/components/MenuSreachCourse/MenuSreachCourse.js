@@ -80,7 +80,7 @@ export default function MenuSreachCourse() {
                 </Form.Item>
                 <Form.Item name='fee'>
                     <div className={styles.menuItem}>
-                        <h3 className={styles.title}>Course type</h3>
+                        <h3 className={styles.title}>Course fee</h3>
                         <div className={styles.ctn_radio}>
                             <RadioCustom id='type'>
                                 <Radio value={0}>Free</Radio>

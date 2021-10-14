@@ -24,7 +24,7 @@ export default function ListCourses() {
         return arrCourses.map((item, index) => {
             return <Col key={index} span={8}>
                 <Course subject={item.name_course} img={item.image}
-                    description={item.description} teacher={item.teacher?.user.username} is_public={item.is_public} category={item.category} price={item.fee} id={item.id} rate={item.rate} tags={item.tags} />
+                    description={item.description} teacher={item.teacher?.user.username} is_public={item.is_public} category={item.category_name} price={item.fee} id={item.id} rate={item.rate} tags={item.tags} />
             </Col>
         })
     }, [arrCourses]);
