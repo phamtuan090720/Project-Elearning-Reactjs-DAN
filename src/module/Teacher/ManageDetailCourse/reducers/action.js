@@ -365,9 +365,9 @@ const getDetailLessonFailed = (err) => {
         err: err
     }
 }
-export const actAllowStudentJoinCourse = (idCourse,data) => {
+export const actAllowStudentJoinCourse = (idCourse, data) => {
     return (dispatch) => {
-        http.post(`courses/${idCourse}/accept-student/`,data).then((rs) => {
+        http.post(`courses/${idCourse}/accept-student/`, data).then((rs) => {
             notification(rs.data.mess, actGetListStudentInCourse(idCourse), dispatch)
         }).catch((err) => {
             console.log(err)
@@ -382,8 +382,8 @@ export const actGetListStudentInCourse = (id) => {
             dispatch(actGetListStudentInCourseSuccess(rs.data))
             console.log(rs.data)
         }).catch((error) => {
-            if (error?.response.data?.mess) {
-                return dispatch(actGetListStudentInCourseFailed(error?.response.data?.mess));
+            if (error?.response?.data?.mess) {
+                return dispatch(actGetListStudentInCourseFailed(error?.response?.data?.mess));
             }
             else if (error?.response.data?.detail && error?.response.status === 401) {
                 return dispatch(actGetListStudentInCourseFailed(error?.response.data?.detail))
@@ -413,6 +413,34 @@ const actGetListStudentInCourseSuccess = (data) => {
 const actGetListStudentInCourseFailed = (err) => {
     return {
         type: Type.GET_STUDENT_FAILED,
+        err: err
+    }
+}
+export const getInfoStatisticsCouser = (id) => {
+    return (dispatch) => {
+        dispatch(getInfoStatisticsCouserRequest())
+        http.get(`courses/${id}/statistics/`).then((rs) => {
+            console.log(rs.data)
+            dispatch(getInfoStatisticsCouserSuccess(rs.data))
+        }).catch((err) => {
+            dispatch(getInfoStatisticsCouserFalied(err))
+        })
+    }
+}
+const getInfoStatisticsCouserRequest = () => {
+    return {
+        type: Type.GET_STATISCS_COURSE_REQUEST
+    }
+}
+const getInfoStatisticsCouserSuccess = (data) => {
+    return {
+        type: Type.GET_STATISCS_COURSE_SUCCESS,
+        data: data
+    }
+}
+const getInfoStatisticsCouserFalied = (err) => {
+    return {
+        type: Type.GET_STATISCS_COURSE_FAILED,
         err: err
     }
 }

@@ -9,7 +9,6 @@ import {
 import LogoCourse from '../../assets/img/logo.svg';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { CgPassword } from 'react-icons/cg'
 const { Sider } = Layout;
 export default function CustomMenuUser() {
   const router = useParams();
@@ -36,11 +35,6 @@ export default function CustomMenuUser() {
         <Menu.Item key="info" icon={<UserOutlined />}>
           <Link to='/user/info'>
             General infomation
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="change-password" icon={<CgPassword />}>
-          <Link to='/user/change-password'>
-            Change Password
           </Link>
         </Menu.Item>
         <Menu.Item key="/" icon={<HomeOutlined />}>

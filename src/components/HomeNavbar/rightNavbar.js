@@ -22,7 +22,7 @@ export default function RightNavbar() {
                 <div className={styles.menuUser}>
                     <div className={styles.user}>
                         <Avatar src={userLogin?.avatar} style={{ marginRight: 10 }}>{userLogin.username}</Avatar>
-                        <Link to='/' style={{ marginRight: 10, color: "black" }}>{userLogin.username}</Link>
+                        <Link to='/user/info' style={{ marginRight: 10, color: "black" }}>{userLogin.username}</Link>
                         <CaretDownOutlined style={{ cursor: 'pointer' }} onClick={() => {
                             if (openMenu === false) {
                                 setOpenMenu(true);

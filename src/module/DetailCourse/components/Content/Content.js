@@ -1,4 +1,4 @@
-import { Col, Collapse, Empty, Row } from 'antd';
+import { Col, Collapse, Empty, Row, Typography } from 'antd';
 import React, { useCallback } from 'react'
 import styles from './Content.module.scss';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
@@ -6,7 +6,7 @@ import Review from '../../../../components/Review/Review';
 import { useSelector } from 'react-redux';
 import { BsFillCameraVideoFill } from 'react-icons/bs';
 import ReactHtmlParser from 'react-html-parser';
-
+const { Paragraph } = Typography;
 const { Panel } = Collapse;
 
 export default function Content() {
@@ -23,7 +23,7 @@ export default function Content() {
                 return <React.Fragment key={index}></React.Fragment>
             })
         }
-        else return <Empty description="There are no reviews for this course yet"/>
+        else return <Empty description="There are no reviews for this course yet" />
     }, [detailCourse?.student_join]);
     const renderListVideo = (list_video) => {
         if (list_video.length > 0) {
@@ -54,7 +54,9 @@ export default function Content() {
                     <Col xs={24} xl={16}>
                         <div className={styles.description}>
                             <h2>Description</h2>
-                            {ReactHtmlParser(detailCourse?.description)}
+                            <Paragraph className={styles.content} style={{ marginLeft: 20 }}>
+                                {ReactHtmlParser(detailCourse?.description)}
+                            </Paragraph>
                         </div>
                         <div className={styles.curriculum}>
                             <h2>Course Curriculum</h2>

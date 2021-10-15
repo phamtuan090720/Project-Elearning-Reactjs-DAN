@@ -2,6 +2,7 @@ import { http } from "../../../api/setting";
 import * as Type from './type';
 import cookies from 'react-cookies';
 import axios from "axios";
+import { Modal } from "antd";
 const grant_type = 'password';
 const client_id = '01UlK0cdqiqdq46sXOdXcfWPGcSXgNzZtMAYnUVf';
 const client_secret = '4xW4BIeBa5899j9L58UUCYsNIFrJ3QLC0euywLHJRlufHSqLy1yWBwRbZlKcBUJ1rBRwnnBRoLzAQLWFbHCdBNwhceHtVy3slnVfwDrbIZK9vagnnQCt4YS9gIGNcfsn';
@@ -99,5 +100,35 @@ export const actLogout = () => {
     cookies.remove('access_token');
     return {
         type: Type.LOGOUT,
+    }
+}
+export const resetPw = (data, colseModal) => {
+    return (dispatch) => {
+        http.post(`user/reset-password/`,data).then((rs) => {
+            return Modal.success(
+                {
+                    title: 'This is a notification message',
+                    content: rs.data.mess,
+                    width: 500,
+                    okText: "confirm",
+                    onOk() {
+                        return colseModal();
+                    }
+                }
+            )
+        }).catch((err) => {
+            if (err.response?.data?.mess) {
+                return Modal.error(
+                    {
+                        title: 'This is a notification message',
+                        content: err.response?.data?.mess,
+                        width: 500,
+                        okText: "confirm",
+                        onOk() { }
+                    }
+                )
+            }
+            console.log(err)
+        })
     }
 }

@@ -1,9 +1,10 @@
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Row, Tabs, Form, Col, Input, Upload, Image, Typography } from 'antd';
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '../../../../../components/Paper/Paper';
-import { actChangeInfo } from '../../reducer/action';
+import { actChangeInfo, actChangePassword, actChangeProfile } from '../../reducer/action';
+import AddSkills from './AddTag/AddTag.js';
 import styles from './ChangeInfo.module.scss';
 const { TabPane } = Tabs;
 const { Text } = Typography;
@@ -18,12 +19,12 @@ export default function ChangeInfo({ closeChangeInfo }) {
                 </TabPane>
                 <TabPane tab="Change Profile" key="2">
                     <div className={styles.wrapContent}>
-                        Change Profile
+                        <FormChangeProfile />
                     </div>
                 </TabPane>
                 <TabPane tab="Change Password" key="3">
                     <div className={styles.wrapContent}>
-                        Change Password
+                        <FormChangePassword />
                     </div>
                 </TabPane>
             </Tabs>
@@ -33,6 +34,68 @@ export default function ChangeInfo({ closeChangeInfo }) {
         </Paper>
 
     )
+}
+const FormChangePassword = () => {
+    const { infoTeacher } = useSelector(state => state.infoTeacherReducer)
+    const dispatch = useDispatch()
+    const onFinish = (values) => {
+        let data = {
+            username: infoTeacher.user.username,
+            oldPassword: values.oldPassword,
+            password: values.password,
+            id: infoTeacher.user.id
+        }
+        console.log(data)
+        dispatch(actChangePassword(data));
+    }
+    return <Form name='change-password' layout='horizontal' onFinish={onFinish}>
+        <Form.Item
+            name="oldPassword"
+            rules={[
+                {
+                    required: true,
+                    message: 'Please input your old password!',
+                },
+            ]}
+        >
+            <Input.Password placeholder="Old Password" />
+        </Form.Item>
+        <Form.Item
+            name="password"
+            rules={[
+                { required: true, message: 'Please input your password!' }, {
+                    min: 6, message: 'This password is too short. It must contain at least 6 characters'
+                }]}
+        >
+            <Input.Password placeholder="New Password" />
+        </Form.Item>
+        <Form.Item
+            name="confirm"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+                {
+                    required: true,
+                    message: 'Please confirm your new password!',
+                },
+                ({ getFieldValue }) => ({
+                    validator(_, value) {
+                        if (!value || getFieldValue('password') === value) {
+                            return Promise.resolve();
+                        }
+                        return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                    },
+                }),
+            ]}
+        >
+            <Input.Password placeholder="Confirm your new password" />
+        </Form.Item>
+        <Row justify='end'>
+            <Form.Item>
+                <Button htmlType='submit' type='link'>Change</Button>
+            </Form.Item>
+        </Row>
+    </Form>
 }
 const FormChangeInfoUser = () => {
     const { infoTeacher } = useSelector(state => state.infoTeacherReducer)
@@ -123,4 +186,32 @@ const FormChangeInfoUser = () => {
 
     </Form>
 
+}
+const FormChangeProfile = () => {
+    const { infoTeacher } = useSelector(state => state.infoTeacherReducer)
+    const dispatch = useDispatch()
+    const [form] = Form.useForm()
+    useEffect(() => {
+        form.setFieldsValue({
+            job: infoTeacher.job,
+            skills: infoTeacher.skills
+        })
+    }, [form, infoTeacher])
+    const onFinish = (values) => {
+        dispatch(actChangeProfile(values));
+    }
+    return <Form form={form} layout='horizontal' onFinish={onFinish}>
+        <div style={{ marginBottom: 10 }}><Text strong>Your profession</Text></div>
+        <Form.Item style={{ marginBottom: `10px` }} name="job">
+            <Input placeholder="Your profession..." />
+        </Form.Item>
+        <Form.Item name='skills'>
+            <AddSkills form={form} />
+        </Form.Item>
+        <Row justify='end'>
+            <Form.Item>
+                <Button htmlType='submit' type='link'>Change</Button>
+            </Form.Item>
+        </Row>
+    </Form>
 }

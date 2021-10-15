@@ -3,10 +3,10 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import style from './BackgroundCourse.module.scss';
 export default function BackgroundCourse() {
-    const { detailCourse } = useSelector(state => state.DetailCourseReducer); 
-    const renderDate = (date)=>{
+    const { detailCourse } = useSelector(state => state.DetailCourseReducer);
+    const renderDate = (date) => {
         let d = new Date(date);
-        return d.getDate()+'/'+d.getMonth()+'/'+d.getFullYear();
+        return d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
     }
     return (
         <div className={style.wrap} style={{ backgroundImage: `url(${detailCourse?.image})`, backgroundColor: 'rgb(23 23 23 / 25%)' }}>
@@ -26,7 +26,7 @@ export default function BackgroundCourse() {
                         {
                             detailCourse?.rate === null ? <div className={style.mess}>There are no reviews yet for this course
                             </div> : <>
-                                <div className={style.point}>{detailCourse?.rate}</div>
+                                <div className={style.point}>{parseFloat(detailCourse?.rate).toFixed(1)}</div>
                                 <div>
                                     <Rate allowHalf defaultValue={detailCourse?.rate} disabled></Rate>
                                 </div>

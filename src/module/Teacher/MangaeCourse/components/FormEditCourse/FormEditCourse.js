@@ -15,27 +15,22 @@ export default function FormEditCourse() {
     const [form] = Form.useForm();
     const [imgSrc, setImgSrc] = useState('/default-image.jpg')
     const dispatch = useDispatch()
+    console.log(courseEdit)
     React.useEffect(() => {
         if (listCategory && courseEdit) {
-            // console.log(listCategory.find((item) => item.name === courseEdit.category))
-            let category = listCategory.find((item) => item.name === courseEdit.category)
-            // console.log(courseEdit.tags)
             const tags = []
             courseEdit.tags.forEach((item) => {
                 tags.push(item.name)
             })
-            // console.log(tags)
-            // console.log(tags)
             form.setFieldsValue({
                 name_course: courseEdit.name_course,
                 subject: courseEdit.subject,
                 fee: parseInt(courseEdit.fee),
                 is_public: courseEdit.is_public,
-                category: category.id,
+                category: courseEdit.category,
                 description: courseEdit.description,
             });
             setImgSrc(courseEdit.image)
-            // console.log(form.getFieldValue('description'))
         }
 
     }, [form, courseEdit, listCategory])
@@ -151,7 +146,7 @@ export default function FormEditCourse() {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input.TextArea />
                 </Form.Item>
                 <Form.Item
                     name={'category'}
@@ -200,7 +195,7 @@ export default function FormEditCourse() {
                         name='image'
                         valuePropName="file"
                         noStyle>
-                        <Upload.Dragger maxCount={1} onChange={handleChangeFile} beforeUpload={() => false} accept='image/png, image/jpg, image.jpeg,image/gif' >
+                        <Upload.Dragger maxCount={1} onChange={handleChangeFile} beforeUpload={() => false} accept='image/*' >
                             <p className="ant-upload-drag-icon">
                                 <UploadOutlined />
                             </p>

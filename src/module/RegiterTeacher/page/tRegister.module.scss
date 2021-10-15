@@ -40,7 +40,7 @@ $secondary-color: #5850ec;
         border-radius: 2px;
     }
     .containerForm{
-        max-width: 600px;
+        // max-width: 600px;
         min-height: 400px;
         margin:0 auto;
         display: flex;
@@ -63,7 +63,9 @@ $secondary-color: #5850ec;
     .stepContainer {
         margin-top: 50px;
     }
-
+    .groupInput{
+        margin-bottom: 30px;
+    }
     .registerContainer {
         margin: auto;
         margin-top: 50px;

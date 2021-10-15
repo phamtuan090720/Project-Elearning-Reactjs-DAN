@@ -3,7 +3,7 @@ import { Button, Row, Tabs, Form, Col, Input, Upload, Image, Typography } from '
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '../../../../../components/Paper/Paper';
-import { actChangeInfo } from '../../reducer/action';
+import { actChangeInfo, actChangePassword } from '../../reducer/action';
 import styles from './ChangeInfo.module.scss';
 const { TabPane } = Tabs;
 const { Text } = Typography;
@@ -18,7 +18,7 @@ export default function ChangeInfo({ closeChangeInfo }) {
                 </TabPane>
                 <TabPane tab="Change Password" key="3">
                     <div className={styles.wrapContent}>
-                        Change Password
+                        <FormChangePassword/>
                     </div>
                 </TabPane>
             </Tabs>
@@ -26,7 +26,6 @@ export default function ChangeInfo({ closeChangeInfo }) {
                 <Button onClick={closeChangeInfo} type='link'>Back</Button>
             </Row>
         </Paper>
-
     )
 }
 const FormChangeInfoUser = () => {
@@ -119,4 +118,67 @@ const FormChangeInfoUser = () => {
 
     </Form>
 
+}
+const FormChangePassword = () => {
+    const { userLogin } = useSelector(state => state.LoginReducer)
+    const dispatch = useDispatch()
+    const [form] = Form.useForm()
+    const onFinish = (values) => {
+        let data = {
+            username: userLogin.username,
+            oldPassword: values.oldPassword,
+            password: values.password,
+            id: userLogin.id
+        }
+        console.log(data)
+        dispatch(actChangePassword(data))
+    }
+    return <Form form={form} name='change-password' layout='horizontal' onFinish={onFinish}>
+        <Form.Item
+            name="oldPassword"
+            rules={[
+                {
+                    required: true,
+                    message: 'Please input your old password!',
+                },
+            ]}
+        >
+            <Input.Password placeholder="Old Password" />
+        </Form.Item>
+        <Form.Item
+            name="password"
+            rules={[
+                { required: true, message: 'Please input your password!' }, {
+                    min: 6, message: 'This password is too short. It must contain at least 6 characters'
+                }]}
+        >
+            <Input.Password placeholder="New Password" />
+        </Form.Item>
+        <Form.Item
+            name="confirm"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+                {
+                    required: true,
+                    message: 'Please confirm your new password!',
+                },
+                ({ getFieldValue }) => ({
+                    validator(_, value) {
+                        if (!value || getFieldValue('password') === value) {
+                            return Promise.resolve();
+                        }
+                        return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                    },
+                }),
+            ]}
+        >
+            <Input.Password placeholder="Confirm your new password" />
+        </Form.Item>
+        <Row justify='end'>
+            <Form.Item>
+                <Button htmlType='submit' type='link'>Change</Button>
+            </Form.Item>
+        </Row>
+    </Form>
 }

@@ -57,22 +57,23 @@ export default function Course() {
         <Alert
             showIcon
             type='error'
-            description={err} 
+            description={err}
         />
     </PageError>
     return (
         <div className={styles.wrap}>
-            <Table
-                columns={columns}
-                loading={loading}
-                dataSource={listLesson}
-                pagination={pagination}
-                onChange={handleTableChange}
-                bordered
-                title={() => <Header />}
-            />
-            <ModalRating />
+            <div className={styles.table}>
+                <Table
+                    columns={columns}
+                    loading={loading}
+                    dataSource={listLesson}
+                    pagination={pagination}
+                    onChange={handleTableChange}
+                    bordered
+                    title={() => <Header />}
+                />
+                <ModalRating />
+            </div>
         </div>
-
     )
 }

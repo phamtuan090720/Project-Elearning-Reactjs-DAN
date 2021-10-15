@@ -33,7 +33,7 @@ export default function MenuEditCourse() {
                     <Menu.Divider />
                     <Menu.ItemGroup key="g3" title="Manage Course">
                         <Menu.Item icon={<UsergroupAddOutlined />} key="students"> <NavLink to={`/teacher/manage-course/${router.id}/students`}>Manage Participants</NavLink></Menu.Item>
-                        <Menu.Item icon={<BarChartOutlined />} key="11">Performance</Menu.Item>
+                        <Menu.Item icon={<BarChartOutlined />} key="statistics"><NavLink to={`/teacher/manage-course/${router.id}/statistics`}>Statistics of Course</NavLink> </Menu.Item>
                     </Menu.ItemGroup>
                     <Menu.ItemGroup key="g4" title="Action">
                         <Menu.Item icon={<UnorderedListOutlined />} key="0"> <NavLink to='/teacher/manage-course'>Courses Manager</NavLink></Menu.Item>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Button, Input, Divider, Layout, notification } from 'antd';
 import { FcGoogle } from 'react-icons/fc';
 import styles from './Login.module.scss';
@@ -7,9 +7,21 @@ import { actLogin, actLoginGG } from '../reducers/action';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { useHistory } from "react-router-dom";
+import ForgotPasswork from '../ForgotPasswork/ForgotPasswork';
 export default function Login() {
     let history = useHistory();
-    console.log(history)
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
     const dispatch = useDispatch();
 
     const { err } = useSelector(state => state.LoginReducer);
@@ -66,7 +78,7 @@ export default function Login() {
                     </Form.Item>
 
                     <Form.Item >
-                        <Button type="link" style={{ padding: 0 }}>Forgot password?</Button>
+                        <Button type="link" style={{ padding: 0 }} onClick={showModal}>Forgot password?</Button>
                     </Form.Item>
 
                     <Form.Item style={{ marginBottom: `10px` }}>
@@ -99,6 +111,7 @@ export default function Login() {
                 </Form>
             </div>
             {renderNoti()}
+            <ForgotPasswork isModalVisible={isModalVisible} handleOk={handleOk} onCancel={handleCancel} onOk={handleOk} />
         </Layout>
 
     )

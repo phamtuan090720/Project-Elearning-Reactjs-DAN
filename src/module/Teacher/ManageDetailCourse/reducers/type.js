@@ -14,3 +14,6 @@ export const SET_KEY_CONTAINER = 'detailLessonManageReducer/SET_KEY_CONTAINER';
 export const GET_STUDENT_SUCCESS = 'studentManageReducer/GET_STUDENT_SUCCESS';
 export const GET_STUDENT_FAILED = 'studentManageReducer/GET_STUDENT_FAILED';
 export const GET_STUDENT_REQUEST = 'studentManageReducer/GET_STUDENT_REQUEST';
+export const GET_STATISCS_COURSE_REQUEST = 'statisticsCourseReducer/GET_STATISCS_COURSE_REQUEST';
+export const GET_STATISCS_COURSE_SUCCESS = 'statisticsCourseReducer/GET_STATISCS_COURSE_SUCCESS';
+export const GET_STATISCS_COURSE_FAILED = 'statisticsCourseReducer/GET_STATISCS_COURSE_FAILED';

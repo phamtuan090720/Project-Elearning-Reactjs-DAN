@@ -2,15 +2,15 @@ import React from 'react'
 import Paper from '../../../../../components/Paper/Paper'
 import styles from './Profile.module.scss';
 import { Col, Row, Space, Typography, Tag } from 'antd';
-import TagSkill from './Tag/TagSkill.js';
 import { useSelector } from 'react-redux';
+import TagCustom from '../../../../../components/Tag/TagCustom';
 const { Paragraph, Text } = Typography;
 export default function Profile() {
     const { infoTeacher } = useSelector(state => state.infoTeacherReducer)
     const renderSkill = (list) => {
         if (list) {
             return list.map((item, index) => {
-                return <span key={index}><TagSkill key={index} content={item} isActiveDefault={true} disable={true}></TagSkill> </span>
+                return <span key={index}><TagCustom content={item} closable={false}></TagCustom></span>
             })
         }
     }

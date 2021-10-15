@@ -165,12 +165,3 @@ const setPagination = (pagination) => {
         data: pagination
     }
 }
-// export const actEditCourse = (id, data) => {
-//     return async (dispatch) => {
-//         await http.patch(`courses/${id}/`, data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((rs) => {
-//             console.log(rs)
-//         }).catch((err) => {
-//             console.log(err)
-//         })
-//     }
-// }
