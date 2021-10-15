@@ -7,7 +7,8 @@ import 'antd/dist/antd.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { actionRegister } from '../reducer/action';
-
+import {actLoginGG} from '../../Login/reducers/action';
+import { GoogleLogin } from 'react-google-login';
 
 
 export default function Register() {
@@ -20,6 +21,11 @@ export default function Register() {
         const action = actionRegister(user, history);
         dispatch(action);
     };
+    const responseGoogle = (response) => {
+        console.log(response);
+        const action = actLoginGG(response.accessToken, history);
+        dispatch(action);
+    }
     return (
         <div className={styles.container}>
             <Form
@@ -94,10 +100,18 @@ export default function Register() {
                 <Divider>or</Divider>
 
                 <Form.Item >
-                    <Button size="large" shape="round" className={styles.googleBtn} >
-                        <FcGoogle className={styles.icon} /> Sign in with Google
-                    </Button>
-                </Form.Item>
+                        <GoogleLogin
+                            clientId="438276732910-nn7g9m5d9jo5mbkbv3doi9f61lhis822.apps.googleusercontent.com"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                            render={renderProps => (
+                                <Button onClick={renderProps.onClick} disabled={renderProps.disabled} size="large" shape="round" className={styles.googleBtn} >
+                                    <FcGoogle className={styles.icon} /> Sign in with Google
+                                </Button>
+                            )}
+                        />
+                    </Form.Item>
                 <Form.Item style={{ marginBottom: `10px` }}>
                     <div style={{ textAlign: 'center' }}>
                         <NavLink to="/">Back to home</NavLink>
