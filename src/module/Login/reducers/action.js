@@ -1,6 +1,7 @@
 import { http } from "../../../api/setting";
 import * as Type from './type';
 import cookies from 'react-cookies';
+import axios from "axios";
 const grant_type = 'password';
 const client_id = '01UlK0cdqiqdq46sXOdXcfWPGcSXgNzZtMAYnUVf';
 const client_secret = '4xW4BIeBa5899j9L58UUCYsNIFrJ3QLC0euywLHJRlufHSqLy1yWBwRbZlKcBUJ1rBRwnnBRoLzAQLWFbHCdBNwhceHtVy3slnVfwDrbIZK9vagnnQCt4YS9gIGNcfsn';
@@ -44,6 +45,36 @@ export const actLogin = (user, history, mess) => {
             history.goBack();
         }).catch((err) => {
             dispatch(actionLoginFailed("Incorrect account and password"));
+        });
+    }
+}
+
+export const actLoginGG = (accessToken, history, mess) => {
+    return async (dispatch) => {
+        dispatch(actionLoginRequest());
+        // const headers = {'Authorization': ''}
+        await axios.post('http://127.0.0.1:8000/auth/convert-token/', {
+            token: accessToken,
+            backend: 'google-oauth2',
+            grant_type: 'convert_token',
+            client_id: client_id,
+            client_secret: client_secret
+
+        }).then((rs) => {
+            console.log(rs)
+            cookies.save('access_token', rs.data.access_token, { path: '/' });
+        }).catch((err) => {
+            console.log(err)
+        })
+        await http.get('user/current-user/').then((rs) => {
+            dispatch(actionLoginSuccess(rs.data));
+            if (mess === "register success") {
+                return history.push('/')
+            }
+            history.goBack();
+        }).catch((err) => {
+            console.log(err)
+            dispatch(actionLoginFailed("Failed!"));
         });
     }
 }

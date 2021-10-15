@@ -3,8 +3,9 @@ import { Form, Button, Input, Divider, Layout, notification } from 'antd';
 import { FcGoogle } from 'react-icons/fc';
 import styles from './Login.module.scss';
 import { Link } from 'react-router-dom';
-import { actLogin } from '../reducers/action';
+import { actLogin, actLoginGG } from '../reducers/action';
 import { useDispatch, useSelector } from 'react-redux';
+import { GoogleLogin } from 'react-google-login';
 import { useHistory } from "react-router-dom";
 export default function Login() {
     let history = useHistory();
@@ -29,6 +30,11 @@ export default function Login() {
         const action = actLogin(user, history);
         dispatch(action);
     };
+    const responseGoogle = (response) => {
+        console.log(response);
+        const action = actLoginGG(response.accessToken, history);
+        dispatch(action);
+    }
     const renderNoti = React.useCallback(
         () => {
             return <> {err === null ? '' : openNotification('Login failed', err)} </>
@@ -72,9 +78,17 @@ export default function Login() {
                     <Divider>or</Divider>
 
                     <Form.Item >
-                        <Button size="large" shape="round" className={styles.googleBtn} >
-                            <FcGoogle className={styles.icon} /> Continue with Google
-                        </Button>
+                        <GoogleLogin
+                            clientId="438276732910-nn7g9m5d9jo5mbkbv3doi9f61lhis822.apps.googleusercontent.com"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                            render={renderProps => (
+                                <Button onClick={renderProps.onClick} disabled={renderProps.disabled} size="large" shape="round" className={styles.googleBtn} >
+                                    <FcGoogle className={styles.icon} /> Continue with Google
+                                </Button>
+                            )}
+                        />
                     </Form.Item>
 
                     <Form.Item style={{ marginBottom: `10px` }}>
