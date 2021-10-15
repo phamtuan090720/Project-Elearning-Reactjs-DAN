@@ -54,14 +54,12 @@ export const getInfoCourse = (id, page = 1, kw = '') => {
                 total: rs.data.count
             }
             dispatch(setPagination(pagination))
-            // console.log(pagination)
         }).catch((error) => {
             console.log(error)
-            console.log(error?.response.data)
             if (error?.response.data?.mess) {
                 return dispatch(getInfoCourseFailed(error?.response.data?.mess));
             }
-            else if(error?.response.data?.detail &&  error?.response.status === 401){
+            else if(error?.response?.data?.detail &&  error?.response.status === 401){
                 return dispatch(getInfoCourseFailed(Err401(error?.response.data?.detail)));
             }
         })
