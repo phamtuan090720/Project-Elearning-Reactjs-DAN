@@ -6,16 +6,18 @@ import { CaretDownOutlined, DashboardOutlined, LoginOutlined } from '@ant-design
 import { useDispatch, useSelector } from 'react-redux';
 import { actLogout, getUserLogin } from '../../module/Login/reducers/action';
 import { useHistory } from 'react-router-dom';
+import cookies from 'react-cookies';
 export default function RightNavbar() {
-    const { userLogin, loading } = useSelector(state => state.LoginReducer);
+    const { userLogin } = useSelector(state => state.LoginReducer);
     const [openMenu, setOpenMenu] = React.useState(false);
     const router = useHistory();
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(getUserLogin());
+        if (cookies.load('access_token')) {
+            dispatch(getUserLogin());
+        }
     }, [dispatch])
-    const RenderLogin = React.useCallback(() => {
-        if (loading) return <></>
+    const RenderLogin = () => {
         if (userLogin) {
             return <>
                 {userLogin.user_type === "Teacher" ? '' : <NavLink to="/register-teacher" className={styles.instructor}>Become a instructor</NavLink >}
@@ -64,7 +66,7 @@ export default function RightNavbar() {
                 </Space>
             </>
         }
-    }, [userLogin, openMenu, dispatch, loading, router]);
+    };
     return (
         <div className={styles.rightNavbar}>
             {RenderLogin()}

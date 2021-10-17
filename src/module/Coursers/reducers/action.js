@@ -21,19 +21,21 @@ export const getCategory = () => {
 export const getCourse = (page = "?page=1") => {
     return (dispatch) => {
         dispatch(actGetCoursesRequest());
-        http.get(`courses/${page}`).then((result) => {
-            dispatch(actGetCoursesSuccess(result.data.results))
-            dispatch({
-                type: Type.INFO_PAGINATION,
-                data: {
-                    total: result.data.count,
-                    current: parseInt(page.substr(page.length - 1)),
-                    pageSize: 6
-                }
+        setTimeout(() => {
+            http.get(`courses/${page}`).then((result) => {
+                dispatch(actGetCoursesSuccess(result.data.results))
+                dispatch({
+                    type: Type.INFO_PAGINATION,
+                    data: {
+                        total: result.data.count,
+                        current: parseInt(page.substr(page.length - 1)),
+                        pageSize: 6
+                    }
+                })
+            }).catch(err => {
+                dispatch(actGetCoursesFailed(err));
             })
-        }).catch(err => {
-            dispatch(actGetCoursesFailed(err));
-        })
+        }, 1000)
     }
 }
 export const searchCourse = (page = 1, dataSreach) => {
