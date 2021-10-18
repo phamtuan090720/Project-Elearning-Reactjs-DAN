@@ -44,7 +44,10 @@ export const actLogin = (user, history, mess) => {
             client_secret: client_secret
         }
         await http.post('o/token/', data).then((rs) => {
-            cookies.save('access_token', rs.data.access_token, { path: '/' });
+            let d = new Date();
+            // do hàm này nó trả về mili giây lên phải đổi ra giây để tính toán
+            d.setTime(d.getTime() + (rs.data.expires_in * 1000))
+            cookies.save('access_token', rs.data.access_token, { path: '/', expires: d });
         }).catch((err) => {
             console.log(err)
         })
@@ -56,7 +59,7 @@ export const actLogin = (user, history, mess) => {
             history.goBack();
         }).catch((err) => {
             dispatch(actionLoginFailed("Incorrect account and password"));
-            openNotification('Login failed','Incorrect account and password');
+            openNotification('Login failed', 'Incorrect account and password');
         });
     }
 }
@@ -73,8 +76,11 @@ export const actLoginGG = (accessToken, history, mess) => {
             client_secret: client_secret
 
         }).then((rs) => {
-            console.log(rs)
-            cookies.save('access_token', rs.data.access_token, { path: '/' });
+            let d = new Date();
+            // do hàm này nó trả về mili giây lên phải đổi ra giây để tính toán
+            d.setTime(d.getTime() + (rs.data.expires_in * 1000))
+            // set thời gian hết hạn của token và xóa token trong cookie
+            cookies.save('access_token', rs.data.access_token, { path: '/', expires: d });
         }).catch((err) => {
             console.log(err)
         })
@@ -115,7 +121,7 @@ export const actLogout = () => {
 }
 export const resetPw = (data, colseModal) => {
     return (dispatch) => {
-        http.post(`user/reset-password/`,data).then((rs) => {
+        http.post(`user/reset-password/`, data).then((rs) => {
             return Modal.success(
                 {
                     title: 'This is a notification message',

@@ -99,7 +99,5 @@ export default function Home() {
       </div>
       <div className={styles.bgFooter} />
     </ >
-    // <CustomMenu/>
-    // <About/>
   )
 }
