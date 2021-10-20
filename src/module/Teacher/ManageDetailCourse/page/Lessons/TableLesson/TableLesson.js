@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { actDeleteLesson, actChangeActive, getListLesson, getDetailLesson } from '../../../reducers/action';
 import * as Type from '../../../reducers/type';
-import { useQuery } from '../../../../../../HOC/useQuery';
+import { useQuery } from '../../../../../../Hooks/useQuery';
 const { Search } = Input;
 export default function TableLesson() {
     const { loading, listLesson, pagination } = useSelector(state => state.lessonManageReducer)

@@ -8,7 +8,7 @@ import ModalRating from '../components/ModalRating';
 import { getInfoCourse } from '../reducer/action';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useHistory } from 'react-router-dom'
-import { useQuery } from '../../../../HOC/useQuery';
+import { useQuery } from '../../../../Hooks/useQuery';
 import { useParams } from 'react-router';
 import PageError from '../../../../page/PageError/PageError';
 export default function Course() {

@@ -3,7 +3,7 @@ import { PageHeader, Button, Tag, Rate, Input, Progress, Row, Col } from 'antd';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Type from '../reducer/type.js';
-import { useQuery } from '../../../../HOC/useQuery.js';
+import { useQuery } from '../../../../Hooks/useQuery.js';
 import { useParams } from 'react-router';
 import { getInfoCourse } from '../reducer/action.js';
 const { Search } = Input;

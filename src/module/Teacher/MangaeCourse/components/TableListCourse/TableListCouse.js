@@ -4,7 +4,7 @@ import styles from './TableLisCourse.module.scss';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { actDeleteCourse, actGetMyCourse, actChangeType, actChangeActive } from '../../redux/action';
-import { useQuery } from '../../../../../HOC/useQuery';
+import { useQuery } from '../../../../../Hooks/useQuery';
 import { Link } from 'react-router-dom';
 import * as Type from '../../redux/type';
 export default function TableListCouse() {

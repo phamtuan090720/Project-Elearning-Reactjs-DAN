@@ -3,6 +3,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import Auth from '../../Hooks/Auth';
 import { getUserLogin } from '../Login/reducers/action';
 import ChangePassword from './ChangePassword/page/ChangePassword';
 import GeneralInfomation from './GeneralInfomation/page/GeneralInfomation';
@@ -40,7 +41,9 @@ export default function UserIndex() {
     }
     return (
         <>
-            {renderComponent()}
+            <Auth>
+                {renderComponent()}
+            </Auth>
         </>
     )
 }

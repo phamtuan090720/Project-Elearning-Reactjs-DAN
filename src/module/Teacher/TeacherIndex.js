@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import GeneralInfomation from './GeneralInfomation/page/GeneralInfomation.js';
 import DashboardTeacher from './Dashboard/page/Dashboard';
 import ManageCourse from './MangaeCourse/page/ManageCourse';
+import Auth from '../../Hooks/Auth.js';
 export default function TeacherIndex() {
     const router = useParams();
     const renderComponent = React.useCallback(() => {
@@ -28,8 +29,10 @@ export default function TeacherIndex() {
         }
     }, [router]);
     return (
-        <div>
-            {renderComponent()}
-        </div>
+        <Auth>
+            <div>
+                {renderComponent()}
+            </div>
+        </Auth>
     )
 }

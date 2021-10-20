@@ -76,7 +76,7 @@ const FormChangeInfoUser = () => {
         reader.onload = async (e) => {
             setSrc(e.target.result);
         }
-        formData.set('avatar', file.originFileObj);
+        formData.append('avatar', file.originFileObj);
     }
     return <Form form={form} layout='horizontal' onFinish={onFinish}>
         <Row style={{ marginBottom: 20 }}>
