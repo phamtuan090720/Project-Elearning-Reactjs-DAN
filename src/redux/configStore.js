@@ -14,9 +14,10 @@ import detailLessonManageReducer from "../module/Teacher/ManageDetailCourse/redu
 import studentManageReducer from "../module/Teacher/ManageDetailCourse/reducers/StudentManageReducer";
 import RegisterReducer from "../module/Register/reducer/registerReducer";
 import teacherRegisterReducer from "../module/RegiterTeacher/reducer/TeacherRegisterReducer";
-import infoTeacherReducer from "../module/Teacher/GeneralInfomation/reducer/InfoTeacherReducer"; 
+import infoTeacherReducer from "../module/Teacher/GeneralInfomation/reducer/InfoTeacherReducer";
 import statisticsCourseReducer from "../module/Teacher/ManageDetailCourse/reducers/StatisticsCourseReducer";
-import statisticsListCourseReducer from "../module/Teacher/Dashboard/reducer/StatisticsListCourseReducer"; 
+import statisticsListCourseReducer from "../module/Teacher/Dashboard/reducer/StatisticsListCourseReducer";
+import resetPasswordReducer from "../module/Login/reducers/ResetPasswordReducer";
 const rootReducer = combineReducers({
     CoursesReducer,
     DetailCourseReducer,
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
     studentManageReducer,
     infoTeacherReducer,
     statisticsCourseReducer,
-    statisticsListCourseReducer
+    statisticsListCourseReducer,
+    resetPasswordReducer
 
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

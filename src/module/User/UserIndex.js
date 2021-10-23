@@ -3,13 +3,11 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import Auth from '../../Hooks/Auth';
 import { getUserLogin } from '../Login/reducers/action';
 import ChangePassword from './ChangePassword/page/ChangePassword';
 import GeneralInfomation from './GeneralInfomation/page/GeneralInfomation';
 import RegisteredCourse from './RegisteredCourse/page/RegisteredCourse';
 import UserDashboard from './UserDashboard/page/UserDashboard';
-
 export default function UserIndex() {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -41,9 +39,7 @@ export default function UserIndex() {
     }
     return (
         <>
-            <Auth>
-                {renderComponent()}
-            </Auth>
+            {renderComponent()}
         </>
     )
 }

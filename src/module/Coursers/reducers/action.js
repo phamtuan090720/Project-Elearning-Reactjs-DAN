@@ -35,7 +35,7 @@ export const getCourse = (page = "?page=1") => {
             }).catch(err => {
                 dispatch(actGetCoursesFailed(err));
             })
-        }, 1000)
+        }, 800)
     }
 }
 export const searchCourse = (page = 1, dataSreach) => {

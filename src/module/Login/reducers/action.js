@@ -121,7 +121,7 @@ export const actLogout = () => {
 }
 export const resetPw = (data, colseModal) => {
     return (dispatch) => {
-        authHttp.post(`user/reset-password/`, data).then((rs) => {
+        http.post(`user/reset-password/`, data).then((rs) => {
             return Modal.success(
                 {
                     title: 'This is a notification message',
