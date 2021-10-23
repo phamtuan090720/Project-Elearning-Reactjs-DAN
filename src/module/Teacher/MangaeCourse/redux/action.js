@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { http } from '../../../../api/setting';
+import { authHttp } from '../../../../api/setting';
 import * as Type from './type';
 const notification = (mess, confirm, dispatch) => {
     return Modal.success({
@@ -23,7 +23,7 @@ const notificationErr = (mess) => {
 }
 export const actChangeType = (id, data) => {
     return (dispatch) => {
-        http.patch(`courses/${id}/`, data).then((rs) => {
+        authHttp.patch(`courses/${id}/`, data).then((rs) => {
             notification("Successfully", actGetMyCourse(), dispatch)
         }).catch((err) => {
             notificationErr("Failed")
@@ -32,7 +32,7 @@ export const actChangeType = (id, data) => {
 }
 export const actChangeActive = (id, data) => {
     return (dispatch) => {
-        http.patch(`courses/${id}/`, data).then((rs) => {
+        authHttp.patch(`courses/${id}/`, data).then((rs) => {
             notification("Successfully", actGetMyCourse(), dispatch)
         }).catch((err) => {
             notificationErr("Failed")
@@ -41,7 +41,7 @@ export const actChangeActive = (id, data) => {
 }
 export const actEditCourse = (id, data, tags) => {
     return async (dispatch) => {
-        await http.patch(`courses/${id}/`, data).then((rs) => {
+        await authHttp.patch(`courses/${id}/`, data).then((rs) => {
             notification("Successfully", actGetMyCourse(), dispatch)
             dispatch({ type: Type.SET_STATUS_OPENEDITFROM, status: false })
         }).catch((err) => {
@@ -49,7 +49,7 @@ export const actEditCourse = (id, data, tags) => {
         })
         if (tags) {
             data = { "tags": tags }
-            await http.post(`courses/${id}/add-tag/`, data).then((rs) => {
+            await authHttp.post(`courses/${id}/add-tag/`, data).then((rs) => {
 
             }).catch((err) => {
                 console.log(err)
@@ -60,7 +60,7 @@ export const actEditCourse = (id, data, tags) => {
 }
 export const actCreateCourse = (data, form, resetStateImg) => {
     return async (dispatch) => {
-        await http.post('courses/create_course/', data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((rs) => {
+        await authHttp.post('courses/create_course/', data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((rs) => {
             console.log(rs.data)
             notification(rs.data.mess, actGetMyCourse(), dispatch)
             form.resetFields()
@@ -75,7 +75,7 @@ export const actCreateCourse = (data, form, resetStateImg) => {
 export const actGetCategory = () => {
     return async (dispatch) => {
         dispatch(actGetCategoryRequest())
-        await http.get('category/').then((rs) => {
+        await authHttp.get('category/').then((rs) => {
             dispatch(actGetCategorySuccess(rs.data));
         }).catch((err) => {
             console.log(err)
@@ -86,7 +86,7 @@ export const actGetCategory = () => {
 
 export const actDeleteCourse = (id) => {
     return async (dispatch) => {
-        await http.delete(`courses/${id}/`).then((rs) => {
+        await authHttp.delete(`courses/${id}/`).then((rs) => {
             notification("Successfully", actGetMyCourse(), dispatch)
         }).catch((err) => {
             notificationErr(err?.response?.data?.detail)
@@ -108,7 +108,7 @@ const actGetCategorySuccess = (data) => {
 export const actGetMyCourse = (page = 1, kw = '') => {
     return (dispatch) => {
         dispatch(actGetMyCourseRequest())
-        http.get(`teacher/get-list-courses/?page=${page}&kw=${kw}`).then((rs) => {
+        authHttp.get(`teacher/get-list-courses/?page=${page}&kw=${kw}`).then((rs) => {
             dispatch(actGetMyCourseSuccess(rs.data));
             console.log(rs)
             let pagination = {

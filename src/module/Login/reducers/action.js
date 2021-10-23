@@ -1,4 +1,4 @@
-import { http } from "../../../api/setting";
+import { http, authHttp } from "../../../api/setting";
 import * as Type from './type';
 import cookies from 'react-cookies';
 import axios from "axios";
@@ -21,7 +21,7 @@ const openNotification = (mess, description) => {
 export const getUserLogin = (history) => {
     return (dispatch) => {
         dispatch(actionLoginRequest());
-        http.get('user/current-user/').then((rs) => {
+        authHttp.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
         }).catch((err) => {
             if (history) {
@@ -51,7 +51,7 @@ export const actLogin = (user, history, mess) => {
         }).catch((err) => {
             console.log(err)
         })
-        await http.get('user/current-user/').then((rs) => {
+        await authHttp.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
             if (mess === "register success") {
                 return history.push('/home')
@@ -84,7 +84,7 @@ export const actLoginGG = (accessToken, history, mess) => {
         }).catch((err) => {
             console.log(err)
         })
-        await http.get('user/current-user/').then((rs) => {
+        await authHttp.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
             if (mess === "register success") {
                 return history.push('/')
@@ -121,7 +121,7 @@ export const actLogout = () => {
 }
 export const resetPw = (data, colseModal) => {
     return (dispatch) => {
-        http.post(`user/reset-password/`, data).then((rs) => {
+        authHttp.post(`user/reset-password/`, data).then((rs) => {
             return Modal.success(
                 {
                     title: 'This is a notification message',

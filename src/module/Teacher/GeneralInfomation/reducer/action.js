@@ -1,5 +1,5 @@
 import * as Type from './type';
-import { http } from '../../../../api/setting';
+import { http, authHttp } from '../../../../api/setting';
 import { Modal, Typography } from 'antd';
 import cookies from 'react-cookies';
 const { Text } = Typography;
@@ -90,7 +90,7 @@ export const actChangePassword = (user) => {
                 password: user.password
             }
             let id = user.id
-            http.patch(`user/${id}/`, password).then((rs) => {
+            authHttp.patch(`user/${id}/`, password).then((rs) => {
                 notificationChangePasswrod('Change password success')
                 console.log(rs)
             }).catch((err) => {
@@ -111,7 +111,7 @@ export const actChangePassword = (user) => {
 }
 export const actChangeInfo = (user) => {
     return async (dispatch) => {
-        await http.patch(`user/${user.get('id')}/`, user).then((rs) => {
+        await authHttp.patch(`user/${user.get('id')}/`, user).then((rs) => {
             notification('Change info success', getInfoTeacher(), dispatch)
             console.log(rs)
         }).catch((err) => {
@@ -123,7 +123,7 @@ export const actChangeInfo = (user) => {
 export const getInfoTeacher = () => {
     return (dispatch) => {
         dispatch(getInfoTeacherRequest())
-        http.get(`teacher/current-teacher/`).then((rs) => {
+        authHttp.get(`teacher/current-teacher/`).then((rs) => {
             dispatch(getInfoTeacherSuccess(rs.data))
             console.log(rs)
         }).catch((err) => {
@@ -151,7 +151,7 @@ const getInfoTeacherFailed = (err) => {
 }
 export const actChangeProfile = (profile) => {
     return async (dispatch) => {
-        http.post(`teacher/change-profile/`, profile).then((rs) => {
+        authHttp.post(`teacher/change-profile/`, profile).then((rs) => {
             notification(rs.data.mess, getInfoTeacher(), dispatch)
             console.log(rs)
         }).catch((err) => {

@@ -1,10 +1,10 @@
-import { http } from '../../../../api/setting.js';
+import {authHttp } from '../../../../api/setting.js';
 import * as Type from './type.js';
 
 export const actGetListRegisteredCourse = (page = 'page=1', history) => {
     return (dispatch) => {
         dispatch(actGetListRegisteredCourseRequest());
-        http.get(`user/course/?${page}`).then((rs) => {
+        authHttp.get(`user/course/?${page}`).then((rs) => {
             dispatch(actGetListRegisteredCourseSuccesst(rs.data.results));
             let pagination = {
                 current: parseInt(page.substr(page.length - 1)),

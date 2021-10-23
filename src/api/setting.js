@@ -5,10 +5,22 @@ export const http = axios.create({
     baseURL: DOMAIN,
     timeout: 3000,
 })
+export const authHttp = axios.create({
+    baseURL: DOMAIN,
+    timeout: 3000,
+})
 http.interceptors.request.use((config) => {
     config.headers = {
         ...config.headers,
-        Authorization: `${cookies.load('access_token') ? `${`Bearer ${cookies.load('access_token')}`}` : ''} `
+    }
+    return config
+}, (errors) => {
+    return Promise.reject(errors)
+})
+authHttp.interceptors.request.use((config) => {
+    config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${cookies.load('access_token')}`
     }
     return config
 }, (errors) => {

@@ -1,4 +1,4 @@
-import { http } from '../../../api/setting.js';
+import { authHttp } from '../../../api/setting.js';
 import * as Type from './type.js';
 import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ const countDown = (actGetLesson,dispatch,mess) => {
 }
 export const actCompleteLesson = (id) => {
     return (dispatch) => {
-        http.post(`lesson/${id}/complete-lesson/`).then((rs) => {
+        authHttp.post(`lesson/${id}/complete-lesson/`).then((rs) => {
             countDown(actGetLesson(id),dispatch,rs.data.mess);
         }).catch((err) => {
             if (err?.response?.data?.mess) {
@@ -31,7 +31,7 @@ export const actGetLesson = (id) => {
     return (dispatch) => {
         dispatch(actGetLessonRequest());
         setTimeout(() => {
-            http.get(`lesson/${id}/`).then((rs) => {
+            authHttp.get(`lesson/${id}/`).then((rs) => {
                 console.log(rs.data)
                 dispatch(actGetLessonSuccess(rs.data));
                 if (rs.data.list_video.length > 0) {

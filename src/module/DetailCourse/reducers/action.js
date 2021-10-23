@@ -1,9 +1,9 @@
 import * as Type from './type';
-import { http } from '../../../api/setting';
+import { authHttp, http } from '../../../api/setting';
 export const actRegisterCourse = (id)=>{
     return (dispatch)=>{
         dispatch(actRegisterCourseRequest());
-        http.get(`courses/${id}/access-course/`).then((rs)=>{
+        authHttp.get(`courses/${id}/access-course/`).then((rs)=>{
             dispatch(actRegisterCourseSuccess(rs.data));
             // khi đăng kí hoàn tất sẽ gọi lại api để get lại thông tin khóa học.
             dispatch(actGetDetailCourse(id));

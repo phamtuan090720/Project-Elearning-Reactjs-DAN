@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { http } from "../../../api/setting";
+import { authHttp } from "../../../api/setting";
 import * as Type from './type';
 const notification = (mess, confirm) => {
     return Modal.success({
@@ -25,7 +25,7 @@ export const actionRegisterTeacher = (data, history) => {
     return (dispatch) => {
         dispatch(actionRegisterRequest());
 
-        http.post('teacher/register-teacher/', data).then((rs) => {
+        authHttp.post('teacher/register-teacher/', data).then((rs) => {
             notification(rs.data, () => history.push('/home'))
             dispatch(actionRegisterSuccess(rs.data));
         }).catch((err) => {
@@ -38,7 +38,7 @@ export const actionRegisterTeacher = (data, history) => {
 
 export const checkActiveTeacher = () => {
     return (dispatch) => {
-        http.get('teacher/check-active-teacher/').then((rs) => {
+        authHttp.get('teacher/check-active-teacher/').then((rs) => {
             console.log(rs.data.access)
             dispatch({
                 type: Type.TEACHER_ACTIVE,
