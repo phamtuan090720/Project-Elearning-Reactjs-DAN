@@ -1,4 +1,4 @@
-import { http } from '../../../../api/setting';
+import { http_auth } from '../../../../api/http_auth';
 import { getUserLogin } from '../../../Login/reducers/action.js';
 import { Modal, Typography } from 'antd';
 import cookies from 'react-cookies';
@@ -27,11 +27,11 @@ const notificationErr = (mess) => {
 }
 export const actChangeInfo = (user) => {
     return async (dispatch) => {
-        await http.patch(`user/${user.get('id')}/`, user).then((rs) => {
+        await http_auth.patch(`user/${user.get('id')}/`, user).then((rs) => {
             notification('Change info success', getUserLogin(), dispatch)
             console.log(rs)
         }).catch((err) => {
-            notificationErr('Change info success')
+            notificationErr('Change info Failed')
             console.log(err)
         })
     }
@@ -94,14 +94,14 @@ export const actChangePassword = (user) => {
             client_id: client_id,
             client_secret: client_secret
         }
-        await http.post('o/token/', data).then((rs) => {
+        await http_auth.post('o/token/', data).then((rs) => {
             cookies.save('access_token', rs.data.access_token, { path: '/' });
             console.log("Login success")
             let password = {
                 password: user.password
             }
             let id = user.id
-            http.patch(`user/${id}/`, password).then((rs) => {
+            http_auth.patch(`user/${id}/`, password).then((rs) => {
                 notificationChangePasswrod('Change password success')
                 console.log(rs)
             }).catch((err) => {

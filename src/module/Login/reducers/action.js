@@ -1,4 +1,5 @@
-import { http, authHttp } from "../../../api/setting";
+import { http,  } from "../../../api/setting";
+import { http_auth } from "../../../api/http_auth";
 import * as Type from './type';
 import cookies from 'react-cookies';
 import axios from "axios";
@@ -21,7 +22,7 @@ const openNotification = (mess, description) => {
 export const getUserLogin = (history) => {
     return (dispatch) => {
         dispatch(actionLoginRequest());
-        authHttp.get('user/current-user/').then((rs) => {
+        http_auth.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
         }).catch((err) => {
             if (history) {
@@ -51,7 +52,7 @@ export const actLogin = (user, history, mess) => {
         }).catch((err) => {
             console.log(err)
         })
-        await authHttp.get('user/current-user/').then((rs) => {
+        await http_auth.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
             if (mess === "register success") {
                 return history.push('/home')
@@ -84,7 +85,7 @@ export const actLoginGG = (accessToken, history, mess) => {
         }).catch((err) => {
             console.log(err)
         })
-        await authHttp.get('user/current-user/').then((rs) => {
+        await http_auth.get('user/current-user/').then((rs) => {
             dispatch(actionLoginSuccess(rs.data));
             if (mess === "register success") {
                 return history.push('/')
@@ -121,7 +122,10 @@ export const actLogout = () => {
 }
 export const resetPw = (data, colseModal) => {
     return (dispatch) => {
+        dispatch(resetPwRequest())
         http.post(`user/reset-password/`, data).then((rs) => {
+            console.log(rs.data)
+            dispatch(resetPwSuccess())
             return Modal.success(
                 {
                     title: 'This is a notification message',
@@ -135,6 +139,7 @@ export const resetPw = (data, colseModal) => {
             )
         }).catch((err) => {
             if (err.response?.data?.mess) {
+                dispatch(resetPwFailed(err.response?.data?.mess))
                 return Modal.error(
                     {
                         title: 'This is a notification message',
@@ -145,7 +150,27 @@ export const resetPw = (data, colseModal) => {
                     }
                 )
             }
-            console.log(err)
+            else {
+                console.log(err)
+                dispatch(resetPwFailed(err))
+            }
+           
         })
+    }
+}
+const resetPwRequest = () => {
+    return{ 
+        type: Type.RESET_PASSWORD_REQUEST
+    }
+}
+const resetPwSuccess = () => {
+    return{ 
+        type: Type.RESET_PASSWORD_SUCCESS
+    }
+}
+const resetPwFailed = (err) => {
+    return{ 
+        type: Type.RESET_PASSWORD_FAILED,
+        err: err
     }
 }

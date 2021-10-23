@@ -1,9 +1,11 @@
 import { Modal, Form, Input, Button, Row, Space } from 'antd'
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { resetPw } from '../reducers/action'
 
 export default function ForgotPasswork({ isModalVisible, onCancel, onOk }) {
+    const { loading } = useSelector(state => state.resetPasswordReducer);
     const dispatch = useDispatch()
     const handleOk = (value) => {
         console.log(value)
@@ -23,7 +25,7 @@ export default function ForgotPasswork({ isModalVisible, onCancel, onOk }) {
                 </Form.Item>
                 <Row justify='end'>
                     <Space>
-                        <Button htmlType='submit' shape='round' type='primary'>
+                        <Button htmlType='submit' shape='round' type='primary' loading={loading}>
                             Ok
                         </Button>
                         <Button htmlType='reset' shape='round' type='primary' danger onClick={handleCancel}>

@@ -1,9 +1,9 @@
-import { authHttp } from '../../../../api/setting.js';
+import { http_auth } from '../../../../api/http_auth.js';
 import * as Type from './type';
 export const getInfoStatisticsCouser = () => {
     return (dispatch) => {
         dispatch(getInfoStatisticsCouserRequest())
-        authHttp.get(`teacher/statistics/`).then((rs) => {
+        http_auth.get(`teacher/statistics/`).then((rs) => {
             console.log(rs.data)
             dispatch(getInfoStatisticsCouserSuccess(rs.data))
         }).catch((err) => {

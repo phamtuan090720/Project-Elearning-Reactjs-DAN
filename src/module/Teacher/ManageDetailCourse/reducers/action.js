@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { authHttp } from '../../../../api/setting.js';
+import { http_auth } from '../../../../api/http_auth.js';
 import * as Type from './type';
 const notification = (mess, confirm, dispatch) => {
     return Modal.success({
@@ -23,7 +23,7 @@ const notificationErr = (mess) => {
 }
 export const actDeleteLesson = (id, idCourse) => {
     return (dispatch) => {
-        authHttp.delete(`lesson/${id}/`).then((rs) => {
+        http_auth.delete(`lesson/${id}/`).then((rs) => {
             notification("Succesfully", getListLesson(idCourse), dispatch);
         }).catch((err) => {
             notificationErr("Delete Failed")
@@ -33,7 +33,7 @@ export const actDeleteLesson = (id, idCourse) => {
 }
 export const actChangeActive = (id, idCourse, data) => {
     return (dispatch) => {
-        authHttp.patch(`lesson/${id}/`, data).then((rs) => {
+        http_auth.patch(`lesson/${id}/`, data).then((rs) => {
             notification("Successfully", getListLesson(idCourse), dispatch)
         }).catch((err) => {
             notificationErr("Failed")
@@ -42,7 +42,7 @@ export const actChangeActive = (id, idCourse, data) => {
 }
 export const actEditLesson = (id, idCourse, data, form) => {
     return async (dispatch) => {
-        await authHttp.patch(`lesson/${id}/`, data).then((rs) => {
+        await http_auth.patch(`lesson/${id}/`, data).then((rs) => {
             notification("Successfully", getListLesson(idCourse), dispatch)
             dispatch({ type: Type.SET_STATUS_OPENEDITFORM, status: false })
             form.resetFields()
@@ -53,7 +53,7 @@ export const actEditLesson = (id, idCourse, data, form) => {
 }
 export const addLesson = (id, data, resetFrom) => {
     return (dispatch) => {
-        authHttp.post(`courses/${id}/add-lesson/`, data).then((rs) => {
+        http_auth.post(`courses/${id}/add-lesson/`, data).then((rs) => {
             console.log(rs)
             notification(rs.data.mess, getListLesson(id), dispatch);
             resetFrom();
@@ -70,7 +70,7 @@ export const addLesson = (id, data, resetFrom) => {
 export const getListLesson = (id, page = 1, kw = '') => {
     return (dispatch) => {
         dispatch(getListLessonRequest());
-        authHttp.get(`courses/${id}/lesson/?page=${page}&kw=${kw}`).then((rs) => {
+        http_auth.get(`courses/${id}/lesson/?page=${page}&kw=${kw}`).then((rs) => {
             dispatch(getListLessonSuccess(rs.data));
             let pagination = {
                 current: parseInt(page),
@@ -115,7 +115,7 @@ const getListLessonFailed = () => {
 // FILE 
 export const actAddFile = (id, data, closeForm) => {
     return (dispatch) => {
-        authHttp.post(`lesson/${id}/add-file/`, data).then((rs) => {
+        http_auth.post(`lesson/${id}/add-file/`, data).then((rs) => {
             console.log(rs.data)
             notification(rs.data.mess, getDetailLesson(id), dispatch);
             closeForm();
@@ -138,7 +138,7 @@ export const actAddFile = (id, data, closeForm) => {
 }
 export const actEditFile = (id, idLesson, data, closeForm) => {
     return (dispatch) => {
-        authHttp.patch(`file/${id}/`, data).then((rs) => {
+        http_auth.patch(`file/${id}/`, data).then((rs) => {
             console.log(rs.data)
             notification("SuccessFully", getDetailLesson(idLesson), dispatch);
             if (closeForm) {
@@ -163,7 +163,7 @@ export const actEditFile = (id, idLesson, data, closeForm) => {
 }
 export const actDeleteFile = (id, idLesson) => {
     return (dispatch) => {
-        authHttp.delete(`file/${id}/`).then((rs) => {
+        http_auth.delete(`file/${id}/`).then((rs) => {
             notification("SuccessFully", getDetailLesson(idLesson), dispatch);
         }).catch((error) => {
             if (error?.response.data?.mess) {
@@ -186,7 +186,7 @@ export const actDeleteFile = (id, idLesson) => {
 // Video 
 export const actAddVideo = (id, data, closeForm) => {
     return (dispatch) => {
-        authHttp.post(`lesson/${id}/add-video/`, data).then((rs) => {
+        http_auth.post(`lesson/${id}/add-video/`, data).then((rs) => {
             console.log(rs.data)
             notification(rs.data.mess, getDetailLesson(id), dispatch);
             closeForm();
@@ -209,7 +209,7 @@ export const actAddVideo = (id, data, closeForm) => {
 }
 export const actEditVideo = (id, idLesson, data, closeForm) => {
     return (dispatch) => {
-        authHttp.patch(`video/${id}/`, data).then((rs) => {
+        http_auth.patch(`video/${id}/`, data).then((rs) => {
             console.log(rs.data)
             notification("SuccessFully", getDetailLesson(idLesson), dispatch);
             if (closeForm) {
@@ -234,7 +234,7 @@ export const actEditVideo = (id, idLesson, data, closeForm) => {
 }
 export const actDeleteVideo = (id, idLesson) => {
     return (dispatch) => {
-        authHttp.delete(`video/${id}/`).then((rs) => {
+        http_auth.delete(`video/${id}/`).then((rs) => {
             notification("SuccessFully", getDetailLesson(idLesson), dispatch);
         }).catch((error) => {
             if (error?.response.data?.mess) {
@@ -257,7 +257,7 @@ export const actDeleteVideo = (id, idLesson) => {
 // Home Work 
 export const actAddHomeWork = (id, data, closeForm) => {
     return (dispatch) => {
-        authHttp.post(`lesson/${id}/add-homework/`, data).then((rs) => {
+        http_auth.post(`lesson/${id}/add-homework/`, data).then((rs) => {
             console.log(rs.data)
             notification(rs.data.mess, getDetailLesson(id), dispatch);
             closeForm();
@@ -280,7 +280,7 @@ export const actAddHomeWork = (id, data, closeForm) => {
 }
 export const actEditHomeWork = (id, idLesson, data, closeForm) => {
     return (dispatch) => {
-        authHttp.patch(`homeWork/${id}/`, data).then((rs) => {
+        http_auth.patch(`homeWork/${id}/`, data).then((rs) => {
             console.log(rs.data)
             notification("SuccessFully", getDetailLesson(idLesson), dispatch);
             if (closeForm) {
@@ -305,7 +305,7 @@ export const actEditHomeWork = (id, idLesson, data, closeForm) => {
 }
 export const actDeleteHomeWork = (id, idLesson) => {
     return (dispatch) => {
-        authHttp.delete(`homeWork/${id}/`).then((rs) => {
+        http_auth.delete(`homeWork/${id}/`).then((rs) => {
             notification("SuccessFully", getDetailLesson(idLesson), dispatch);
         }).catch((error) => {
             if (error?.response.data?.mess) {
@@ -329,7 +329,7 @@ export const actDeleteHomeWork = (id, idLesson) => {
 export const getDetailLesson = (id) => {
     return (dispatch) => {
         dispatch(getDetailLessonRequest())
-        authHttp.get(`lesson/${id}/`).then((rs) => {
+        http_auth.get(`lesson/${id}/`).then((rs) => {
             console.log(rs.data)
             dispatch(getDetailLessonSuccess(rs.data));
         }).catch((error) => {
@@ -367,7 +367,7 @@ const getDetailLessonFailed = (err) => {
 }
 export const actAllowStudentJoinCourse = (idCourse, data) => {
     return (dispatch) => {
-        authHttp.post(`courses/${idCourse}/accept-student/`, data).then((rs) => {
+        http_auth.post(`courses/${idCourse}/accept-student/`, data).then((rs) => {
             notification(rs.data.mess, actGetListStudentInCourse(idCourse), dispatch)
         }).catch((err) => {
             console.log(err)
@@ -378,7 +378,7 @@ export const actAllowStudentJoinCourse = (idCourse, data) => {
 export const actGetListStudentInCourse = (id) => {
     return (dispatch) => {
         dispatch(actGetListStudentInCourseRequest())
-        authHttp.get(`courses/${id}/get-student-course/`).then((rs) => {
+        http_auth.get(`courses/${id}/get-student-course/`).then((rs) => {
             dispatch(actGetListStudentInCourseSuccess(rs.data))
             console.log(rs.data)
         }).catch((error) => {
@@ -419,7 +419,7 @@ const actGetListStudentInCourseFailed = (err) => {
 export const getInfoStatisticsCouser = (id) => {
     return (dispatch) => {
         dispatch(getInfoStatisticsCouserRequest())
-        authHttp.get(`courses/${id}/statistics/`).then((rs) => {
+        http_auth.get(`courses/${id}/statistics/`).then((rs) => {
             console.log(rs.data)
             dispatch(getInfoStatisticsCouserSuccess(rs.data))
         }).catch((err) => {

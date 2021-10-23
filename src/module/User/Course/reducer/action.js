@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
-import {  authHttp } from '../../../../api/setting';
+import {  http_auth } from '../../../../api/http_auth';
 import * as Type from '../reducer/type';
 // export const getInfoCourse = (page = 1, kw = '') => {
 //     return (dispatch) => {
@@ -34,7 +34,7 @@ const notificationErr = (mess) => {
 }
 export const rating = (id,data)=>{
     return (dispatch)=>{
-        authHttp.post(`courses/${id}/rating/`,data).then((rs)=>{
+        http_auth.post(`courses/${id}/rating/`,data).then((rs)=>{
             console.log(rs)
             notification(getInfoCourse(id),dispatch,rs.data);
         }).catch((err)=>{
@@ -46,7 +46,7 @@ export const rating = (id,data)=>{
 export const getInfoCourse = (id, page = 1, kw = '') => {
     return (dispatch) => {
         dispatch(getInfoCourseRequest());
-        authHttp.get(`courses/${id}/complete/?page=${page}&kw=${kw}`).then((rs) => {
+        http_auth.get(`courses/${id}/complete/?page=${page}&kw=${kw}`).then((rs) => {
             console.log(rs.data)
             dispatch(getInfoCourseSuccess(rs.data.results));
             let pagination = {
