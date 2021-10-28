@@ -71,7 +71,7 @@ export default function ListStudent() {
             dataIndex: 'complete_course',
             width: "10%",
             key: 'Complete',
-            render: complete_course => <Progress style={{ fontSize: 15 }} strokeColor={{
+            render: complete_course => <Progress  strokeColor={{
                 '0%': '#108ee9',
                 '100%': '#87d068',
             }} width='55px' type="circle" percent={complete_course} />
