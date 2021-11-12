@@ -95,7 +95,11 @@ export const actChangePassword = (user) => {
             client_secret: client_secret
         }
         await http_auth.post('o/token/', data).then((rs) => {
-            cookies.save('access_token', rs.data.access_token, { path: '/' });
+            let d = new Date();
+            // do hàm này nó trả về mili giây lên phải đổi ra giây để tính toán
+            d.setTime(d.getTime() + (rs.data.expires_in * 1000))
+            cookies.save('access_token', rs.data.access_token, { path: '/', expires: d });
+            // cookies.save('access_token', rs.data.access_token, { path: '/' });
             console.log("Login success")
             let password = {
                 password: user.password
@@ -117,6 +121,5 @@ export const actChangePassword = (user) => {
             console.log(err)
             return notificationErr("old password is not correct")
         })
-       
     }
 }
