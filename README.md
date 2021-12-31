@@ -2,6 +2,5 @@
 ## Sinh Viên Thực Hiện Đồ Án :
 - Phạm Tuân - Fullstack.
 - Thu Thủy - Fullstack.
-## Giảng Viên Hướng Dẫn
-Lê Ngọc Hiếu 
+## Giảng Viên Hướng Dẫn : Lê Ngọc Hiếu
  
